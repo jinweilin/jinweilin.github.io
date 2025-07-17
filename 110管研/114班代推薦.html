@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.0 班代推薦活動</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right bottom, #a78bfa, #818cf8); /* Purple to Blue Gradient */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        /* Custom styles for glowing button effect */
+        .glow-button {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            z-index: -1;
+        }
+        .glow-button:hover::before {
+            width: 300px;
+            height: 300px;
+            opacity: 1;
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-2xl max-w-4xl w-full mx-auto transform transition-all duration-300 hover:scale-[1.01]">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+                🌟 7.0 班代推薦活動 🌟
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-600">
+                為我們的班級選出新的領航者！
+            </p>
+        </div>
+
+        <div class="space-y-6 text-gray-700 leading-relaxed">
+            <p class="text-base sm:text-lg">
+                各位親愛的學長姐好：
+            </p>
+            <p class="text-base sm:text-lg">
+                新的學年度即將展開，我們也要為班級選出一位新的領航者 —— <span class="font-bold text-indigo-600">7.0 班代</span>！
+                班代的角色，不只是協助處理班務，更是連結同學情誼與學校之間溝通的重要橋樑。為了讓這份責任與榮譽能順利傳承，我們正式啟動 <span class="font-bold text-purple-600">班代推薦活動</span>！
+            </p>
+
+            <div class="bg-indigo-50 p-4 sm:p-6 rounded-2xl border border-indigo-200 shadow-inner">
+                <h3 class="text-xl sm:text-2xl font-bold text-indigo-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    推薦期間
+                </h3>
+                <p class="text-lg sm:text-xl font-semibold text-indigo-800">
+                    <span class="bg-yellow-200 px-2 py-1 rounded-md">7/18</span> 至 <span class="bg-yellow-200 px-2 py-1 rounded-md">7/27</span>
+                </p>
+                <p class="mt-2 text-base sm:text-lg">
+                    邀請大家一起發掘身邊值得信任、熱心又有責任感的夥伴，讓我們的班級在新的一年持續活躍、有聲有色！
+                </p>
+            </div>
+
+            <div class="bg-red-50 p-4 sm:p-6 rounded-2xl border border-red-200 shadow-inner">
+                <h3 class="text-xl sm:text-2xl font-bold text-red-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    📌 提醒一下
+                </h3>
+                <p class="text-base sm:text-lg">
+                    本屆（6.0）班代與幹部已功成身退，這次就別推薦他們囉～
+                </p>
+                <ul class="list-disc list-inside mt-2 text-base sm:text-lg font-medium text-red-800">
+                    <li>6.0班代: 呂榮生</li>
+                    <li>6.0幹部: 孫月眉、曾美菁、林金微、林佩蘭、普美鮮、嚴裕明</li>
+                </ul>
+            </div>
+
+            <div class="bg-green-50 p-4 sm:p-6 rounded-2xl border border-green-200 shadow-inner">
+                <h3 class="text-xl sm:text-2xl font-bold text-green-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a2 2 0 100-4 2 2 0 000 4zM8.707 12.547l1.767-4.062m2.429.568l3.652 1.53c1.024.428 1.547 1.623 1.058 2.613L13 19.493V17.5z"></path></svg>
+                    🗳️ 選舉預告
+                </h3>
+                <p class="text-lg sm:text-xl font-semibold text-green-800">
+                    <span class="bg-lime-200 px-2 py-1 rounded-md">7/28</span>～<span class="bg-lime-200 px-2 py-1 rounded-md">7/31</span> 將開放線上投票
+                </p>
+                <p class="mt-2 text-base sm:text-lg">
+                    屆時將由全班共同票選出下一任班代，每人一票，票多者當選；若票數相同，將由6.0班代投下決定性的一票。當選後，新班代也將負責幹部團隊的指派與組成。
+                </p>
+            </div>
+
+            <p class="text-base sm:text-lg">
+                班代不是一個人的舞台，而是凝聚大家心力的開始，
+                歡迎每一位學長姐都來參與這次推薦，把心中的好人選介紹出來，
+                我們一起迎接全新的7.0班代團隊！
+            </p>
+            <p class="text-base sm:text-lg">
+                需要協助或有推薦疑問，歡迎私訊詢問～
+            </p>
+            <p class="text-base sm:text-lg font-bold text-purple-700">
+                期待大家的熱情參與與支持！🔥
+            </p>
+        </div>
+
+        <div class="mt-10 text-center">
+            <a href="https://forms.gle/fsx3S7aha5vAtEm1A" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 glow-button">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.102 1.101M12 12l.01 0"></path></svg>
+                推薦 7.0 班代連結
+            </a>
+        </div>
+    </div>
+</body>
+</html>
