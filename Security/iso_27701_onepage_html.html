@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO/IEC 27701 PII 控管計畫</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0EY36MHX33');
+</script>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      line-height: 1.7;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    h1, h2 {
+      color: #0d6efd;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1rem 0;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #e9ecef;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    .tagline {
+      background: #e2f0ff;
+      padding: 1rem;
+      border-left: 5px solid #0d6efd;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>ISO/IEC 27701 落實建議方案</h1>
+  <div class="tagline">
+    <strong>專案目標：</strong><br>
+    打造兼具合規性、使用者便利性與可追蹤性的 PII（個人識別資訊）資料控管機制，符合 ISO/IEC 27701 國際隱私管理標準，強化公司內部資安治理。
+  </div>
+
+  <section>
+    <h2>1️⃣ 磁碟加密處理管理</h2>
+    <p><strong>目的：</strong> 防止設備遺失造成 PII 外洩</p>
+    <table>
+      <tr><th>項目</th><th>解決方案</th><th>工具/平台</th><th>成本預估</th></tr>
+      <tr><td>磁碟全盤加密</td><td>強制公司筆電開機前加密</td><td>BitLocker / FileVault</td><td>無額外成本</td></tr>
+      <tr><td>密鑰管理</td><td>使用 TPM/BIOS 密碼搭配集中備份</td><td>Azure AD Recovery Key</td><td>需 E3+（可選）</td></tr>
+      <tr><td>稽核紀錄</td><td>建立裝置清單 + 半年查核</td><td>Excel / Power BI</td><td>無</td></tr>
+    </table>
+    <p style="color:#666; font-size:0.95em; margin-top:0.5em;"><strong>備註：</strong>筆電全面加密，桌機依敏感等級選擇性加密。</p>
+  </section>
+
+  <section>
+    <h2>2️⃣ PII 檔案掃描與自動刪除</h2>
+    <p><strong>目的：</strong> 避免檔案長期堆積，違反最小保存原則</p>
+    <table>
+      <tr><th>項目</th><th>解決方案</th><th>工具</th><th>成本預估</th></tr>
+      <tr><td>自動掃描</td><td>使用正則表達式掃描個資</td><td>PowerShell / Python</td><td>內部開發</td></tr>
+      <tr><td>自動刪除</td><td>180 天未存取檔自動清除</td><td>任務排程</td><td>無</td></tr>
+      <tr><td>稽核紀錄</td><td>Log 刪除 + Email 給 DPO</td><td>SMTP + CSV</td><td>無</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>3️⃣ Email (PST) 管理</h2>
+    <p><strong>目的：</strong> 控管 Outlook 中長期保存的個資風險</p>
+    <table>
+      <tr><th>項目</th><th>解決方案</th><th>工具</th><th>成本預估</th></tr>
+      <tr><td>PST 掃描</td><td>讀取並過濾含個資信件</td><td>Python + pypff</td><td>開源</td></tr>
+      <tr><td>自動刪除</td><td>180 天未讀取信件刪除</td><td>Task Scheduler</td><td>無</td></tr>
+      <tr><td>稽核紀錄</td><td>產出 CSV + 報表</td><td>腳本</td><td>無</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>4️⃣ NAS 管理建議</h2>
+    <p><strong>目的：</strong> 避免 NAS 長期堆積 PII</p>
+    <table>
+      <tr><th>項目</th><th>解決方案</th><th>工具</th><th>成本預估</th></tr>
+      <tr><td>掃描工具</td><td>部署掃描腳本</td><td>Python + Synology Task</td><td>免費</td></tr>
+      <tr><td>自動搬移/刪除</td><td>搬移至 quarantine 後自動清除</td><td>腳本</td><td>內部開發</td></tr>
+      <tr><td>稽核紀錄</td><td>建立清理紀錄表</td><td>Google Sheet / Power BI</td><td>無</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>5️⃣ 辦公空間門禁強化</h2>
+    <table>
+      <tr><th>區域</th><th>解決方案</th><th>工具</th><th>成本預估</th></tr>
+      <tr><td>門禁強化</td><td>RFID + 人臉辨識</td><td>HID / 雲端廠商</td><td>5~10 萬 NTD</td></tr>
+      <tr><td>訪客管理</td><td>QR Code + 登記</td><td>Google 表單</td><td>5,000 NTD 以下</td></tr>
+      <tr><td>監控記錄</td><td>門禁 API 導出</td><td>Excel 匯出</td><td>無</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>6️⃣ 列印安全管理</h2>
+    <table>
+      <tr><th>項目</th><th>解決方案</th><th>工具</th><th>成本預估</th></tr>
+      <tr><td>列印驗證</td><td>刷卡後列印（Pull Printing）</td><td>Papercut / ePaper</td><td>每台約 8 萬</td></tr>
+      <tr><td>浮水印</td><td>加使用者資訊與時間戳</td><td>列印腳本</td><td>5,000~8,000 / 台</td></tr>
+      <tr><td>列印紀錄</td><td>列印報表供稽核</td><td>Papercut Report</td><td>含在授權內</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>💰 總成本預估</h2>
+    <table>
+      <tr><th>項目</th><th>預估成本</th></tr>
+      <tr><td>內部腳本/工具</td><td>0 元</td></tr>
+      <tr><td>門禁升級</td><td>8~10 萬 NTD</td></tr>
+      <tr><td>列印管理系統</td><td>8~15 萬 NTD</td></tr>
+      <tr><td>M365 授權</td><td>視需求</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>✅ 結語建議</h2>
+    <ul>
+      <li>以「能落地、能稽核」為原則，設計可追蹤的控管流程</li>
+      <li>採分階段部署 + 年度成熟度檢核</li>
+      <li>納入資安訓練與年度 KPI</li>
+    </ul>
+  </section>
+</body>
+</html>
