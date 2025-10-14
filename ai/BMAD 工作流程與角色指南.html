@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎭 BMAD 工作流程與角色指南</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-0EY36MHX33');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h4 {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .role-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .role-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role-description {
+            color: #555;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .role-outputs {
+            margin: 15px 0;
+        }
+
+        .role-outputs h5 {
+            color: #27ae60;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .role-outputs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .role-outputs li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+
+        .role-outputs li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .role-timing {
+            background: #e8f4fd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+        }
+
+        .role-timing strong {
+            color: #2980b9;
+        }
+
+        .role-example {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #dee2e6;
+        }
+
+        .workflow-section {
+            margin: 40px 0;
+        }
+
+        .workflow-card {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .workflow-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #d68910;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .workflow-description {
+            color: #7d6608;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .workflow-step {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .best-practices {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #17a2b8;
+        }
+
+        .best-practices h3 {
+            color: #0c5460;
+            margin-bottom: 15px;
+        }
+
+        .best-practices ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .best-practices li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #0c5460;
+        }
+
+        .best-practices li:before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .github-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toc {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 BMAD 工作流程與角色指南</h1>
+            <p>BMAD-METHOD（Breakthrough Method of Agile AI-driven Development）是一套結合 AI 代理與敏捷開發的系統。<br>
+            每個角色對應一個專業 AI 代理（Agent），共同完成從策略規劃到產品開發的全流程。</p>
+            <div style="margin-top: 20px;">
+                <a href="https://github.com/bmad-code-org/BMAD-METHOD" target="_blank" class="github-link">
+                    🔗 官方 GitHub 專案
+                </a>
+            </div>
+        </div>
+
+        <div class="toc">
+            <h3>📋 目錄</h3>
+            <ul>
+                <li><a href="#roles">👥 八大核心角色與主要產出</a></li>
+                <li><a href="#workflows">🧩 完整開發流程範例</a></li>
+                <li><a href="#practices">💡 實務建議</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="section" id="roles">
+                <h2>👥 八大核心角色與主要產出</h2>
+                
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">1️⃣</span>
+                            <span class="emoji">📊</span>
+                            商業分析師（Analyst / Mary）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：策略思考夥伴，負責市場研究、使用者需求分析、競品比較與專案簡報。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>專案簡介（Project Brief）</li>
+                                <li>市場研究報告（Market Research）</li>
+                                <li>競爭分析（Competitor Analysis）</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：專案初期、重新定位或市場探索階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent analyst</code> → <code>*create-doc project-brief</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">2️⃣</span>
+                            <span class="emoji">📋</span>
+                            產品經理（PM / John）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：產品策略負責人，聚焦「做什麼」與「為什麼要做」。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>產品需求文件（PRD）</li>
+                                <li>功能優先順序與 MVP 定義</li>
+                                <li>路線圖（Roadmap）</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：明確需求後，開始設計產品功能與版本規劃。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent pm</code> → <code>*create-doc prd</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">3️⃣</span>
+                            <span class="emoji">🏗️</span>
+                            系統架構師（Architect / Winston）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：技術總設計師，負責系統整體架構與技術棧決策。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>系統架構文件（Architecture Doc）</li>
+                                <li>模組與 API 設計圖</li>
+                                <li>資料流程與基礎建設規劃</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：PRD 完成後，進入技術設計階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent architect</code> → <code>*create-doc architecture</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">4️⃣</span>
+                            <span class="emoji">🎨</span>
+                            UX / UI 設計師（UX Expert / Sally）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：使用者體驗與介面設計專家。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>前端設計規格（Front-End Spec）</li>
+                                <li>Wireframe / Prototype</li>
+                                <li>AI 介面生成提示（AI UI Prompt）</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：架構確定後，設計介面與互動流程階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent ux-expert</code> → <code>*generate-ui-prompt</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">5️⃣</span>
+                            <span class="emoji">📝</span>
+                            產品負責人（PO / Sarah）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：敏捷流程守門人，確保需求具體可執行。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>使用者故事（User Stories）</li>
+                                <li>驗收標準（Acceptance Criteria）</li>
+                                <li>Backlog 優先順序</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：PRD 與架構文件完成後，開發前準備階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent po</code> → <code>*create-story</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">6️⃣</span>
+                            <span class="emoji">🏃</span>
+                            Scrum Master（SM / Bob）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：開發流程教練與協調者。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>下一個開發故事（Next Story）</li>
+                                <li>任務拆解與進度追蹤</li>
+                                <li>敏捷檢查清單</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：每次 Sprint 開始時。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent sm</code> → <code>*create</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">7️⃣</span>
+                            <span class="emoji">💻</span>
+                            開發者（Dev / James）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：程式實作者，專注於實作、測試與驗證。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>程式碼與單元測試</li>
+                                <li>開發日誌（Debug Log）</li>
+                                <li>Story 完成紀錄</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：故事批准後進入正式開發階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent dev</code> → <code>*run-tests</code>
+                        </div>
+                    </div>
+
+                    <div class="role-card">
+                        <div class="role-title">
+                            <span class="emoji">8️⃣</span>
+                            <span class="emoji">🧪</span>
+                            品質保證 / 資深審查者（QA / Quinn）
+                        </div>
+                        <div class="role-description">
+                            <strong>角色定位</strong>：品質守護者，進行程式碼審查與測試策略設計。
+                        </div>
+                        <div class="role-outputs">
+                            <h5>主要產出：</h5>
+                            <ul>
+                                <li>QA 審查報告</li>
+                                <li>測試計畫與自動化建議</li>
+                                <li>重構與品質改善紀錄</li>
+                            </ul>
+                        </div>
+                        <div class="role-timing">
+                            <strong>使用時機</strong>：開發完成後，進入審查與驗證階段。
+                        </div>
+                        <div class="role-example">
+                            <strong>指令範例</strong>：<code>*agent qa</code> → <code>*review-story</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="workflows">
+                <h2>🧩 完整開發流程範例</h2>
+
+                <div class="workflow-section">
+                    <div class="workflow-card">
+                        <div class="workflow-title">
+                            <span class="emoji">🔹</span>
+                            新專案（Greenfield Fullstack）
+                        </div>
+                        <div class="workflow-description">
+                            適用：從零開始開發新產品
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">1️⃣ Analyst → 市場與需求分析</div>
+                            <div class="workflow-step">2️⃣ PM → 建立 PRD（定義願景與功能）</div>
+                            <div class="workflow-step">3️⃣ Architect → 系統架構與技術方案</div>
+                            <div class="workflow-step">4️⃣ UX Expert → 設計 UX / UI</div>
+                            <div class="workflow-step">5️⃣ PO → 拆解 User Stories</div>
+                            <div class="workflow-step">6️⃣ SM → 產生下一個故事並進入 Sprint</div>
+                            <div class="workflow-step">7️⃣ Dev → 開發與測試故事</div>
+                            <div class="workflow-step">8️⃣ QA → 程式碼與品質驗證</div>
+                            <div class="workflow-step">9️⃣ 重複步驟 6–8，直到所有故事完成</div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">
+                            <span class="emoji">🔹</span>
+                            既有系統優化（Brownfield Fullstack）
+                        </div>
+                        <div class="workflow-description">
+                            適用：為現有產品增加新功能或改善架構
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">1️⃣ Analyst → *document-project 分析現有系統</div>
+                            <div class="workflow-step">2️⃣ PM → 建立 Brownfield PRD</div>
+                            <div class="workflow-step">3️⃣ Architect → 規劃整合與升級方案</div>
+                            <div class="workflow-step">4️⃣ PO → 拆解並撰寫新故事</div>
+                            <div class="workflow-step">5️⃣ SM → 啟動開發循環</div>
+                            <div class="workflow-step">6️⃣ Dev → 開發與測試</div>
+                            <div class="workflow-step">7️⃣ QA → 品質審查</div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">
+                            <span class="emoji">🔹</span>
+                            前端專案（Greenfield UI）
+                        </div>
+                        <div class="workflow-description">
+                            適用：快速設計並生成 Web / App 前端
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">1️⃣ Analyst → 需求與使用者場景分析</div>
+                            <div class="workflow-step">2️⃣ PM → PRD 定義介面功能</div>
+                            <div class="workflow-step">3️⃣ UX Expert → 設計互動與介面</div>
+                            <div class="workflow-step">4️⃣ Architect → 技術選型（React, Tailwind, API）</div>
+                            <div class="workflow-step">5️⃣ Dev → 實作與測試前端</div>
+                            <div class="workflow-step">6️⃣ QA → 驗證介面與功能</div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">
+                            <span class="emoji">🔹</span>
+                            後端服務專案（Greenfield Service）
+                        </div>
+                        <div class="workflow-description">
+                            適用：建立 API 或微服務
+                        </div>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">1️⃣ PM → 功能與 API 定義</div>
+                            <div class="workflow-step">2️⃣ Architect → 系統與資料流設計</div>
+                            <div class="workflow-step">3️⃣ Dev → 實作服務與單元測試</div>
+                            <div class="workflow-step">4️⃣ QA → 效能與安全測試</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="practices">
+                <h2>💡 實務建議</h2>
+                
+                <div class="best-practices">
+                    <h3>最佳實踐：</h3>
+                    <ul>
+                        <li>在 <strong>Web 介面</strong>（如 ChatGPT / Gemini）中進行文檔、研究與設計階段</li>
+                        <li>在 <strong>IDE</strong>（如 VS Code / Cursor）中進行開發與測試階段</li>
+                        <li>所有開發循環遵守以下節奏：</li>
+                        <li>每個角色只在自己階段中出現，保持上下文乾淨</li>
+                        <li>所有文件遵循命名規範：<code>docs/prd.md</code>、<code>docs/architecture.md</code></li>
+                        <li>開發階段故事（stories）需逐一完成後再啟新任務</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滾動到錨點
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 添加滾動效果
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.role-card, .workflow-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // 初始化卡片動畫
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.role-card, .workflow-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+</html>
