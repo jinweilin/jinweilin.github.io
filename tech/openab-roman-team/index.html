@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織｜金霸觀察</title>
+  <meta name="description" content="介紹 OpenAB 的定位、ACP 架構，以及金霸羅馬帝國開發軍團如何分工完成需求、開發、QA、部署與驗收。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#15372e">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/openab-roman-team/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織">
+  <meta property="og:description" content="OpenAB 是道路與驛站；不同 AI Agent，則是各司其職的專業團隊。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/openab-roman-team/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0EY36MHX33');
+  </script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織","datePublished":"2026-09-13","dateModified":"2026-09-13","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/openab-roman-team/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.article-hero { margin-bottom: 4rem; }
+    header.masthead.article-hero .post-heading { padding: 10rem 0 7rem; }
+    header.masthead.article-hero .post-heading h1 { max-width: 920px; font-size: clamp(2.7rem, 7vw, 5.4rem); line-height: 1.06; letter-spacing: -.045em; }
+    header.masthead.article-hero .post-heading .subheading { max-width: 760px; margin-top: 1.4rem; color: rgba(255,255,255,.84); font-size: clamp(1.05rem, 2.4vw, 1.4rem); line-height: 1.65; }
+    .article-body { color: #26302c; font-size: 1.08rem; line-height: 1.95; }
+    .article-body h2 { margin: 4rem 0 1.4rem; font-size: clamp(1.9rem, 4vw, 2.7rem); letter-spacing: -.025em; }
+    .article-body h3 { margin-top: 2rem; font-size: 1.35rem; }
+    .article-body a { color: #1d6653; text-underline-offset: 3px; }
+    .lead { color: #45514c; font-size: 1.25rem; line-height: 1.85; }
+    .architecture { margin: 2.5rem 0; padding: 2rem; border-radius: 1rem; color: #f8faf9; background: #15372e; box-shadow: 0 20px 55px rgba(21,55,46,.18); }
+    .architecture-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .8rem; align-items: center; text-align: center; }
+    .architecture-box { padding: 1.1rem .8rem; border: 1px solid rgba(255,255,255,.24); border-radius: .7rem; background: rgba(255,255,255,.07); }
+    .architecture-box strong { display: block; color: #e8cd94; font-size: .78rem; letter-spacing: .11em; }
+    .architecture-arrow { color: #d9b96f; font-size: 1.5rem; }
+    .workflow { margin: 2.5rem 0; padding: 0; list-style: none; counter-reset: flow; }
+    .workflow li { position: relative; margin: 0; padding: 1.2rem 1.2rem 1.2rem 4.3rem; border: 1px solid #dcd8cc; border-bottom: 0; background: rgba(255,255,255,.48); }
+    .workflow li:first-child { border-radius: .8rem .8rem 0 0; }
+    .workflow li:last-child { border-bottom: 1px solid #dcd8cc; border-radius: 0 0 .8rem .8rem; }
+    .workflow li::before { counter-increment: flow; content: counter(flow, decimal-leading-zero); position: absolute; left: 1.2rem; top: 1.25rem; color: #a67724; font-size: .76rem; font-weight: 800; letter-spacing: .08em; }
+    .workflow strong { display: block; font-family: Georgia, "Noto Serif TC", serif; font-size: 1.2rem; }
+    .roster { width: 100%; margin: 2rem 0; border-collapse: collapse; font-size: .96rem; }
+    .roster th, .roster td { padding: 1rem .8rem; border-bottom: 1px solid #dcd8cc; text-align: left; vertical-align: top; }
+    .roster th { color: #52615b; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+    .callout { margin: 3rem 0; padding: 1.7rem 1.8rem; border-left: 4px solid #c79b45; background: #ece8dc; }
+    .callout p { margin: 0; }
+    .sources { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #dcd8cc; }
+    .sources li { margin-bottom: .75rem; }
+    @media (max-width: 767px) {
+      header.masthead.article-hero .post-heading { padding: 8rem 0 5rem; }
+      .architecture-row { grid-template-columns: 1fr; }
+      .architecture-arrow { transform: rotate(90deg); }
+      .roster thead { display: none; }
+      .roster, .roster tbody, .roster tr, .roster td { display: block; }
+      .roster tr { padding: .8rem 0; border-bottom: 1px solid #dcd8cc; }
+      .roster td { padding: .25rem 0; border: 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="../../">金霸觀察</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead article-hero">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-11 col-lg-10 col-xl-9">
+          <div class="post-heading">
+            <div class="kicker">Technology · Multi-agent systems</div>
+            <h1>OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織</h1>
+            <span class="subheading">OpenAB 是道路與驛站；不同 AI Agent，則是各司其職的專業團隊。</span>
+            <span class="meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 7 分鐘閱讀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <article class="col-md-10 col-lg-9 col-xl-8 article-body">
+        <p class="lead"><strong>OpenAB 不是一個 AI 模型，而是把不同 AI Agent、聊天平台與工作流程串起來的 Agent 調度平台。</strong>它讓團隊可以在熟悉的聊天介面提出需求，同時保留專業分工、工作階段與執行邊界。</p>
+
+        <h2>OpenAB 是什麼？</h2>
+        <p>OpenAB 全名是 <strong>Open Agent Broker</strong>。官方將它定位為輕量、安全且雲端原生的 ACP harness：平台端負責接收訊息、調度 Session 與管理通道，再透過 Agent Client Protocol（ACP）把工作交給 Claude Code、Codex、Grok、Devin、Gemini、Antigravity 等相容的 Agent runtime。</p>
+
+        <div class="architecture" role="img" aria-label="聊天平台經由 OpenAB 與 ACP 連接不同 Agent，再使用開發及部署工具">
+          <div class="architecture-row">
+            <div class="architecture-box"><strong>入口</strong>Discord／LINE／Slack</div>
+            <div class="architecture-arrow">→</div>
+            <div class="architecture-box"><strong>調度</strong>OpenAB／Session／權限</div>
+            <div class="architecture-arrow">→</div>
+            <div class="architecture-box"><strong>執行</strong>AI Agent／MCP／開發工具</div>
+          </div>
+        </div>
+
+        <p>OpenAB 的價值不在於取代模型，而在於把模型變成可持續運作的服務。它處理多平台訊息、Thread 多輪對話、Session pool、Agent 互相協作、檔案與圖片傳遞、排程工作，以及 Kubernetes 部署所需的持久化與生命週期管理。</p>
+
+        <h2>我們的羅馬帝國開發軍團</h2>
+        <p>我們沒有讓同一個 Agent 同時定義需求、寫程式、測試，再自己宣布滿分。羅馬軍團採用角色分工與責任分離，把產品開發拆成一條可以檢查、退回與驗收的流程。</p>
+
+        <ol class="workflow">
+          <li><strong>格拉古：需求訪談</strong>確認真正要解決的問題，整理需求與驗收標準。</li>
+          <li><strong>凱撒：規劃與派工</strong>判斷方向、拆解 Issues，協調後續執行順序。</li>
+          <li><strong>維特魯威：工程實作</strong>撰寫程式、測試修改，並提交可供審查的 PR。</li>
+          <li><strong>加圖：品質把關</strong>從功能、邊界條件與 E2E 行為挑錯，不讓「能跑」冒充「能用」。</li>
+          <li><strong>阿格里帕：部署與維運</strong>負責發布、服務驗證、監控，以及必要時的回退。</li>
+          <li><strong>格拉古：最終驗收</strong>回到最初需求，確認成果真的解決使用者問題。</li>
+        </ol>
+
+        <div class="table-responsive">
+          <table class="roster">
+            <thead><tr><th>成員</th><th>定位</th><th>目前使用的 Agent 後端</th></tr></thead>
+            <tbody>
+              <tr><td><strong>格拉古</strong></td><td>產品顧問／需求與驗收</td><td>Claude Sonnet 5</td></tr>
+              <tr><td><strong>凱撒</strong></td><td>PM 指揮官／決策與協調</td><td>Claude Sonnet 5</td></tr>
+              <tr><td><strong>維特魯威</strong></td><td>開發工程師／程式實作</td><td>Devin SWE-1.7</td></tr>
+              <tr><td><strong>加圖</strong></td><td>QA 品質長／測試與審查</td><td>Grok 4.6</td></tr>
+              <tr><td><strong>阿格里帕</strong></td><td>SRE 部署官／發布與監控</td><td>Claude Sonnet 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>刻意使用不同後端也有風險分散的效果：如果所有角色都依賴同一套模型，它們可能共享相似盲點；透過異質模型與明確驗收標準，可以降低「大家很有共識，但一起看錯」的機率。</p>
+
+        <h2>眾議院：討論與執行分開</h2>
+        <p>除了開發軍團，我們也設置「眾議院」作為顧問與政策討論場域。凱撒與格拉古常駐，加圖及阿格里帕依主題提供 QA 或維運意見。討論可以形成表決與 SWOT 分析，但決議只是建議，不會自動派工或部署；意見無法收斂時，由金霸做最後裁定。</p>
+
+        <div class="callout"><p><strong>眾議院負責把事情吵清楚，軍團負責把事情做清楚。</strong>把顧問場域與執行場域分開，可以避免一邊討論方向，一邊意外改動正式環境。</p></div>
+
+        <h2>羅馬軍團以外的專業單位</h2>
+        <p>整個 OpenAB 艦隊不只有開發團隊。金小霸與金二霸屬於金霸直屬的個人側；另有旅遊規劃、社群內容、每日視覺、台股研究及圖像工作室等獨立團隊。各自有明確入口、權限與交付流程，不需要所有問題都送進開發軍團。</p>
+
+        <h2>真正的價值：組織設計，而不只是 Agent 數量</h2>
+        <p>多 Agent 系統最容易掉進「角色很多，看起來很熱鬧」的陷阱。如果沒有清楚的責任邊界、交付格式、權限控制與最終驗收，增加 Agent 只會增加溝通成本。</p>
+        <p>我們目前的方向，是讓 OpenAB 負責穩定的通訊與調度，讓每個 Agent 專注自己的專業角色，再透過 Git、PR、測試與部署紀錄留下可以追蹤的成果。</p>
+
+        <blockquote>OpenAB 是帝國的道路、驛站與通訊系統；Agent 是各司其職的官員。真正重要的不是官員有多少，而是權責是否清楚、命令是否可追蹤、結果是否有人驗收。</blockquote>
+
+        <section class="sources" aria-labelledby="sources-title">
+          <div class="section-label">Sources</div>
+          <h2 id="sources-title">來源與說明</h2>
+          <ol>
+            <li><a href="https://github.com/openabdev/openab">OpenAB 官方專案與 README</a>：平台定位、支援通道、Agent 後端與整體架構。</li>
+            <li><a href="https://github.com/openabdev/openab/blob/main/docs/multi-agent.md">OpenAB Multi-agent Collaboration</a>：Bot-to-Bot 協作與多 Agent 設計。</li>
+            <li><a href="https://github.com/openabdev/openab/blob/main/docs/config-reference.md">OpenAB Configuration Reference</a>：平台、Session pool 與權限設定。</li>
+          </ol>
+          <p class="small text-muted">羅馬軍團角色、流程與目前後端配置，依團隊內部名冊截至 2026 年 9 月 13 日的現況整理。公開版已省略內部位址、頻道識別碼、憑證與部署敏感資訊。本文由 AI 協助資料整理與排版，發布前經金霸確認。</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-top mt-5">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+          <div class="small text-muted fst-italic">© 2026 金霸觀察</div>
+          <div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
