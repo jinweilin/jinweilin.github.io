@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金霸</title>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0EY36MHX33');
+</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #1e40af, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e40af, #7c3aed);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.5);
+        }
+
+        .stickers-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .stickers-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stickers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .sticker-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sticker-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .sticker-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sticker-image {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sticker-image img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .sticker-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .sticker-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .sticker-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .sticker-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00C851, #00B744);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sticker-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 200, 81, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stickers-section h2 {
+                font-size: 2rem;
+            }
+
+            .section-desc {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .stickers-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .sticker-card {
+                padding: 1.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">金霸</div>
+            <ul class="nav-links">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#about">關於</a></li>
+                <li><a href="#stickers">貼圖作品</a></li>
+                <li><a href="#applications">應用分享</a></li>
+                <li><a href="#contact">聯絡</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>歡迎來到我的創作世界</h1>
+            <p>分享我的創作作品和實用工具！從 LINE Store 上的貼圖作品到技術應用分享，每一項都充滿了創意和實用價值。</p>
+            <a href="#stickers" class="btn">查看我的作品</a>
+        </section>
+
+        <section id="stickers" class="stickers-section">
+            <h2>我的 LINE 貼圖作品</h2>
+            <p class="section-desc">以下是我在 LINE Store 上發布的貼圖作品，每一組都充滿了創意和生活樂趣！</p>
+
+            <div class="stickers-grid">
+                <div class="sticker-card">
+                    <div class="sticker-image">
+                        <img src="https://creators-market-all.line-scdn.net/line-user-stickers-sticker-3965/sticker/39651728/main/0feaed63dfbe363ebb2f68a83936ec442df3f626.png" alt="秉媽日常用語貼圖" />
+                    </div>
+                    <h3>秉媽日常用語</h3>
+                    <p>這是一組充滿生活感的日常用語貼圖，不管是提醒、關心還是幽默互動，秉媽都幫你把話說得剛剛好。用秉媽傳遞溫暖與笑意，讓每一次聊天更有溫度！</p>
+                    <a href="https://line.me/S/sticker/30328592" target="_blank" class="sticker-link">查看貼圖</a>
+                </div>
+                <div class="sticker-card">
+                    <div class="sticker-image">
+                        <img src="https://creators-market-all.line-scdn.net/line-user-stickers-sticker-3970/sticker/39700788/main/25854ab262d4d92b289212264fecde31acb91163.png" alt="騎到懷疑人生的單車日常貼圖" />
+                    </div>
+                    <h3>騎到懷疑人生的單車日常</h3>
+                    <p>爆胎、爬坡、假補給，車友的話也不能信！ 這是騎士們「騎到懷疑人生」的真實寫照。 用可愛風格的貼圖，幽默傳達每次踩踏的心聲！</p>
+                    <a href="https://line.me/S/sticker/30371837" target="_blank" class="sticker-link">查看貼圖</a>
+                </div>
+                <div class="sticker-card">
+                    <div class="sticker-image">
+                        <img src="https://creators-market-all.line-scdn.net/line-user-stickers-sticker-3967/sticker/39670213/main/dcd2363c867e83ebe6705f9f5b9eb1c7a4a8b6c0.png" alt="高爾夫日常・揮桿人生貼圖" />
+                    </div>
+                    <h3>《高爾夫日常・揮桿人生》</h3>
+                    <p>來自球場的每一刻！從開球、找球到休息時間，每一個表情都是真實的你。這組可愛又幽默的高爾夫 LINE 貼圖，讓你和球友聊天更有感，揮出每一場好球，也傳遞每一分情感！</p>
+                    <a href="https://line.me/S/sticker/30371444" target="_blank" class="sticker-link">查看貼圖</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="applications" class="stickers-section">
+            <h2>應用分享</h2>
+            <p class="section-desc">分享實用的工具、方法和技術文件，幫助提升工作效率和學習效果！</p>
+
+            <div class="stickers-grid">
+                <div class="sticker-card">
+                    <div class="sticker-icon">🧠</div>
+                    <h3>Agents API：模型正在變成基礎設施</h3>
+                    <p>從架構、成本、資安與平台策略，分析 OpenAI Agents API 帶來的機會與挑戰，以及企業應如何展開受控試點。</p>
+                    <a href="tech/openai-agents-api-2026/" class="sticker-link">閱讀分析</a>
+                </div>
+                <div class="sticker-card">
+                    <div class="sticker-icon">🎭</div>
+                    <h3>BMAD 工作流程與角色指南</h3>
+                    <p>BMAD-METHOD 是一套結合 AI 代理與敏捷開發的系統。每個角色對應一個專業 AI 代理，共同完成從策略規劃到產品開發的全流程。包含八大核心角色與完整開發流程範例。</p>
+                    <a href="ai/BMAD 工作流程與角色指南.html" class="sticker-link">查看指南</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>創意設計</h3>
+                <p>每個貼圖都經過精心設計，結合幽默感和實用性，讓日常對話更有趣。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>生活化表達</h3>
+                <p>貼圖內容貼近日常生活，無論是運動、家庭或工作場景都能找到合適的表達方式。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>LINE Store 上架</h3>
+                <p>所有作品都已在 LINE Store 正式上架，只需 US$0.99 即可購買使用。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 金霸. All rights reserved。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滾動效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 簡單的載入動畫
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
