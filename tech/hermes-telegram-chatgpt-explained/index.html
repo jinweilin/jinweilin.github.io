@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解｜金霸觀察</title>
+  <meta name="description" content="用對講機、機器人管家和大腦的比喻，解釋 Hermes Agent、Telegram、ChatGPT／Codex、伺服器與工具各自負責什麼。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18372f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解">
+  <meta property="og:description" content="Telegram 是對講機、ChatGPT／Codex 是大腦，Hermes Agent 是會記事情並真正動手的機器人管家。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0EY36MHX33');
+  </script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解","datePublished":"2026-09-13","dateModified":"2026-09-13","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.hermes-hero { margin-bottom: 4rem; background-image: radial-gradient(circle at 82% 28%, rgba(94,196,166,.35) 0 80px, transparent 81px), radial-gradient(circle at 78% 32%, transparent 0 142px, rgba(255,255,255,.14) 143px 144px, transparent 145px), linear-gradient(130deg,#0a1d18,#183d33 58%,#296451); }
+    header.masthead.hermes-hero .post-heading { padding: 10rem 0 7rem; }
+    header.masthead.hermes-hero .post-heading h1 { max-width: 960px; font-size: clamp(2.6rem,7vw,5.4rem); line-height: 1.05; letter-spacing: -.045em; }
+    header.masthead.hermes-hero .post-heading .subheading { max-width: 790px; margin-top: 1.5rem; color: rgba(255,255,255,.84); font-size: clamp(1.05rem,2.4vw,1.4rem); line-height: 1.7; }
+    .article-body { color:#26302c; font-size:1.08rem; line-height:1.95; }
+    .article-body h2 { margin:4rem 0 1.4rem; font-size:clamp(1.9rem,4vw,2.7rem); letter-spacing:-.025em; }
+    .article-body h3 { margin-top:2rem; font-size:1.32rem; }
+    .article-body a { color:#1d6653; text-underline-offset:3px; }
+    .lead { color:#45514c; font-size:1.26rem; line-height:1.85; }
+    .big-answer { margin:2.5rem 0; padding:2rem; border-radius:1rem; color:white; background:#18372f; box-shadow:0 20px 55px rgba(21,55,46,.18); font:700 clamp(1.4rem,3vw,2rem)/1.65 Georgia,"Noto Serif TC",serif; }
+    .cast { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:2.2rem 0; }
+    .cast-card { min-height:215px; padding:1.5rem; border:1px solid #dcd8cc; border-radius:.9rem; background:rgba(255,255,255,.52); }
+    .cast-icon { display:grid; width:48px; height:48px; margin-bottom:1rem; place-items:center; border-radius:50%; color:white; background:#26594b; font-weight:800; }
+    .cast-card h3 { margin:.2rem 0 .45rem; font-size:1.3rem; }
+    .cast-card p { margin:0; color:#64706b; font-size:.97rem; line-height:1.72; }
+    .journey { margin:2.5rem 0; padding:2rem; border-radius:1rem; background:#ece8dc; }
+    .journey-row { display:grid; grid-template-columns:repeat(5,1fr); gap:.65rem; align-items:stretch; }
+    .journey-step { position:relative; padding:1rem .65rem; border-radius:.7rem; text-align:center; background:#fffdf8; font-size:.88rem; line-height:1.5; }
+    .journey-step:not(:last-child)::after { content:"→"; position:absolute; right:-.58rem; top:42%; z-index:1; color:#a67724; font-weight:900; }
+    .journey-step strong { display:block; margin-bottom:.35rem; color:#1d5b4b; }
+    .role-table { width:100%; margin:2rem 0; border-collapse:collapse; font-size:.96rem; }
+    .role-table th,.role-table td { padding:1rem .8rem; border-bottom:1px solid #dcd8cc; text-align:left; vertical-align:top; }
+    .role-table th { color:#52615b; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; }
+    .two-paths { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:2rem 0; }
+    .path { padding:1.5rem; border-top:4px solid #c79b45; border-radius:.25rem .25rem .8rem .8rem; background:#fffdf8; }
+    .path h3 { margin:0 0 .8rem; }
+    .path p { margin-bottom:0; color:#5b6661; font-size:.98rem; }
+    .apps { display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem 1.2rem; padding:0; list-style:none; }
+    .apps li { padding:1rem 1.1rem; border-left:3px solid #4c8d79; background:rgba(255,255,255,.45); }
+    .warning { margin:3rem 0; padding:1.8rem; border-left:4px solid #c26045; background:#f3e7e1; }
+    .warning h3 { margin-top:0; }
+    .sources { margin-top:4rem; padding-top:2rem; border-top:1px solid #dcd8cc; }
+    .sources li { margin-bottom:.75rem; }
+    @media(max-width:767px){
+      header.masthead.hermes-hero .post-heading { padding:8rem 0 5rem; }
+      .cast,.two-paths,.apps { grid-template-columns:1fr; }
+      .journey-row { grid-template-columns:1fr; }
+      .journey-step:not(:last-child)::after { content:"↓"; right:auto; left:49%; top:auto; bottom:-1.05rem; }
+      .role-table thead { display:none; }
+      .role-table,.role-table tbody,.role-table tr,.role-table td { display:block; }
+      .role-table tr { padding:.75rem 0; border-bottom:1px solid #dcd8cc; }
+      .role-table td { padding:.25rem 0; border:0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="../../">金霸觀察</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead hermes-hero">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-11 col-lg-10 col-xl-9">
+          <div class="post-heading">
+            <div class="kicker">Technology · ELI5</div>
+            <h1>Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解</h1>
+            <span class="subheading">每個工具在做什麼、為什麼要拆開，以及組合之後還能做哪些事？</span>
+            <span class="meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 8 分鐘閱讀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <article class="col-md-10 col-lg-9 col-xl-8 article-body">
+        <p class="lead">Hermes Agent、Telegram 和 ChatGPT 整合在一起時，名詞很多、設定也不少。不過先不要管 API、OAuth 或 Gateway，只要記住一句話。</p>
+
+        <div class="big-answer">Telegram 是嘴巴和耳朵，ChatGPT／Codex 是大腦，Hermes Agent 是會記事情、拿工具並真正動手的機器人管家。</div>
+
+        <p>實際上還有一個常被忽略的角色：<strong>伺服器是機器人的家與身體</strong>。Hermes 必須在電腦、VPS 或雲端環境中運作，才能持續收訊息、保存資料與執行排程。</p>
+
+        <h2>先認識五位主角</h2>
+        <div class="cast">
+          <section class="cast-card"><div class="cast-icon">T</div><h3>Telegram：對講機</h3><p>讓你從手機送出文字、語音、照片與檔案，也負責把結果顯示回來；它自己不會思考。</p></section>
+          <section class="cast-card"><div class="cast-icon">H</div><h3>Hermes Agent：管家</h3><p>辨認主人、記住對話、安排步驟、選擇工具、執行任務，最後把成果送回正確的聊天室。</p></section>
+          <section class="cast-card"><div class="cast-icon">AI</div><h3>ChatGPT／Codex：大腦</h3><p>理解自然語言、推理與規劃下一步。但只有大腦不會自動知道該去哪裡拿檔案或把結果送給誰。</p></section>
+          <section class="cast-card"><div class="cast-icon">V</div><h3>伺服器：家與身體</h3><p>讓 Hermes 有地方運作與保存設定。它可以是自己的電腦、便宜 VPS，或能閒置休眠的雲端環境。</p></section>
+          <section class="cast-card"><div class="cast-icon">＋</div><h3>Skills／Tools：工具箱</h3><p>搜尋、瀏覽器、程式執行、檔案、圖片、語音與排程，讓管家不只會說，也能真正完成工作。</p></section>
+        </div>
+
+        <h2>一則訊息怎麼走完全程？</h2>
+        <p>假設你在 Telegram 對機器人說：「每天早上七點整理 AI 新聞給我。」</p>
+        <div class="journey" role="img" aria-label="訊息從使用者經 Telegram、Hermes Gateway、AI 模型與工具，再回到 Telegram 的流程">
+          <div class="journey-row">
+            <div class="journey-step"><strong>你</strong>傳出需求</div>
+            <div class="journey-step"><strong>Telegram</strong>把訊息送走</div>
+            <div class="journey-step"><strong>Hermes</strong>辨識、記憶、規劃</div>
+            <div class="journey-step"><strong>模型＋工具</strong>思考並執行</div>
+            <div class="journey-step"><strong>Telegram</strong>收到成果</div>
+          </div>
+        </div>
+
+        <p>Hermes 的 Messaging Gateway 是連接 Telegram、Discord、Slack 等平台的背景程序，負責每個聊天室的 Session、排程工作與結果傳遞。Telegram Bot API 則是 Telegram 提供給開發者收發 Bot 訊息的 HTTP 介面。</p>
+
+        <h2>每個工具實際負責什麼？</h2>
+        <div class="table-responsive">
+          <table class="role-table">
+            <thead><tr><th>元件</th><th>小學生比喻</th><th>實際職責</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Telegram</strong></td><td>對講機</td><td>接收文字、語音、圖片與檔案，顯示回覆。</td></tr>
+              <tr><td><strong>Telegram Bot</strong></td><td>對講機號碼</td><td>讓 Hermes 可以透過 Telegram 的介面收發訊息。</td></tr>
+              <tr><td><strong>Hermes Gateway</strong></td><td>管家門口</td><td>接收訊息、驗證使用者、找到相對應的對話。</td></tr>
+              <tr><td><strong>Hermes Agent</strong></td><td>機器人管家</td><td>維持記憶、規劃工作、呼叫模型與選用工具。</td></tr>
+              <tr><td><strong>ChatGPT／Codex</strong></td><td>大腦</td><td>理解語言、推理與產生下一步，但不獨自管理 Telegram。</td></tr>
+              <tr><td><strong>Skills／Tools</strong></td><td>工具箱</td><td>搜尋、操作瀏覽器、執行程式、處理檔案與建立排程。</td></tr>
+              <tr><td><strong>電腦／VPS</strong></td><td>管家的家</td><td>讓 Hermes 持續運作並保存設定、記憶與工作檔案。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>最容易搞錯：ChatGPT 不等於 Hermes</h2>
+        <p>ChatGPT／Codex 模型可以思考，但通常不會自己知道訊息從哪個 Telegram 使用者而來、上一次對話存在哪裡、有哪些工具可以使用、哪些動作需要核准，以及完成後該回覆到哪個聊天室。這些工作由 Hermes 負責。</p>
+        <blockquote>模型提供智慧；Hermes 把智慧組織成一位可以長期工作的 Agent。</blockquote>
+
+        <h2>Hermes 使用 OpenAI 的兩條路</h2>
+        <div class="two-paths">
+          <section class="path"><h3>路線一：ChatGPT OAuth／OpenAI Codex</h3><p>透過裝置登入連接 ChatGPT 或 Codex 訂閱，讓 Hermes 使用 Codex 模型。這不是把 ChatGPT 網頁裝進 Telegram，而是授權 Hermes 使用模型服務。</p></section>
+          <section class="path"><h3>路線二：OpenAI API</h3><p>設定 OpenAI API Key，由 Hermes 呼叫 OpenAI API。這條路和 ChatGPT 消費者產品是不同的連接及使用方式。</p></section>
+        </div>
+        <p>Hermes 官方目前確認支援 ChatGPT OAuth，但哪些 ChatGPT 方案符合資格、使用量如何計入 Codex 限額，文件尚未完整說明。因此不應直接宣稱「買 ChatGPT Plus 就能讓 Hermes 無限制使用」。</p>
+
+        <h2>為什麼故意拆成這麼多環節？</h2>
+        <p>因為每個零件可以獨立替換：Telegram 可以改成 Discord 或 Slack；OpenAI 可以換成其他模型供應商或自架模型；換伺服器不必重做 Telegram Bot；要增加能力，只需要加入新的 Skill、Tool 或 MCP。</p>
+        <p>拆開看起來比較複雜，長期反而更容易維護。汽車也不會把方向盤、引擎和輪胎焊成一顆大鐵球——雖然整合度很高，但大概只能拿來滾下山。</p>
+
+        <h2>組合後可以做什麼？</h2>
+        <ul class="apps">
+          <li><strong>私人助理</strong><br>記事、提醒、行程與資料整理。</li>
+          <li><strong>每日情報站</strong><br>新聞、金融、競品與社群摘要。</li>
+          <li><strong>遠端工程師</strong><br>從 Telegram 指派修改、測試與 Git 工作。</li>
+          <li><strong>研究助理</strong><br>搜尋來源、比較資料並整理報告。</li>
+          <li><strong>語音助理</strong><br>傳語音，自動轉錄、執行與回覆。</li>
+          <li><strong>文件工廠</strong><br>產生報告、圖片、簡報與試算表。</li>
+          <li><strong>家庭中控</strong><br>連接 Home Assistant 查詢或控制設備。</li>
+          <li><strong>定時巡邏</strong><br>監看網站或服務，異常時主動通知。</li>
+        </ul>
+
+        <h2>最後一塊不能省：安全</h2>
+        <div class="warning">
+          <h3>這不是普通聊天機器人</h3>
+          <p>Telegram 接上 Hermes 後，使用者可能是在遠端操作一台能讀檔案、上網與執行工具的電腦。Bot Token 必須保密，並應設定允許名單或配對機制、區分管理員與一般使用者、讓危險指令需要核准，以及使用隔離環境與最小權限。</p>
+        </div>
+        <p>Hermes 官方提供使用者 allowlist、一次性配對碼、管理員／一般使用者分級、危險命令核准與容器隔離。若機器人具有終端機權限，切勿為了方便直接開放給所有陌生人。</p>
+
+        <div class="big-answer">Telegram 讓你隨時找得到它；ChatGPT／Codex 讓它聽得懂你；Hermes 讓它記得住、會用工具，而且真的把事情做完。</div>
+
+        <section class="sources" aria-labelledby="sources-title">
+          <div class="section-label">Primary sources</div>
+          <h2 id="sources-title">來源與說明</h2>
+          <ol>
+            <li><a href="https://hermes-agent.nousresearch.com/">Hermes Agent 官方網站</a>：產品定位、開源授權、記憶、Skills、排程、子 Agent 與執行環境。</li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/">Hermes Messaging Gateway</a>：支援平台、Session、排程與訊息傳遞架構。</li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram">Hermes Telegram Setup</a>：BotFather、媒體支援、Polling／Webhook 與使用者權限。</li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/integrations/providers">Hermes LLM and Model Providers</a>：ChatGPT OAuth／Codex 與 OpenAI API 的連接方式。</li>
+            <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/security">Hermes Security</a>：命令核准、身分授權與隔離建議。</li>
+            <li><a href="https://core.telegram.org/bots/api">Telegram Bot API</a>：Telegram 官方 Bot HTTP 介面。</li>
+            <li><a href="https://developers.openai.com/api/docs">OpenAI API 官方文件</a>：OpenAI API 的開發介面與能力。</li>
+          </ol>
+          <p class="small text-muted">查證日期：2026 年 9 月 13 日。本文將產品功能與官方文件中的事實分開整理；實際支援方案、額度與介面可能隨服務更新。本文由 AI 協助資料查證、整理與排版，發布前經金霸確認。</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-top mt-5">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+          <div class="small text-muted fst-italic">© 2026 金霸觀察</div>
+          <div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
