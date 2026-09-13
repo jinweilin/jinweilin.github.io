@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解｜金霸觀察</title>
+  <title>Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構｜金霸觀察</title>
   <meta name="description" content="用對講機、機器人管家和大腦的比喻，解釋 Hermes Agent、Telegram、ChatGPT／Codex、伺服器與工具各自負責什麼。">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#18372f">
   <link rel="canonical" href="https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="zh_TW">
-  <meta property="og:title" content="Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解">
+  <meta property="og:title" content="Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構">
   <meta property="og:description" content="Telegram 是對講機、ChatGPT／Codex 是大腦，Hermes Agent 是會記事情並真正動手的機器人管家。">
   <meta property="og:url" content="https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/">
 
@@ -23,7 +23,7 @@
     gtag('config', 'G-0EY36MHX33');
   </script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解","datePublished":"2026-09-13","dateModified":"2026-09-13","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構","datePublished":"2026-09-13","dateModified":"2026-09-13","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/hermes-telegram-chatgpt-explained/"}</script>
   <link href="../../assets/css/clean-blog.css" rel="stylesheet">
   <link href="../../assets/css/jinba.css" rel="stylesheet">
   <style>
@@ -93,7 +93,7 @@
         <div class="col-md-11 col-lg-10 col-xl-9">
           <div class="post-heading">
             <div class="kicker">Technology · ELI5</div>
-            <h1>Hermes Agent＋Telegram＋ChatGPT：小學生也懂的完整圖解</h1>
+            <h1>Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構</h1>
             <span class="subheading">每個工具在做什麼、為什麼要拆開，以及組合之後還能做哪些事？</span>
             <span class="meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 8 分鐘閱讀</span>
           </div>
@@ -137,7 +137,7 @@
         <h2>每個工具實際負責什麼？</h2>
         <div class="table-responsive">
           <table class="role-table">
-            <thead><tr><th>元件</th><th>小學生比喻</th><th>實際職責</th></tr></thead>
+            <thead><tr><th>元件</th><th>白話比喻</th><th>實際職責</th></tr></thead>
             <tbody>
               <tr><td><strong>Telegram</strong></td><td>對講機</td><td>接收文字、語音、圖片與檔案，顯示回覆。</td></tr>
               <tr><td><strong>Telegram Bot</strong></td><td>對講機號碼</td><td>讓 Hermes 可以透過 Telegram 的介面收發訊息。</td></tr>
