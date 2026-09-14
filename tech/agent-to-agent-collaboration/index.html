@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Agent-to-Agent：當 AI 從單兵工具走向協作組織｜金霸觀察</title>
+  <meta name="description" content="從 AutoGen、CAMEL、MetaGPT、ChatDev 等研究，到 A2A Protocol 與 OpenAB 羅馬軍團，解析多 Agent 協作的價值、架構、失敗模式與安全風險。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#162d29">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/agent-to-agent-collaboration/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="Agent-to-Agent：當 AI 從單兵工具走向協作組織">
+  <meta property="og:description" content="Agent-to-Agent 的真正價值，不是讓多個 AI 聊天，而是建立有角色、有交付物、有驗收與責任邊界的協作流程。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/agent-to-agent-collaboration/">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0EY36MHX33');
+  </script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Agent-to-Agent：當 AI 從單兵工具走向協作組織","datePublished":"2026-09-14","dateModified":"2026-09-14","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/agent-to-agent-collaboration/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.a2a-hero { margin-bottom:4rem; background-image:radial-gradient(circle at 80% 28%,rgba(218,180,96,.35) 0 70px,transparent 71px),radial-gradient(circle at 80% 28%,transparent 0 135px,rgba(255,255,255,.13) 136px 137px,transparent 138px),linear-gradient(128deg,#0a1b18,#173a33 54%,#315d52); }
+    header.masthead.a2a-hero .post-heading { padding:10rem 0 7rem; }
+    header.masthead.a2a-hero .post-heading h1 { max-width:950px; font-size:clamp(2.75rem,7vw,5.5rem); line-height:1.04; letter-spacing:-.05em; }
+    header.masthead.a2a-hero .post-heading .subheading { max-width:790px; margin-top:1.5rem; color:rgba(255,255,255,.84); font-size:clamp(1.05rem,2.4vw,1.4rem); line-height:1.7; }
+    .article-body { color:#26302c; font-size:1.08rem; line-height:1.95; }
+    .article-body h2 { margin:4rem 0 1.4rem; font-size:clamp(1.9rem,4vw,2.7rem); letter-spacing:-.025em; }
+    .article-body h3 { margin-top:2rem; font-size:1.3rem; }
+    .article-body a { color:#1d6653; text-underline-offset:3px; }
+    .lead { color:#45514c; font-size:1.26rem; line-height:1.85; }
+    .thesis { margin:2.5rem 0; padding:2rem; border-radius:1rem; color:white; background:#173a33; box-shadow:0 20px 55px rgba(21,55,46,.18); font:700 clamp(1.35rem,3vw,1.9rem)/1.65 Georgia,"Noto Serif TC",serif; }
+    .handoff { margin:2.5rem 0; padding:1.8rem; border-radius:1rem; background:#ece8dc; }
+    .handoff-row { display:grid; grid-template-columns:repeat(6,1fr); gap:.55rem; }
+    .handoff-step { position:relative; display:flex; min-height:110px; padding:.8rem .55rem; align-items:center; justify-content:center; border-radius:.65rem; text-align:center; background:#fffdf8; font-size:.82rem; line-height:1.45; }
+    .handoff-step:not(:last-child)::after { content:"→"; position:absolute; right:-.48rem; z-index:2; color:#a67724; font-size:1.1rem; font-weight:900; }
+    .research-table,.compare-table { width:100%; margin:2rem 0; border-collapse:collapse; font-size:.94rem; }
+    .research-table th,.research-table td,.compare-table th,.compare-table td { padding:1rem .75rem; border-bottom:1px solid #dcd8cc; text-align:left; vertical-align:top; }
+    .research-table th,.compare-table th { color:#52615b; font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; }
+    .evidence { display:inline-block; padding:.15rem .45rem; border-radius:999px; color:#315d52; background:#dbe9e3; font-size:.7rem; font-weight:800; white-space:nowrap; }
+    .a2a-objects { display:grid; grid-template-columns:repeat(2,1fr); gap:.85rem; margin:2rem 0; }
+    .object-card { padding:1.25rem; border:1px solid #dcd8cc; border-radius:.8rem; background:rgba(255,255,255,.48); }
+    .object-card strong { display:block; margin-bottom:.35rem; font-family:Georgia,"Noto Serif TC",serif; font-size:1.15rem; }
+    .object-card p { margin:0; color:#64706b; font-size:.94rem; line-height:1.65; }
+    .warning { margin:3rem 0; padding:1.8rem; border-left:4px solid #bc5b45; background:#f2e5df; }
+    .warning h3 { margin-top:0; }
+    .checklist { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem 1rem; padding:0; list-style:none; }
+    .checklist li { padding:.9rem 1rem; border-left:3px solid #4c8d79; background:rgba(255,255,255,.45); }
+    .sources { margin-top:4rem; padding-top:2rem; border-top:1px solid #dcd8cc; }
+    .sources li { margin-bottom:.8rem; }
+    @media(max-width:767px){
+      header.masthead.a2a-hero .post-heading { padding:8rem 0 5rem; }
+      .handoff-row,.a2a-objects,.checklist { grid-template-columns:1fr; }
+      .handoff-step:not(:last-child)::after { content:"↓"; right:auto; bottom:-.8rem; }
+      .research-table thead,.compare-table thead { display:none; }
+      .research-table,.research-table tbody,.research-table tr,.research-table td,.compare-table,.compare-table tbody,.compare-table tr,.compare-table td { display:block; }
+      .research-table tr,.compare-table tr { padding:.7rem 0; border-bottom:1px solid #dcd8cc; }
+      .research-table td,.compare-table td { padding:.25rem 0; border:0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="../../">金霸觀察</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead a2a-hero">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-11 col-lg-10 col-xl-9">
+          <div class="post-heading">
+            <div class="kicker">Technology · Multi-agent systems</div>
+            <h1>Agent-to-Agent：當 AI 從單兵工具走向協作組織</h1>
+            <span class="subheading">從多 Agent 研究、A2A 開放協定，到 OpenAB 羅馬軍團的實務設計。</span>
+            <span class="meta">金霸研究編輯部 · 2026 年 9 月 14 日 · 約 12 分鐘閱讀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <article class="col-md-10 col-lg-9 col-xl-8 article-body">
+        <p class="lead">過去使用生成式 AI，通常是一個人對一個模型下指令。但當任務橫跨需求分析、研究、程式開發、測試與部署時，把所有責任交給同一個 Agent，就像要求同一名員工出題、作答，最後再替自己打滿分。</p>
+
+        <div class="thesis">Agent-to-Agent 的真正價值，不是讓多個 AI 互相聊天，而是把複雜任務拆成有角色、有交付物、有驗收與責任邊界的協作流程。</div>
+
+        <h2>一句話理解 Agent-to-Agent</h2>
+        <p>單一 Agent 像一名能力很強的自由工作者；多 Agent 系統則比較像一家公司：有人理解需求、有人規劃、有人執行、有人檢查，最後還要有人確認成果是否真的符合目標。</p>
+        <p>因此，Agent-to-Agent 可以定義為：<strong>讓不同 AI 角色依照可控制的規則，交換任務、狀態、證據與成果。</strong></p>
+
+        <h2>一次標準的 Agent 交接</h2>
+        <p>假設使用者提出：「幫我建立一個活動報名網站。」理想流程不是六個 Agent 在群組裡輪流發言，而是一條能被追蹤的交付鏈。</p>
+        <div class="handoff" role="img" aria-label="需求 Agent、PM Agent、工程 Agent、QA Agent、部署 Agent與驗收 Agent的工作交接流程">
+          <div class="handoff-row">
+            <div class="handoff-step">需求<br>問題與驗收條件</div>
+            <div class="handoff-step">規劃<br>Issues 與順序</div>
+            <div class="handoff-step">開發<br>程式與 PR</div>
+            <div class="handoff-step">QA<br>缺陷與證據</div>
+            <div class="handoff-step">部署<br>網址與狀態</div>
+            <div class="handoff-step">驗收<br>回到原始目標</div>
+          </div>
+        </div>
+        <p>可靠的交接至少應說明：任務識別碼、負責人、限制條件、目前狀態、產出檔案、測試證據、待核准事項，以及失敗後應交還給誰。</p>
+
+        <h2>研究怎麼看多 Agent？</h2>
+        <p>多 Agent 研究目前提供了有力線索，但不是「Agent 越多越好」的定論。以下整理論文觀察與可用的設計啟示。</p>
+        <div class="table-responsive">
+          <table class="research-table">
+            <thead><tr><th>研究</th><th>主要觀察</th><th>設計啟示</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://arxiv.org/abs/2308.08155"><strong>AutoGen</strong></a><br><span class="evidence">論文結果</span></td><td>可對話 Agent 能組合 LLM、人類輸入與工具，支援多種互動模式。</td><td>對話不只呈現答案，也可以成為工作協定。</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2303.17760"><strong>CAMEL</strong></a><br><span class="evidence">論文結果</span></td><td>角色扮演與 inception prompting 可引導 Agent 自主合作。</td><td>每個 Agent 必須清楚知道身分、目標與邊界。</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2308.00352"><strong>MetaGPT</strong></a><br><span class="evidence">論文結果</span></td><td>將 SOP 與專業角色編入協作，可降低單純串接模型造成的錯誤累積。</td><td>中間交付物比自由聊天更重要。</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2307.07924"><strong>ChatDev</strong></a><br><span class="evidence">論文結果</span></td><td>Chat Chain 管理設計、編碼與測試溝通；不同階段適合不同表達形式。</td><td>設計用自然語言，除錯與交付應附程式及測試證據。</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2308.10848"><strong>AgentVerse</strong></a><br><span class="evidence">論文結果</span></td><td>動態多 Agent 團隊在部分任務優於單一 Agent，也出現正負向群體行為。</td><td>需要選對團隊組成，不能只增加人數。</td></tr>
+              <tr><td><a href="https://arxiv.org/abs/2402.05120"><strong>More Agents Is All You Need</strong></a><br><span class="evidence">論文結果</span></td><td>在特定基準中，增加取樣 Agent 並投票可提升結果。</td><td>適合能產生獨立答案並客觀比較的任務，不能任意外推。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>多 Agent 為什麼會失敗？</h2>
+        <p><a href="https://arxiv.org/abs/2503.13657">Why Do Multi-Agent LLM Systems Fail?</a> 分析超過 1,600 條、來自七種多 Agent 框架的執行軌跡，提出十四種失敗模式，集中在三大類：系統設計、Agent 之間的錯位，以及任務驗證。</p>
+        <p>常見失敗包括上游傳錯資訊、下游照單全收；Agent 忘記自身角色；流程偏離卻沒有人停止；大家反覆討論但沒有交付物；或只說「完成」卻沒有任何證據。</p>
+        <p>這代表多 Agent 系統需要的不只是通訊能力，更需要治理能力。</p>
+
+        <h2>Agent-to-Agent 與 A2A Protocol 不完全相同</h2>
+        <p><strong>Agent-to-Agent</strong> 可以泛指任何 Agent 之間的協作；<strong>A2A Protocol</strong> 則是一套特定開放標準，目前是 Linux Foundation 旗下、由 Google 貢獻的開源專案。</p>
+        <p>A2A 的目標，是讓不同公司、使用不同框架、部署在不同伺服器上的 Agent 能以共同語言合作，同時保持內部模型、記憶與工具不透明。</p>
+        <div class="a2a-objects">
+          <section class="object-card"><strong>Agent Card</strong><p>Agent 的數位名片，描述身分、能力、端點、Skills 與驗證方式。</p></section>
+          <section class="object-card"><strong>Message／Part</strong><p>一次溝通及其內容，可包含文字、檔案或結構化資料。</p></section>
+          <section class="object-card"><strong>Task／Status</strong><p>具有識別碼與生命週期的工作，可追蹤執行中、等待、完成或失敗。</p></section>
+          <section class="object-card"><strong>Artifact</strong><p>Agent 產生的具體成果，例如文件、圖片或機器可讀資料。</p></section>
+        </div>
+        <p>A2A 使用 HTTP(S) 與 JSON-RPC 2.0，支援同步請求、SSE 串流與非同步通知。它解決的是跨系統 Agent 的發現、委派與長時間任務協作。</p>
+
+        <h2>A2A、MCP 與 OpenAB Bot-to-Bot</h2>
+        <div class="table-responsive">
+          <table class="compare-table">
+            <thead><tr><th>機制</th><th>主要連接</th><th>核心問題</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MCP</strong></td><td>Agent ↔ 工具／資料</td><td>Agent 如何使用搜尋、資料庫、瀏覽器或檔案？</td></tr>
+              <tr><td><strong>A2A Protocol</strong></td><td>Agent ↔ 遠端 Agent</td><td>不同系統如何發現彼此並委派長時間任務？</td></tr>
+              <tr><td><strong>內部多 Agent 編排</strong></td><td>同一系統內的角色</td><td>任務由誰處理、按照什麼順序交接？</td></tr>
+              <tr><td><strong>OpenAB Bot-to-Bot</strong></td><td>聊天平台上的 Bot</td><td>Bot 如何透過 mention、信任名單與回合限制協作？</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A2A 與 MCP 是互補關係：MCP 讓 Agent 使用工具，A2A 讓 Agent 將任務交給另一個具備專業能力的 Agent。</p>
+
+        <h2>OpenAB 羅馬軍團怎麼做？</h2>
+        <p>我們目前的羅馬軍團屬於<strong>平台內的 Agent-to-Agent 工作流</strong>，並不宣稱已實作 A2A Protocol。格拉古負責需求與驗收、凱撒規劃派工、維特魯威開發、加圖負責 QA，阿格里帕則處理部署與維運。</p>
+        <p>OpenAB 讓不同 Agent 擁有獨立執行環境與設定，再透過 Discord mention、可信任 Bot 名單及回合上限管理 Bot-to-Bot 訊息。工程師不能自行宣布 QA 通過，部署成功也不等於需求已驗收；高風險操作仍保留人類核准。</p>
+
+        <h2>通訊本身也是攻擊面</h2>
+        <div class="warning">
+          <h3>攻擊者不一定要控制 Agent</h3>
+          <p><a href="https://arxiv.org/abs/2502.14847">Red-Teaming LLM Multi-Agent Systems via Communication Attacks</a> 提出的 Agent-in-the-Middle 攻擊顯示，只要攔截或操縱 Agent 間的訊息，就可能影響整個多 Agent 系統。</p>
+        </div>
+        <p>因此，成熟的 Agent-to-Agent 架構至少需要：</p>
+        <ul class="checklist">
+          <li>可驗證的 Agent 身分</li><li>明確信任與允許名單</li>
+          <li>最小權限與環境隔離</li><li>結構化交付格式</li>
+          <li>任務 ID 與狀態追蹤</li><li>訊息和工具操作紀錄</li>
+          <li>回合、時間與成本上限</li><li>高風險動作人工核准</li>
+        </ul>
+
+        <h2>什麼時候不該使用多 Agent？</h2>
+        <p>一次性問題、步驟很短、結果容易立即驗證，或交接成本高於工作本身時，單一 Agent 通常更簡單。多 Agent 比較適合能清楚拆分、需要不同專業或權限、中間成果可以驗證，以及需要平行處理或長時間追蹤的任務。</p>
+
+        <h2>結論</h2>
+        <p>Agent-to-Agent 的未來，不是建立一群會互相稱讚的 AI，而是建立一套能被管理、驗證與追責的數位組織。</p>
+        <p>研究顯示，多 Agent 在角色分工、平行探索、投票與專業協作上具有潛力；研究也同時指出，系統設計、角色錯位、缺乏驗證與通訊攻擊，都可能讓更多 Agent 變成更多失敗來源。</p>
+        <div class="thesis">不是 Agent 越多越像公司；是角色越明確、權限越有限、交付越標準、結果越能驗證，才越像一個真正可以工作的組織。</div>
+
+        <section class="sources" aria-labelledby="sources-title">
+          <div class="section-label">Research & primary sources</div>
+          <h2 id="sources-title">論文與官方來源</h2>
+          <ol>
+            <li><a href="https://arxiv.org/abs/2308.08155">Wu et al., AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</a>.</li>
+            <li><a href="https://arxiv.org/abs/2303.17760">Li et al., CAMEL: Communicative Agents for “Mind” Exploration of Large Language Model Society</a>.</li>
+            <li><a href="https://arxiv.org/abs/2308.00352">Hong et al., MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework</a>.</li>
+            <li><a href="https://arxiv.org/abs/2307.07924">Qian et al., ChatDev: Communicative Agents for Software Development</a>.</li>
+            <li><a href="https://arxiv.org/abs/2308.10848">Chen et al., AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors</a>.</li>
+            <li><a href="https://arxiv.org/abs/2402.05120">Li et al., More Agents Is All You Need</a>.</li>
+            <li><a href="https://arxiv.org/abs/2503.13657">Cemri et al., Why Do Multi-Agent LLM Systems Fail?</a>.</li>
+            <li><a href="https://arxiv.org/abs/2502.14847">Red-Teaming LLM Multi-Agent Systems via Communication Attacks</a>.</li>
+            <li><a href="https://github.com/a2aproject/A2A">Agent2Agent Protocol 官方專案</a>與<a href="https://a2a-protocol.org/latest/">官方規格</a>。</li>
+            <li><a href="https://github.com/openabdev/openab/blob/main/docs/multi-agent.md">OpenAB Multi-Agent Setup</a>。</li>
+          </ol>
+          <p class="small text-muted">查證日期：2026 年 9 月 14 日。部分研究為 arXiv 論文或預印本，提供研究證據但不代表所有場景均已形成學界定論。文中已區分論文觀察、官方規格與我們的實務推論。公開版省略內部位址、識別碼、憑證、私人程式碼及部署敏感資訊。本文由 AI 協助查證、整理與排版，發布前經金霸確認。</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-top mt-5">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+          <div class="small text-muted fst-italic">© 2026 金霸觀察</div>
+          <div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
