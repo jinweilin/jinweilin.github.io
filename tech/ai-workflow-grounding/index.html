@@ -1,17 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學｜金霸觀察</title>
-  <meta name="description" content="別再從 Prompt 大全開始。用五步驟與完整案例，把 AI 接進真實工作：定義成果、補足情境、安排人工關卡，並用回饋持續改善。">
+  <meta name="description" content="別再從 Prompt 大全開始。用五步驟與完整案例，把 AI 接進真實工作，定義成果、觸發條件、行動權限、升級條件與人工關卡。">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#18382f">
   <link rel="canonical" href="https://jinweilin.github.io/tech/ai-workflow-grounding/">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學">
-  <meta property="og:description" content="讓 AI 真正進入工作，不靠神 Prompt，而靠可交付、可驗收、可改善的流程設計。">
+  <meta property="og:description" content="讓 AI 真正進入工作：定義可驗收成果，以及何時開始、能做多遠、何時交還給人。">
   <meta property="og:url" content="https://jinweilin.github.io/tech/ai-workflow-grounding/">
   <meta property="og:image" content="https://jinweilin.github.io/tech/ai-workflow-grounding/hero-ai-workflow-grounding.png">
   <meta property="og:image:width" content="1916">
@@ -19,11 +19,11 @@
   <meta property="og:image:alt" content="人類與 AI 將零散資料依序整理、檢查並產出通過驗收文件的概念插圖">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學">
-  <meta name="twitter:description" content="從聊天到交付：用五步驟建立可管理、可驗收的 AI 工作流程。">
+  <meta name="twitter:description" content="從聊天到交付：用五步驟建立具觸發、權限邊界與升級條件的 AI 工作流程。">
   <meta name="twitter:image" content="https://jinweilin.github.io/tech/ai-workflow-grounding/hero-ai-workflow-grounding.png">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學","description":"用五個步驟與完整案例，把 AI 從聊天工具接進真實工作流程。","image":"https://jinweilin.github.io/tech/ai-workflow-grounding/hero-ai-workflow-grounding.png","datePublished":"2026-09-17","dateModified":"2026-09-17","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-workflow-grounding/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學","description":"用五個步驟與完整案例，建立具觸發、權限邊界、升級條件與人工關卡的 AI 工作流程。","image":"https://jinweilin.github.io/tech/ai-workflow-grounding/hero-ai-workflow-grounding.png","datePublished":"2026-09-17","dateModified":"2026-09-17","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-workflow-grounding/"}</script>
   <link href="../../assets/css/clean-blog.css" rel="stylesheet">
   <link href="../../assets/css/jinba.css" rel="stylesheet">
   <style>
@@ -31,7 +31,7 @@
     header.masthead.work-hero .post-heading{padding:10rem 0 7rem} header.masthead.work-hero h1{max-width:980px;font-size:clamp(2.65rem,6.7vw,5.2rem);line-height:1.05;letter-spacing:-.05em}
     header.masthead.work-hero .subheading{max-width:820px;margin-top:1.5rem;color:rgba(255,255,255,.86);font-size:clamp(1.05rem,2.3vw,1.38rem);line-height:1.7}
     .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2rem;font-size:1.3rem}.article-body a{color:#1d6653;text-underline-offset:3px}
-    .lead{color:#45514c;font-size:1.26rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(21,55,46,.18)}.article-cover figcaption{margin-top:.65rem;color:#707a75;font-size:.82rem}
+    .lead{color:#45514c;font-size:1.26rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(21,55,46,.18)}.article-cover figcaption{margin-top:.65rem;color:#68716d;font-size:.82rem}
     .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.85rem)/1.65 Georgia,"Noto Serif TC",serif}
     .formula{display:grid;grid-template-columns:repeat(5,1fr);gap:.65rem;margin:2.5rem 0}.formula div{padding:1rem .65rem;border:1px solid #d8d4c8;border-radius:.8rem;background:#fffdf8;text-align:center}.formula strong{display:block;color:#1c5648}.formula span{color:#6c756f;font-size:.8rem}
     .step{margin:1.2rem 0;padding:1.5rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.5)}.step h3{margin:.1rem 0 .7rem}.no{display:inline-flex;width:2rem;height:2rem;align-items:center;justify-content:center;margin-right:.45rem;border-radius:50%;color:#fff;background:#315d52}
@@ -40,7 +40,7 @@
     .risk{display:inline-block;padding:.15rem .5rem;border-radius:999px;font-size:.72rem;font-weight:800}.green{color:#275443;background:#dcebe4}.yellow{color:#755416;background:#f3e6bd}.red{color:#842e24;background:#f1d8d3}
     .callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b27d2e;background:#f2ecdf}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem 1rem;padding:0;list-style:none}.checklist li{padding:.9rem 1rem;border-left:3px solid #4c8d79;background:rgba(255,255,255,.48)}
     .sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.8rem}
-    @media(max-width:767px){header.masthead.work-hero .post-heading{padding:8rem 0 5rem}.formula,.checklist{grid-template-columns:1fr}thead{display:none}table,tbody,tr,td{display:block}tr{padding:.7rem 0;border-bottom:1px solid #dcd8cc}td{padding:.25rem 0;border:0}}
+    @media(max-width:767px){header.masthead.work-hero .post-heading{padding:8rem 0 5rem}.formula,.checklist{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -54,15 +54,18 @@
 <h2>先別問用哪個 AI，先問卡在哪一段工作</h2>
 <p>「導入 AI」不是工作目標。「每週整理客訴要花四小時，希望先產出可供主管複核的分類草稿」才是。前者只有工具，後者才有使用者、頻率、輸入、交付物與價值。</p>
 <p>適合當第一個 AI 工作流程的任務，通常重複發生、以文字或既有資料為主、成果容易檢查，而且做錯時可以回復。不要一開始就挑會直接影響聘僱、付款、醫療、法律或客戶權益的決定。</p>
-<div class="formula" aria-label="AI 工作流程的五個必要元素"><div><strong>工作成果</strong><span>完成長什麼樣</span></div><div><strong>必要情境</strong><span>根據哪些資料</span></div><div><strong>輸出規格</strong><span>格式與限制</span></div><div><strong>人工關卡</strong><span>誰檢查、誰批准</span></div><div><strong>回饋循環</strong><span>如何愈做愈準</span></div></div>
-<p>這五項是乘法。任何一項接近零，工作價值就會快速縮水。模型再強，如果不知道公司用語、不能辨認未知資訊，也沒有人負責驗收，產出的仍可能只是文筆流暢的猜測。</p>
+<div class="formula" role="group" aria-label="AI 工作流程的五個基本元素"><div><strong>工作成果</strong><span>完成長什麼樣</span></div><div><strong>必要情境</strong><span>根據哪些資料</span></div><div><strong>輸出規格</strong><span>格式與限制</span></div><div><strong>人工關卡</strong><span>誰檢查、誰批准</span></div><div><strong>回饋循環</strong><span>如何愈做愈準</span></div></div>
+<p>這五項是流程價值的骨架，也是乘法：任何一項接近零，工作價值就會快速縮水。模型再強，如果不知道公司用語、不能辨認未知資訊，也沒有人負責驗收，產出的仍可能只是文筆流暢的猜測。真正執行時，任務卡還要補上觸發、行動權限與升級條件，才知道何時開始、能走多遠、何時停下交回人。</p>
 
 <h2>五步驟，把 AI 接進真實工作</h2>
 <section class="step"><h3><span class="no">1</span>先定義「完成」，再開始生成</h3><p>不要只說「幫我整理會議」。先寫出交付物與使用時刻：誰會拿它做什麼？最低品質是什麼？哪些內容不能由 AI 自行補完？</p><p><strong>完成定義：</strong>產出一頁會議工作包，包含已確認決策、待辦、負責人、期限與待確認問題；原文沒有的資訊一律標示「待確認」。</p></section>
 <section class="step"><h3><span class="no">2</span>只給完成任務所需的最小情境</h3><p>提供來源時，要說明哪一份最可信、資料截至何時，以及衝突時採用什麼規則。同時遵守公司政策，不要把未核准的個資、客戶機密、憑證或整包資料庫直接貼進工具。</p><p>好情境不是資料愈多愈好，而是<strong>來源夠用、權限正確、版本清楚</strong>。</p></section>
-<section class="step"><h3><span class="no">3</span>用「任務卡」取代一長串願望</h3><p>任務卡至少包含目標、輸入、輸出、限制、驗收，以及資訊不確定時的處理方式。它可以寫進固定 Prompt、表單、SOP 或 Agent Skill；重點是下一次仍能重複使用。</p></section>
-<pre class="template" aria-label="可複製的 AI 任務卡模板">【任務】
+<section class="step"><h3><span class="no">3</span>用「任務卡」取代一長串願望</h3><p>任務卡至少包含觸發、目標、核准來源、輸出、行動權限、升級條件與驗收。它可以寫進固定 Prompt、表單、SOP 或 Agent Skill；重點是讓系統知道何時開始、能做多遠，以及何時必須停下來交還給人。</p></section>
+<pre class="template">【任務】
 把會議紀錄整理成可供專案經理確認的工作包。
+
+【觸發】
+會議結束、逐字稿已產生，且專案經理提出整理需求時開始。
 
 【核准來源】
 本次逐字稿、專案名詞表、上一版決策紀錄。
@@ -73,9 +76,14 @@
 3. 尚未解決的問題
 4. 資訊衝突或缺漏
 
-【限制】
-不得補寫原文沒有的負責人、日期或承諾。
-無法確認時標示「待確認」，並指出缺少什麼。
+【行動權限】
+可讀取核准來源，擷取、分類、比對並草擬工作包。
+不得修改來源、建立正式任務、對外傳送，或補寫原文沒有的
+負責人、日期與承諾。
+
+【升級條件】
+來源互相衝突、缺少關鍵資訊、出現敏感資料或涉及新承諾時，
+停止處理，標示「待確認」並交由專案經理判斷。
 
 【驗收】
 每個結論可追溯到來源；建立正式任務前，
@@ -112,9 +120,9 @@
 
 <h2>用三色風險，決定 AI 可以走多遠</h2>
 <div class="table-responsive"><table><thead><tr><th>等級</th><th>工作</th><th>邊界</th></tr></thead><tbody>
-<tr><td><span class="risk green">綠色</span></td><td>腦力激盪、內部摘要、格式整理、草稿</td><td>可自動產出，但要標示來源與未知。</td></tr>
+<tr><td><span class="risk green">綠色</span></td><td>腦力激盪、內部摘要、格式整理、草稿</td><td>可自動產出草稿或中間產物，但要標示來源與未知。</td></tr>
 <tr><td><span class="risk yellow">黃色</span></td><td>客戶回覆、分析建議、正式文件、資料更新</td><td>AI 先準備，人類核對後才能對外或寫入正式系統。</td></tr>
-<tr><td><span class="risk red">紅色</span></td><td>聘僱、醫療、法律、財務核准、付款、刪除與重大權益</td><td>不得把責任轉交 AI；需要合格人員、明確授權與更高強度控制。</td></tr>
+<tr><td><span class="risk red">紅色</span></td><td>聘僱、醫療、法律、財務核准、付款、刪除與重大權益</td><td>在適用法律、專業規範與組織政策允許的範圍內，AI 可協助蒐集、整理、比對、草擬與風險提示，但不得自行做出或執行影響權益的最終決定；最終判斷與行動須由具相應專業資格與權責的人員負責。</td></tr>
 </tbody></table></div>
 <div class="callout"><strong>實用判斷：</strong>如果錯誤會影響他人權益、造成金錢損失、洩漏敏感資料，或動作難以撤回，就不要因為 AI 回答得很有自信而跳過核准。</div>
 
@@ -127,7 +135,7 @@
 
 <h2>結論：把 AI 當成流程節點，不是許願池</h2>
 <p>真正能落地的 AI，通常從狹窄、重複、可驗證的任務開始；知道可以讀什麼、不能做什麼；產出固定交付物；在關鍵動作前交給人確認；最後用真實錯誤持續修正。</p>
-<div class="thesis">不要問「AI 能不能做我的工作？」先問：「我的工作裡，哪一段可以被清楚描述、獨立驗收，而且做錯時收得回？」那一段，就是最好的起點。</div>
+<div class="thesis"><p>真正的 AI 導入，不是把 AI 塞進既有工作，而是重新設計人與 AI 如何共同完成工作。</p><p class="mb-0">不要問「AI 能不能做我的工作？」先問：「我的工作裡，哪一段可以被清楚描述、獨立驗收，而且做錯時收得回？」那一段，就是最好的起點。</p></div>
 
 <section class="sources" aria-labelledby="sources-title"><div class="section-label">Primary sources</div><h2 id="sources-title">官方來源與延伸閱讀</h2><ol>
 <li><a href="https://academy.openai.com/public/clubs/champions-ecqup/resources/chatgpt-work-reimagine-guide-for-team-activators-2026-07-08">OpenAI Academy：ChatGPT Work Reimagine Guide</a>。</li>
