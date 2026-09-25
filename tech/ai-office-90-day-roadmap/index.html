@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖｜金霸觀察</title>
+  <meta name="description" content="延續 AI 工作流五步教學，以 90 天路線圖說明如何挑選試點、設定權限與人工核准、衡量成果，逐步把 AI 導入真實辦公室。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#15372e">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/ai-office-90-day-roadmap/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖">
+  <meta property="og:description" content="不先買平台、不追求全自動；用三個階段建立可停止、可核准、可衡量的 AI 辦公流程。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/ai-office-90-day-roadmap/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/ai-office-90-day-roadmap/hero-ai-office-90-day-roadmap.png">
+  <meta property="og:image:secure_url" content="https://jinweilin.github.io/tech/ai-office-90-day-roadmap/hero-ai-office-90-day-roadmap.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1734">
+  <meta property="og:image:height" content="907">
+  <meta property="og:image:alt" content="辦公室團隊將零散文件依序轉成可審核、可衡量的 AI 工作流程">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖">
+  <meta name="twitter:description" content="三個階段，把 AI 從個人嘗試變成有人負責、能夠驗收的辦公流程。">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/ai-office-90-day-roadmap/hero-ai-office-90-day-roadmap.png">
+  <meta name="twitter:image:alt" content="辦公室團隊將零散文件依序轉成可審核、可衡量的 AI 工作流程">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0EY36MHX33');
+  </script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖","description":"延續 AI 工作流五步教學，以 90 天路線圖說明如何挑選試點、設定權限與人工核准、衡量成果，逐步把 AI 導入真實辦公室。","image":"https://jinweilin.github.io/tech/ai-office-90-day-roadmap/hero-ai-office-90-day-roadmap.png","datePublished":"2026-09-25","dateModified":"2026-09-25","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-office-90-day-roadmap/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.office-hero { margin-bottom:4rem; background-image:radial-gradient(circle at 78% 25%,rgba(221,178,86,.32) 0 70px,transparent 71px),linear-gradient(128deg,#0b1f2f,#153d37 58%,#427866); }
+    header.masthead.office-hero .post-heading { padding:10rem 0 7rem; }
+    header.masthead.office-hero .post-heading h1 { max-width:980px; font-size:clamp(2.65rem,6.8vw,5.2rem); line-height:1.06; letter-spacing:-.045em; }
+    header.masthead.office-hero .post-heading .subheading { max-width:820px; margin-top:1.5rem; color:rgba(255,255,255,.86); font-size:clamp(1.05rem,2.3vw,1.38rem); line-height:1.7; }
+    .article-body { color:#26302c; font-size:1.08rem; line-height:1.95; }
+    .article-body h2 { margin:4rem 0 1.35rem; font-size:clamp(1.9rem,4vw,2.65rem); letter-spacing:-.025em; }
+    .article-body h3 { margin-top:2rem; font-size:1.3rem; }
+    .article-body a { color:#1d6653; text-underline-offset:3px; }
+    .lead { color:#45514c; font-size:1.25rem; line-height:1.85; }
+    .article-cover { margin:0 0 2.5rem; }
+    .article-cover img { display:block; width:100%; height:auto; border-radius:1rem; box-shadow:0 20px 55px rgba(21,55,46,.18); }
+    .article-cover figcaption { margin-top:.65rem; color:#707a75; font-size:.82rem; line-height:1.6; }
+    .thesis { margin:2.5rem 0; padding:2rem; border-radius:1rem; color:#fff; background:#173a33; box-shadow:0 20px 55px rgba(21,55,46,.18); font:700 clamp(1.3rem,3vw,1.85rem)/1.65 Georgia,"Noto Serif TC",serif; }
+    .roadmap { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:2rem 0; }
+    .phase { padding:1.45rem; border:1px solid #d9ded9; border-radius:1rem; background:#fffdf8; }
+    .phase .days { display:inline-block; margin-bottom:.75rem; padding:.25rem .55rem; border-radius:999px; color:#fff; background:#315d52; font-size:.72rem; font-weight:800; letter-spacing:.06em; }
+    .phase h3 { margin:.1rem 0 .65rem; font-size:1.25rem; }
+    .phase p { margin:0; color:#5a6661; font-size:.94rem; line-height:1.7; }
+    .callout { margin:2.4rem 0; padding:1.6rem 1.8rem; border-left:4px solid #b88a32; background:#f2eee2; }
+    .warning { margin:2.4rem 0; padding:1.6rem 1.8rem; border-left:4px solid #b65b48; background:#f4e7e2; }
+    .metric { margin:2rem 0; padding:1.5rem; border-radius:1rem; text-align:center; background:#e1ece7; font:700 clamp(1.05rem,2.5vw,1.35rem)/1.6 Georgia,"Noto Serif TC",serif; }
+    table { width:100%; margin:2rem 0; border-collapse:collapse; font-size:.94rem; }
+    th,td { padding:1rem .75rem; border-bottom:1px solid #dcd8cc; text-align:left; vertical-align:top; }
+    th { color:#52615b; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+    .scroll-table caption { padding:.75rem 0; color:#5f6c66; font-size:.86rem; text-align:left; }
+    .scroll-table tbody th { color:#26302c; font-size:.9rem; letter-spacing:0; text-transform:none; }
+    .evidence { display:inline-block; padding:.14rem .45rem; border-radius:999px; color:#315d52; background:#dbe9e3; font-size:.68rem; font-weight:800; white-space:nowrap; }
+    .checklist { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem 1rem; padding:0; list-style:none; }
+    .checklist li { padding:.9rem 1rem; border-left:3px solid #4c8d79; background:rgba(255,255,255,.5); }
+    .sources { margin-top:4rem; padding-top:2rem; border-top:1px solid #dcd8cc; }
+    .sources li { margin-bottom:.8rem; }
+    @media(max-width:767px){
+      header.masthead.office-hero .post-heading { padding:8rem 0 5rem; }
+      .roadmap,.checklist { grid-template-columns:1fr; }
+      table,tbody,tr,td { display:block; }
+      thead { display:none; }
+      tr { padding:.7rem 0; border-bottom:1px solid #dcd8cc; }
+      td { padding:.3rem 0; border:0; }
+      .scroll-table table { display:table; min-width:700px; }
+      .scroll-table thead { display:table-header-group; }
+      .scroll-table tbody { display:table-row-group; }
+      .scroll-table tr { display:table-row; padding:0; border:0; }
+      .scroll-table th,.scroll-table td { display:table-cell; padding:1rem .75rem; border-bottom:1px solid #dcd8cc; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="../../">金霸觀察</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li>
+          <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead office-hero">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-11 col-lg-10 col-xl-9">
+          <div class="post-heading">
+            <div class="kicker">Technology · AI office adoption</div>
+            <h1>AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖</h1>
+            <span class="subheading">不先買平台、不追求全自動；用三個階段，把個人嘗試變成有人負責、能夠驗收的工作方式。</span>
+            <span class="meta">金霸研究編輯部 · 2026 年 9 月 25 日 · 約 12 分鐘閱讀</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <article class="col-md-10 col-lg-9 col-xl-8 article-body">
+        <p class="lead">上一篇〈<a href="../ai-workflow-grounding/">AI 怎麼跟工作接地氣？</a>〉談的是如何把一段工作改造成 AI 做得動、人類驗得過的流程。這一篇往下一步走：當第一個流程看起來有效，公司如何在不放大錯誤與權限風險的前提下，把它放進真實辦公室？</p>
+
+        <figure class="article-cover">
+          <img src="hero-ai-office-90-day-roadmap.png" width="1734" height="907" alt="辦公室團隊將零散文件依序轉成可審核、可衡量的 AI 工作流程" fetchpriority="high">
+          <figcaption>從小型試點、受控流程到可治理的辦公室協作。AI 輔助原創概念插圖，非實測介面或研究證據。</figcaption>
+        </figure>
+
+        <div class="thesis">AI 辦公室不是把所有工作交給 AI，而是把適合的工作切出來，給它有限資料、有限權限、明確驗收與清楚的停止條件。</div>
+
+        <h2>先講結論：90 天不是全面自動化期限</h2>
+        <p>本文的「90 天」是一個管理用的試行框架，不是研究證明的固定工期，也不是承諾三個月後公司就能無人運作。它的目的，是把導入切成三個可停損階段：先證明一項工作有價值，再接入必要資料與核准，最後才決定是否擴大。</p>
+        <div class="roadmap" aria-label="AI 辦公室九十天三階段路線圖">
+          <section class="phase"><span class="days">第 1–30 天</span><h3>證明工作值得做</h3><p>選一個狹窄、重複、可驗收的流程，只產出草稿或中間成果。</p></section>
+          <section class="phase"><span class="days">第 31–60 天</span><h3>接入真實流程</h3><p>加入必要資料、最小權限、人工核准、失敗升級與執行紀錄。</p></section>
+          <section class="phase"><span class="days">第 61–90 天</span><h3>決定是否擴大</h3><p>用品質、時間、風險與採用率評估擴大、維持、縮小或停止。</p></section>
+        </div>
+
+        <h2>為什麼不能直接讓 Agent 接管電腦？</h2>
+        <p>寫一段摘要，和跨郵件、試算表、簡報及內部系統完成一項工作，是兩種難度。長流程會累積更多狀態、例外、權限與驗證問題。</p>
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="辦公室 Agent 研究證據與落地決定對照，可水平捲動">
+          <table>
+            <caption>辦公室 Agent 研究證據、研究觀察與落地決定</caption>
+            <thead><tr><th scope="col">證據</th><th scope="col">研究觀察</th><th scope="col">落地決定</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2606.29537"><strong>OSWorld 2.0</strong></a><br><span class="evidence">2026 預印本</span></th><td>108 項長流程任務中，最佳受測設定完整完成率為 20.6%；常見問題包括忘記限制、漏接新資訊、猜測而不詢問，以及跳過驗證。</td><td>先限制任務長度與可採取的動作，遇到資訊缺口必須停下來詢問。</td></tr>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2607.27155"><strong>OmegaUse-OfficeVal</strong></a><br><span class="evidence">2026 預印本</span></th><td>在 100 項長流程辦公軟體任務中，受測 Agent 普遍更快、更便宜，但交付品質仍未接近人類基準。</td><td>不能只看生成速度與使用成本；必須把人工修改與可用性算進去。</td></tr>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2407.19056"><strong>OfficeBench</strong></a><br><span class="evidence">研究基準</span></th><td>跨多個辦公應用程式時，冗餘操作、幻覺與應用程式切換仍是主要失敗來源。</td><td>能用結構化工具或 API 完成的工作，不要一律改成模擬人類點擊畫面。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>這些基準不是所有公司、所有工具的實際成效預測，模型也會快速變化；但它們共同提醒我們：<strong>展示成功一次，不等於流程可以穩定上線。</strong></p>
+
+        <h2>第 1–30 天：挑一段工作，不要挑一個部門</h2>
+        <p>「導入行銷 AI」範圍太大；「每週把三份活動成效資料整理成主管可複核的一頁報告」才是可測試的工作。第一個試點應同時具備四個條件：</p>
+        <ul class="checklist">
+          <li>每週或每月重複發生</li><li>輸入資料已存在且可以合法使用</li>
+          <li>成果有明確格式與審核者</li><li>做錯時能回復，不立即傷害他人權益</li>
+        </ul>
+
+        <h3>先記錄基準，否則成功只剩感覺</h3>
+        <p>試點開始前，至少記錄五次人工處理結果：花多少時間、多少次往返、常見漏項、退件原因與誰負責驗收。這不是為了做一份很會發光的 ROI 簡報，而是避免導入後只剩「大家覺得好像有比較快」。</p>
+        <div class="metric">試點淨價值 ≈ 節省的處理與等待時間 − Review、重工、整合與風險成本</div>
+
+        <h3>五種適合作為入口的辦公流程</h3>
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="候選辦公流程第一階段範圍對照，可水平捲動">
+          <table>
+            <caption>五種候選辦公流程的第一階段範圍</caption>
+            <thead><tr><th scope="col">流程</th><th scope="col">第一階段只做什麼</th><th scope="col">暫時不要做什麼</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">會議到工作包</th><td>整理決策、待辦、未知與來源。</td><td>不要自行指定負責人或承諾期限。</td></tr>
+              <tr><th scope="row">主管週報</th><td>彙整核准來源，標示變化、風險與缺漏。</td><td>不要自行判定績效或修改正式數據。</td></tr>
+              <tr><th scope="row">提案資料包</th><td>拆解需求、整理核准案例與待確認清單。</td><td>不要承諾價格、能力或合約條件。</td></tr>
+              <tr><th scope="row">發票例外清單</th><td>比對欄位並標記不一致。</td><td>不要核准付款或修改帳務。</td></tr>
+              <tr><th scope="row">新人報到包</th><td>依職務與日期準備文件及待辦草稿。</td><td>不要建立帳號、授權系統或處理未核准個資。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>第 31–60 天：接資料之前，先畫權限邊界</h2>
+        <p>試點能穩定產出草稿後，下一步才是連接公司資料與工具。每新增一個連線，都要回答四個問題：它可以讀什麼、可以寫什麼、代表誰行動、出錯後誰能停止與回復。</p>
+        <p><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI RMF Core</a> 強調組織要清楚界定 AI 風險管理的角色、責任與監督；OpenAI 的<a href="https://developers.openai.com/api/docs/guides/agents/guardrails-approvals">Guardrails 與人工核准指南</a>則建議，在取消、修改、執行命令或敏感工具操作等會產生副作用的行動前暫停，交由人類批准或拒絕。</p>
+
+        <div class="callout"><strong>實用順序：</strong>先離線樣本，再唯讀資料，再產生待核准草稿，最後才考慮經人工核准後寫入正式系統。不要第一天就把寄信、付款、刪除與發布權限一次打包送給 Agent。</div>
+
+        <h3>每條工作流需要五個責任角色</h3>
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="工作流責任角色與職責對照，可水平捲動">
+          <table>
+            <caption>五個工作流責任角色與必要職責</caption>
+            <thead><tr><th scope="col">角色</th><th scope="col">必須負責的事</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">業務負責人</th><td>說明為何值得做、可接受風險，以及是否繼續投資。</td></tr>
+              <tr><th scope="row">流程負責人</th><td>定義完成標準、例外、升級條件與日常維護。</td></tr>
+              <tr><th scope="row">資料／系統負責人</th><td>核准來源、權限、保存期限與存取紀錄。</td></tr>
+              <tr><th scope="row">實際審核者</th><td>確認成果能否使用，記錄修改與退件原因。</td></tr>
+              <tr><th scope="row">停止與復原負責人</th><td>在錯誤、異常成本或安全事件發生時暫停流程並回復。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>小公司可以由同一人兼任多個角色，但責任不能消失。最危險的不是人少，而是所有人都以為「應該有人在看」。</p>
+
+        <h2>第 61–90 天：用失敗樣本決定能不能擴大</h2>
+        <p>到了第三階段，不要只展示最好看的成功案例。建立一組固定測試包：正常案例、資料缺漏、來源衝突、過期政策、敏感資訊與必須升級給人的案例。每次修改模型、Prompt、工具或權限後，都用同一批案例回歸。</p>
+        <p><a href="https://openai.com/index/how-enterprises-put-ai-to-work/">OpenAI 的企業觀察</a>把「正確情境與工具、清楚權限、審查與治理、將個人有效流程變成共享工作方式」列為擴大導入的實務重點；這是供應商發布的企業資料，適合作為產業訊號，不應當成所有公司的因果證明。</p>
+
+        <h3>90 天的決策不是只有「全面上線」</h3>
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="九十天後導入決策與適用情況對照，可水平捲動">
+          <table>
+            <caption>九十天後四種導入決策與適用情況</caption>
+            <thead><tr><th scope="col">決策</th><th scope="col">適用情況</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">擴大</th><td>品質穩定、使用者願意採用、淨價值為正，而且重大風險有明確控制。</td></tr>
+              <tr><th scope="row">維持</th><td>在單一小範圍有效，但尚無證據支持跨部門複製。</td></tr>
+              <tr><th scope="row">縮小</th><td>部分步驟有價值，但長流程、寫入動作或資料連線造成不必要風險。</td></tr>
+              <tr><th scope="row">停止</th><td>人工修改量過高、資料不可合法使用、錯誤難以發現，或維護成本超過收益。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>五個最常見的落地假象</h2>
+        <ol>
+          <li><strong>把帳號數當採用率：</strong>有登入不等於完成了更好的工作。</li>
+          <li><strong>只算生成速度：</strong>沒把查核、返工、例外與等待時間算進去。</li>
+          <li><strong>把 Demo 當穩定性：</strong>挑過的案例成功，不代表真實輸入也成功。</li>
+          <li><strong>把人工核准當按鈕：</strong>審核者若看不到來源、差異與風險，只能盲目批准。</li>
+          <li><strong>沒有人維護：</strong>政策、欄位、資料來源和模型改變後，舊流程會安靜地變錯。</li>
+        </ol>
+
+        <div class="warning"><strong>不要自動化一條沒人說得清楚的流程。</strong>如果同一份工作由三個資深同事執行會得到三種完成標準，第一步不是選模型，而是先釐清真正需要的成果、決策權與例外處理。</div>
+
+        <h2>90 天後，辦公室應留下什麼？</h2>
+        <p>成功的試點不只留下一個 Prompt 或 Agent，而應留下可被接手的工作資產：</p>
+        <ul class="checklist">
+          <li>明確的流程負責人與使用者</li><li>版本化的任務卡與輸出格式</li>
+          <li>核准資料來源與最小權限</li><li>人工核准、停止與復原方式</li>
+          <li>固定的成功與失敗測試案例</li><li>時間、品質、風險與採用指標</li>
+          <li>修改紀錄與定期檢查日期</li><li>可以安全停用的退場方案</li>
+        </ul>
+
+        <h2>結論：先建立一條可信任的路，再增加車流</h2>
+        <p>第一個月證明工作值得做；第二個月把資料、權限與人工核准接好；第三個月用真實失敗樣本決定是否擴大。這種速度可能不像「一週打造 AI 公司」那麼刺激，但更有機會留下真正可用的能力。</p>
+        <div class="thesis">AI 辦公室的成熟度，不看有多少 Agent，而看每項工作是否有人負責、每次行動是否權限相符、每份成果是否能被驗收、每個錯誤是否收得回。</div>
+
+        <section class="sources" aria-labelledby="sources-title">
+          <div class="section-label">Research & primary sources</div>
+          <h2 id="sources-title">研究與官方來源</h2>
+          <ol>
+            <li><a href="https://arxiv.org/abs/2606.29537">Yuan et al., OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks</a>。</li>
+            <li><a href="https://arxiv.org/abs/2607.27155">Zhou et al., OmegaUse-OfficeVal: Benchmarking LLM Agents on Long-Horizon Office-Suite Tasks with Economic Grounding</a>。</li>
+            <li><a href="https://arxiv.org/abs/2407.19056">Wang et al., OfficeBench: Benchmarking Language Agents across Multiple Applications for Office Automation</a>。</li>
+            <li><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI Risk Management Framework Core</a>。</li>
+            <li><a href="https://developers.openai.com/api/docs/guides/agents/guardrails-approvals">OpenAI Developers: Guardrails and human review</a>。</li>
+            <li><a href="https://openai.com/index/how-enterprises-put-ai-to-work/">OpenAI: From assistance to execution — How enterprises put AI to work</a>。</li>
+          </ol>
+          <p class="small text-muted">查證日期：2026 年 9 月 25 日。OSWorld 2.0 與 OmegaUse-OfficeVal 為 2026 年預印本；OfficeBench 的受測模型與結果反映其研究時點，不能直接推算今日所有產品表現。90 天分期、候選流程與決策門檻是本文依研究、官方治理建議與實務風險整理出的編輯建議，不是通用標準或成效保證。供應商報告已標示為產業訊號，不作獨立因果證據。公開版不包含任何真實公司的內部資料、帳號、權限、客戶資訊或部署細節。本文由 AI 協助查證、整理、配圖與排版，發布前須經獨立複審與金霸確認。</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="border-top mt-5">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+          <div class="small text-muted fst-italic">© 2026 金霸觀察</div>
+          <div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
