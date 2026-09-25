@@ -62,6 +62,8 @@
     table { width:100%; margin:2rem 0; border-collapse:collapse; font-size:.94rem; }
     th,td { padding:1rem .75rem; border-bottom:1px solid #dcd8cc; text-align:left; vertical-align:top; }
     th { color:#52615b; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+    .scroll-table caption { padding:.75rem 0; color:#5f6c66; font-size:.86rem; text-align:left; }
+    .scroll-table tbody th { color:#26302c; font-size:.9rem; letter-spacing:0; text-transform:none; }
     .evidence { display:inline-block; padding:.14rem .45rem; border-radius:999px; color:#315d52; background:#dbe9e3; font-size:.68rem; font-weight:800; white-space:nowrap; }
     .checklist { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem 1rem; padding:0; list-style:none; }
     .checklist li { padding:.9rem 1rem; border-left:3px solid #4c8d79; background:rgba(255,255,255,.5); }
@@ -74,6 +76,11 @@
       thead { display:none; }
       tr { padding:.7rem 0; border-bottom:1px solid #dcd8cc; }
       td { padding:.3rem 0; border:0; }
+      .scroll-table table { display:table; min-width:700px; }
+      .scroll-table thead { display:table-header-group; }
+      .scroll-table tbody { display:table-row-group; }
+      .scroll-table tr { display:table-row; padding:0; border:0; }
+      .scroll-table th,.scroll-table td { display:table-cell; padding:1rem .75rem; border-bottom:1px solid #dcd8cc; }
     }
   </style>
 </head>
@@ -129,13 +136,14 @@
 
         <h2>為什麼不能直接讓 Agent 接管電腦？</h2>
         <p>寫一段摘要，和跨郵件、試算表、簡報及內部系統完成一項工作，是兩種難度。長流程會累積更多狀態、例外、權限與驗證問題。</p>
-        <div class="table-responsive">
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="辦公室 Agent 研究證據與落地決定對照，可水平捲動">
           <table>
-            <thead><tr><th>證據</th><th>研究觀察</th><th>落地決定</th></tr></thead>
+            <caption>辦公室 Agent 研究證據、研究觀察與落地決定</caption>
+            <thead><tr><th scope="col">證據</th><th scope="col">研究觀察</th><th scope="col">落地決定</th></tr></thead>
             <tbody>
-              <tr><td><a href="https://arxiv.org/abs/2606.29537"><strong>OSWorld 2.0</strong></a><br><span class="evidence">2026 預印本</span></td><td>108 項長流程任務中，最佳受測設定完整完成率為 20.6%；常見問題包括忘記限制、漏接新資訊、猜測而不詢問，以及跳過驗證。</td><td>先限制任務長度與可採取的動作，遇到資訊缺口必須停下來詢問。</td></tr>
-              <tr><td><a href="https://arxiv.org/abs/2607.27155"><strong>OmegaUse-OfficeVal</strong></a><br><span class="evidence">2026 預印本</span></td><td>在 100 項長流程辦公軟體任務中，受測 Agent 普遍更快、更便宜，但交付品質仍未接近人類基準。</td><td>不能只看生成速度與使用成本；必須把人工修改與可用性算進去。</td></tr>
-              <tr><td><a href="https://arxiv.org/abs/2407.19056"><strong>OfficeBench</strong></a><br><span class="evidence">研究基準</span></td><td>跨多個辦公應用程式時，冗餘操作、幻覺與應用程式切換仍是主要失敗來源。</td><td>能用結構化工具或 API 完成的工作，不要一律改成模擬人類點擊畫面。</td></tr>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2606.29537"><strong>OSWorld 2.0</strong></a><br><span class="evidence">2026 預印本</span></th><td>108 項長流程任務中，最佳受測設定完整完成率為 20.6%；常見問題包括忘記限制、漏接新資訊、猜測而不詢問，以及跳過驗證。</td><td>先限制任務長度與可採取的動作，遇到資訊缺口必須停下來詢問。</td></tr>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2607.27155"><strong>OmegaUse-OfficeVal</strong></a><br><span class="evidence">2026 預印本</span></th><td>在 100 項長流程辦公軟體任務中，受測 Agent 普遍更快、更便宜，但交付品質仍未接近人類基準。</td><td>不能只看生成速度與使用成本；必須把人工修改與可用性算進去。</td></tr>
+              <tr><th scope="row"><a href="https://arxiv.org/abs/2407.19056"><strong>OfficeBench</strong></a><br><span class="evidence">研究基準</span></th><td>跨多個辦公應用程式時，冗餘操作、幻覺與應用程式切換仍是主要失敗來源。</td><td>能用結構化工具或 API 完成的工作，不要一律改成模擬人類點擊畫面。</td></tr>
             </tbody>
           </table>
         </div>
@@ -153,15 +161,16 @@
         <div class="metric">試點淨價值 ≈ 節省的處理與等待時間 − Review、重工、整合與風險成本</div>
 
         <h3>五種適合作為入口的辦公流程</h3>
-        <div class="table-responsive">
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="候選辦公流程第一階段範圍對照，可水平捲動">
           <table>
-            <thead><tr><th>流程</th><th>第一階段只做什麼</th><th>暫時不要做什麼</th></tr></thead>
+            <caption>五種候選辦公流程的第一階段範圍</caption>
+            <thead><tr><th scope="col">流程</th><th scope="col">第一階段只做什麼</th><th scope="col">暫時不要做什麼</th></tr></thead>
             <tbody>
-              <tr><td><strong>會議到工作包</strong></td><td>整理決策、待辦、未知與來源。</td><td>不要自行指定負責人或承諾期限。</td></tr>
-              <tr><td><strong>主管週報</strong></td><td>彙整核准來源，標示變化、風險與缺漏。</td><td>不要自行判定績效或修改正式數據。</td></tr>
-              <tr><td><strong>提案資料包</strong></td><td>拆解需求、整理核准案例與待確認清單。</td><td>不要承諾價格、能力或合約條件。</td></tr>
-              <tr><td><strong>發票例外清單</strong></td><td>比對欄位並標記不一致。</td><td>不要核准付款或修改帳務。</td></tr>
-              <tr><td><strong>新人報到包</strong></td><td>依職務與日期準備文件及待辦草稿。</td><td>不要建立帳號、授權系統或處理未核准個資。</td></tr>
+              <tr><th scope="row">會議到工作包</th><td>整理決策、待辦、未知與來源。</td><td>不要自行指定負責人或承諾期限。</td></tr>
+              <tr><th scope="row">主管週報</th><td>彙整核准來源，標示變化、風險與缺漏。</td><td>不要自行判定績效或修改正式數據。</td></tr>
+              <tr><th scope="row">提案資料包</th><td>拆解需求、整理核准案例與待確認清單。</td><td>不要承諾價格、能力或合約條件。</td></tr>
+              <tr><th scope="row">發票例外清單</th><td>比對欄位並標記不一致。</td><td>不要核准付款或修改帳務。</td></tr>
+              <tr><th scope="row">新人報到包</th><td>依職務與日期準備文件及待辦草稿。</td><td>不要建立帳號、授權系統或處理未核准個資。</td></tr>
             </tbody>
           </table>
         </div>
@@ -173,15 +182,16 @@
         <div class="callout"><strong>實用順序：</strong>先離線樣本，再唯讀資料，再產生待核准草稿，最後才考慮經人工核准後寫入正式系統。不要第一天就把寄信、付款、刪除與發布權限一次打包送給 Agent。</div>
 
         <h3>每條工作流需要五個責任角色</h3>
-        <div class="table-responsive">
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="工作流責任角色與職責對照，可水平捲動">
           <table>
-            <thead><tr><th>角色</th><th>必須負責的事</th></tr></thead>
+            <caption>五個工作流責任角色與必要職責</caption>
+            <thead><tr><th scope="col">角色</th><th scope="col">必須負責的事</th></tr></thead>
             <tbody>
-              <tr><td><strong>業務負責人</strong></td><td>說明為何值得做、可接受風險，以及是否繼續投資。</td></tr>
-              <tr><td><strong>流程負責人</strong></td><td>定義完成標準、例外、升級條件與日常維護。</td></tr>
-              <tr><td><strong>資料／系統負責人</strong></td><td>核准來源、權限、保存期限與存取紀錄。</td></tr>
-              <tr><td><strong>實際審核者</strong></td><td>確認成果能否使用，記錄修改與退件原因。</td></tr>
-              <tr><td><strong>停止與復原負責人</strong></td><td>在錯誤、異常成本或安全事件發生時暫停流程並回復。</td></tr>
+              <tr><th scope="row">業務負責人</th><td>說明為何值得做、可接受風險，以及是否繼續投資。</td></tr>
+              <tr><th scope="row">流程負責人</th><td>定義完成標準、例外、升級條件與日常維護。</td></tr>
+              <tr><th scope="row">資料／系統負責人</th><td>核准來源、權限、保存期限與存取紀錄。</td></tr>
+              <tr><th scope="row">實際審核者</th><td>確認成果能否使用，記錄修改與退件原因。</td></tr>
+              <tr><th scope="row">停止與復原負責人</th><td>在錯誤、異常成本或安全事件發生時暫停流程並回復。</td></tr>
             </tbody>
           </table>
         </div>
@@ -192,14 +202,15 @@
         <p><a href="https://openai.com/index/how-enterprises-put-ai-to-work/">OpenAI 的企業觀察</a>把「正確情境與工具、清楚權限、審查與治理、將個人有效流程變成共享工作方式」列為擴大導入的實務重點；這是供應商發布的企業資料，適合作為產業訊號，不應當成所有公司的因果證明。</p>
 
         <h3>90 天的決策不是只有「全面上線」</h3>
-        <div class="table-responsive">
+        <div class="table-responsive scroll-table" tabindex="0" role="region" aria-label="九十天後導入決策與適用情況對照，可水平捲動">
           <table>
-            <thead><tr><th>決策</th><th>適用情況</th></tr></thead>
+            <caption>九十天後四種導入決策與適用情況</caption>
+            <thead><tr><th scope="col">決策</th><th scope="col">適用情況</th></tr></thead>
             <tbody>
-              <tr><td><strong>擴大</strong></td><td>品質穩定、使用者願意採用、淨價值為正，而且重大風險有明確控制。</td></tr>
-              <tr><td><strong>維持</strong></td><td>在單一小範圍有效，但尚無證據支持跨部門複製。</td></tr>
-              <tr><td><strong>縮小</strong></td><td>部分步驟有價值，但長流程、寫入動作或資料連線造成不必要風險。</td></tr>
-              <tr><td><strong>停止</strong></td><td>人工修改量過高、資料不可合法使用、錯誤難以發現，或維護成本超過收益。</td></tr>
+              <tr><th scope="row">擴大</th><td>品質穩定、使用者願意採用、淨價值為正，而且重大風險有明確控制。</td></tr>
+              <tr><th scope="row">維持</th><td>在單一小範圍有效，但尚無證據支持跨部門複製。</td></tr>
+              <tr><th scope="row">縮小</th><td>部分步驟有價值，但長流程、寫入動作或資料連線造成不必要風險。</td></tr>
+              <tr><th scope="row">停止</th><td>人工修改量過高、資料不可合法使用、錯誤難以發現，或維護成本超過收益。</td></tr>
             </tbody>
           </table>
         </div>
@@ -236,7 +247,6 @@
             <li><a href="https://arxiv.org/abs/2607.27155">Zhou et al., OmegaUse-OfficeVal: Benchmarking LLM Agents on Long-Horizon Office-Suite Tasks with Economic Grounding</a>。</li>
             <li><a href="https://arxiv.org/abs/2407.19056">Wang et al., OfficeBench: Benchmarking Language Agents across Multiple Applications for Office Automation</a>。</li>
             <li><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI Risk Management Framework Core</a>。</li>
-            <li><a href="https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence">NIST AI 600-1: Generative Artificial Intelligence Profile</a>。</li>
             <li><a href="https://developers.openai.com/api/docs/guides/agents/guardrails-approvals">OpenAI Developers: Guardrails and human review</a>。</li>
             <li><a href="https://openai.com/index/how-enterprises-put-ai-to-work/">OpenAI: From assistance to execution — How enterprises put AI to work</a>。</li>
           </ol>
