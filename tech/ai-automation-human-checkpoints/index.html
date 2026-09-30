@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AI 自動化應該停在哪裡？用資格門檻與兩軸模型設計人工關卡｜金霸觀察</title>
+  <meta name="description" content="AI 流程不是每一步都要人工核准。先拆解子步驟，排除沒有資格自動化的動作，再判斷價值，最後用復原難度與重做代價放置人工關卡。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18342f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/ai-automation-human-checkpoints/">
+  <meta property="og:type" content="article"><meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="AI 自動化應該停在哪裡？用資格門檻與兩軸模型設計人工關卡">
+  <meta property="og:description" content="先判斷有沒有資格自動化，再算值不值得做；只有通過前兩關，才用復原難度與重做代價決定人工斷點。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/ai-automation-human-checkpoints/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/ai-automation-human-checkpoints/hero-ai-automation-human-checkpoints.png">
+  <meta property="og:image:width" content="1942"><meta property="og:image:height" content="809">
+  <meta property="og:image:alt" content="一條工作流程依序通過權限閘門、價值秤與人工檢查站的概念插圖">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI 自動化應該停在哪裡？">
+  <meta name="twitter:description" content="用資格門檻、價值判斷與兩軸模型，找出真正需要人工確認的流程斷點。">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/ai-automation-human-checkpoints/hero-ai-automation-human-checkpoints.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI 自動化應該停在哪裡？用資格門檻與兩軸模型設計人工關卡","description":"先判斷有沒有資格自動化，再算值不值得做；只有通過前兩關，才用復原難度與重做代價決定人工斷點。","image":"https://jinweilin.github.io/tech/ai-automation-human-checkpoints/hero-ai-automation-human-checkpoints.png","datePublished":"2026-09-30","dateModified":"2026-09-30","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-automation-human-checkpoints/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet"><link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.gate-hero{margin-bottom:4rem;background-image:radial-gradient(circle at 78% 28%,rgba(226,181,92,.27) 0 88px,transparent 89px),linear-gradient(132deg,#0c201c,#1d453b 56%,#6b7768)}
+    header.masthead.gate-hero .post-heading{padding:10rem 0 7rem}header.masthead.gate-hero h1{max-width:1000px;font-size:clamp(2.55rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.05em}header.masthead.gate-hero .subheading{max-width:850px;margin-top:1.5rem;color:rgba(255,255,255,.87);font-size:clamp(1.04rem,2.25vw,1.36rem);line-height:1.72}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2.2rem;font-size:1.34rem}.article-body a{color:#1c6654;text-underline-offset:3px}.lead{color:#45514c;font-size:1.25rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(20,52,44,.18)}.article-cover figcaption{margin-top:.65rem;color:#68716d;font-size:.82rem}
+    .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.84rem)/1.65 Georgia,"Noto Serif TC",serif}.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2.3rem 0}.layer{padding:1.45rem;border:1px solid #d9d5c9;border-radius:1rem;background:#fffdf8}.layer .n{display:inline-flex;width:2rem;height:2rem;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#315d52;font-weight:800}.layer h3{margin:.8rem 0 .45rem}.layer p{margin:0;color:#59635e;font-size:.94rem}.step{margin:1.3rem 0;padding:1.6rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.55)}.step h3{margin:.05rem 0 .75rem}
+    .hard-gate{margin:2.5rem 0;padding:1.7rem 1.8rem;border-left:5px solid #9c3c32;background:#f6e8e4}.hard-gate strong{color:#792b25}.callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b17c2d;background:#f3ecdf}.formula{margin:1.8rem 0;padding:1.25rem;border-radius:.8rem;color:#f7f3e8;background:#132a24;text-align:center;font:700 1.05rem/1.7 ui-monospace,monospace}
+    .table-region{width:100%;margin:2rem 0;overflow-x:auto;border:1px solid #ded9cc;border-radius:.9rem;background:#fff;box-shadow:0 10px 26px rgba(22,50,42,.06)}table{width:100%;min-width:720px;margin:0;border-collapse:collapse;font-size:.93rem}caption{padding:1rem;text-align:left;color:#4a5751;font-weight:800}th,td{padding:1rem .8rem;border-top:1px solid #e2ded3;text-align:left;vertical-align:top}thead th{border-top:0;color:#4b5d55;background:#f2eee5;font-size:.75rem;letter-spacing:.05em}tbody th{color:#214f43;background:#fbfaf6}
+    .axis-grid,.checkpoint{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0}.axis-card{padding:1.45rem;border-radius:.9rem;background:#eef2ed}.axis-card h3,.checkpoint h3{margin:0 0 .55rem}.axis-card p{margin:0}.checkpoint section{padding:1.5rem;border:1px solid #d9d5c9;border-radius:.9rem}.checkpoint .script{border-top:5px solid #b67b28}.checkpoint .view{border-top:5px solid #397762}.data-note{padding:1.5rem;border-radius:.85rem;background:#eef3f1}.data-note ul{margin-bottom:0}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 1rem;padding:0;list-style:none}.checklist li{padding:.95rem 1rem;border-left:3px solid #4d8c79;background:rgba(255,255,255,.55)}.sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.85rem}
+    @media(max-width:767px){header.masthead.gate-hero .post-heading{padding:8rem 0 5rem}.layers,.axis-grid,.checkpoint,.checklist{grid-template-columns:1fr}.table-region{scrollbar-width:thin}table{min-width:680px}.article-body{font-size:1.02rem}.thesis{padding:1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+<header class="masthead gate-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · Human checkpoints for AI workflows</div><h1>AI 自動化應該停在哪裡？</h1><span class="subheading">不是每一步都要人工核准，也不是所有關卡都能用風險分數決定。用資格門檻、價值判斷與兩軸模型，找出真正該停下來的位置。</span><span class="meta">金霸研究編輯部 · 2026 年 9 月 30 日 · 約 12 分鐘閱讀</span></div></div></div></div></header>
+<main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+  <p class="lead">前兩篇文章談了如何把 AI 接進真實工作，以及如何用 90 天試點建立可驗收流程。接下來最實際的問題是：一條工作流裡，到底哪裡應該自動走完，哪裡必須停下來等人？</p>
+  <figure class="article-cover"><img src="hero-ai-automation-human-checkpoints.png" width="1942" height="809" alt="一條工作流程依序通過權限閘門、價值秤與人工檢查站的概念插圖" fetchpriority="high"><figcaption>先過資格門檻，再判斷價值，最後才設計人工斷點。AI 輔助原創概念插圖，非實測畫面。</figcaption></figure>
+  <div class="thesis">人工關卡不是愈多愈安全。好的關卡要放在兩個地方：規則不允許系統自行跨越之處，以及復原難度或重做代價即將跳升之前。</div>
+  <h2>先分清楚三個問題，不要全部叫「風險」</h2>
+  <p>很多團隊把是否自動化、是否值得做、要不要人工核准，全塞進同一張高低風險表。這看似簡單，卻會把三種本質不同的決定混在一起。</p>
+  <div class="layers" role="group" aria-label="設計 AI 工作流的三個決策層次"><section class="layer"><span class="n">1</span><h3>資格門檻</h3><p>系統有沒有權限與正當性做這件事？沒有，就停止；不能用效率或低錯誤率換取通行。</p></section><section class="layer"><span class="n">2</span><h3>值不值得做</h3><p>節省的時間與改善的品質，是否大於審核、返工、維護與例外處理成本？</p></section><section class="layer"><span class="n">3</span><h3>斷點放哪裡</h3><p>對已被允許、也值得自動化的步驟，再用復原難度與重做代價決定何時停下來。</p></section></div>
+  <p><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI RMF Core</a>把治理視為貫穿生命週期的工作，要求組織定義人與 AI 的角色、責任與監督；它也把「是否應繼續開發或部署」和後續風險處理分開。這支持一個重要觀念：先有組織規則與責任，再談如何量化和管理風險。</p>
+  <h2>四步方法：從流程拆解到人工斷點</h2>
+  <section class="step"><h3>第一步：把流程拆成可以交付的子步驟</h3><p>不要問「這份工作能不能全自動」，而要列出每一步的輸入、輸出、使用身分、外部影響與失敗回復方式。只要其中一格仍寫著「AI 自己判斷」，流程就還不夠清楚。</p><p>拆解後，原本的一件工作通常會變成：取得資料、辨識、整理、草擬、寫入、發布、回報。這些步驟的權限與後果不同，不應綁成同一個自動化開關。</p></section>
+  <section class="step"><h3>第二步：先過資格門檻</h3><p>資格門檻問的不是「錯誤機率多低」，而是「誰授權、能代表誰、是否符合政策與權利」。例如替本人公開發文、接受合約、付款、發布新承諾，必須有明確授權與負責人；沒有授權時，即使技術成功率很高、刪文也很容易，仍然不能執行。</p></section>
+  <div class="hard-gate"><strong>資格門檻不是黃色警示燈，而是一道門。</strong>沒有發布權的人，不能因為貼文「低風險」就代替本人按下公開；沒有付款權的 Agent，也不能因為金額很小就自行取得資格。通過門檻只表示可以進入下一層判斷，不代表已獲准全自動。</div>
+  <section class="step"><h3>第三步：判斷值不值得做</h3><p>先建立沒有 AI 時的基準線，再把人工審核、錯誤返工、模型與工具費用、維護、例外處理一併算入。若一段工作每月只發生一次、人工五分鐘就完成，卻需要長期維護串接與權限，它可能技術上做得到，經濟上卻不值得。</p><div class="formula">淨價值 ＝ 重複節省＋品質改善－審核－返工－維護－例外成本</div><p>這不是要求每家公司套用同一個公式，而是提醒：生成速度只是收益的一部分，後續工作也是真成本。</p></section>
+  <section class="step"><h3>第四步：用兩軸模型找斷點</h3><p>只有在一個步驟已通過資格門檻，而且值得自動化之後，才比較兩個軸：錯了有多難復原，以及發現太晚要重做多少工作。關卡應放在任一軸即將明顯跳升之前。</p></section>
+  <div class="axis-grid"><section class="axis-card"><h3>軸一：復原難度</h3><p>能否撤銷、回到穩定版本、保留原始資料？錯誤是否已進入外部系統，或影響別人的權益與判斷？</p></section><section class="axis-card"><h3>軸二：重做代價</h3><p>若現在才發現錯誤，要重跑多少計算、重寫多少內容、重錄多少聲音，又需要多少人工重新檢查？</p></section></div>
+  <h2>案例一：一張明信片，其實有六段工作</h2>
+  <p>以我們實際使用的明信片流程為例，使用者上傳圖片後，系統會取得檔案、辨識地點與內容、投稿網站、準備社群文案、發布到社群，最後回報各階段結果。若只把它叫做「自動投稿」，真正的權限邊界就會被藏起來。</p>
+  <section class="table-region" tabindex="0" aria-label="明信片六段流程與決策層次，可水平捲動"><table><caption>明信片六段流程：每一步應先回答哪個問題</caption><thead><tr><th scope="col">子步驟</th><th scope="col">交付物</th><th scope="col">主要判斷</th><th scope="col">適合的控制</th></tr></thead><tbody>
+    <tr><th scope="row">1. 取得圖片</th><td>有效且可讀取的來源檔</td><td>檔案是否有效、來源是否在允許範圍</td><td>格式、大小與來源驗證；失敗即停止</td></tr>
+    <tr><th scope="row">2. 辨識內容</th><td>地標、地區、描述與候選標籤</td><td>哪些是看見的事實，哪些只是推估</td><td>保留原圖；不確定資訊標示待確認</td></tr>
+    <tr><th scope="row">3. 投稿網站</th><td>可瀏覽的明信片頁面</td><td>是否已有明確投稿授權；重複或錯誤是否可更正</td><td>授權範圍、欄位驗證與結果回執</td></tr>
+    <tr><th scope="row">4. 粉專發文</th><td>以指定品牌口吻發布的原文</td><td>是否有代表該身分公開發文的資格</td><td>資格門檻；沒有明確授權就不執行</td></tr>
+    <tr><th scope="row">5. 社群發文</th><td>符合平台限制的另一篇原文</td><td>帳號身分、內容與發布權是否一致</td><td>資格門檻；各平台結果分開判定</td></tr>
+    <tr><th scope="row">6. 結果回報</th><td>網站、粉專與社群各自的成功或失敗狀態</td><td>是否把部分成功誤報成整體成功</td><td>逐段回報；社群失敗不抹掉網站投稿結果</td></tr>
+  </tbody></table></section>
+  <p>這個案例的重要性不在某個平台，而在「部分成功」的處理方式：網站投稿成功、社群發布失敗，是兩個獨立事實。把整條流程壓成一個綠色勾勾，會讓人既無法復原，也找不到真正卡點。</p>
+  <h2>案例二：影片的兩個成本關卡，以及一個發布門檻</h2>
+  <p>我們也把一篇文章實際製作成解說動畫，並公開了<a href="https://www.youtube.com/watch?v=zwFXM4rnjZU">《AI 辦公室 90 天落地路線圖》影片</a>。製作工具把文章轉成文稿、配音、動畫、字幕、封面與 YouTube 上架資料包。本文只公開方法與成品，不揭露私人專案內容。</p>
+  <p>這套流程有三次人類確認，但三關不能排成同一條「愈後面愈危險」的線。</p>
+  <div class="checkpoint"><section class="script"><h3>文稿核准</h3><p><strong>同屬兩軸模型。</strong>文字一旦鎖定才進入配音與場景製作。若太晚改字，可能連動重做配音、發音檢查、時間軸、動畫、字幕、章節與說明，因此重做代價高。</p></section><section class="view"><h3>看片核准</h3><p><strong>同屬兩軸模型。</strong>單一構圖或字幕錯誤可局部修正；全片節奏、聲畫同步或旁白錯誤則可能需要重新混音、算繪與輸出，因此要在包裝上架前確認。</p></section></div>
+  <div class="hard-gate"><strong>上傳核准不放進兩軸模型。</strong>它不是根據算繪成本或錯誤機率決定，而是發布資格本身的規則：工具只準備上架資料包，最終由內容所有人看片、上傳並決定是否公開。風險評估不能偷偷把這項資格門檻降級成「如果分數低就自動發布」。</div>
+  <h3>沒有日誌，就不要發明重做數字</h3>
+  <p>這支首部公開成片沒有保留下可稽核的逐次重做日誌，因此文稿與看片兩關的實際重做次數、實際耗時均記為 <abbr title="Not available">N/A</abbr>，不能把印象寫成統計。</p>
+  <div class="data-note"><strong>只有規劃估算，不是實測 benchmark：</strong><ul><li>在文稿、聲音、風格與場景程式都已備妥，且第一次執行不用修正的假設下，五分鐘影片從配音、檢查、算繪到上架包，粗估約 40–130 分鐘。</li><li>若包含寫稿、場景程式、人工看片與返工，合理單位是半天到數天。</li><li>硬體、場景複雜度與修正次數都會大幅改變結果；下一支影片應直接記錄每關進出時間與返工原因。</li></ul></div>
+  <h2>把關卡寫進流程，不要只畫一個人形圖示</h2>
+  <p><a href="https://developers.openai.com/api/docs/guides/agents/guardrails-approvals">OpenAI 的 Guardrails 與人工核准指南</a>區分自動驗證與人工批准，並建議在取消、修改、執行命令或敏感工具等會產生副作用的動作前暫停。真正可用的人工關卡，至少要回答以下問題：</p>
+  <ul class="checklist"><li>誰有資格批准或拒絕？</li><li>審核者能看到來源、差異與不確定性嗎？</li><li>逾時時是停止，還是默認通過？</li><li>拒絕後回到哪個穩定版本？</li><li>核准範圍是單次、限時，還是常設授權？</li><li>每一段成功與失敗是否分開記錄？</li></ul>
+  <p>如果審核者只看到一個「確認」按鈕，卻看不到 Agent 準備做什麼、根據什麼、會改到哪裡，那不是 human-in-the-loop，只是 human-as-a-button。</p>
+  <h2>一張可以直接使用的斷點檢查表</h2>
+  <ol><li><strong>拆：</strong>列出每個子步驟的輸入、輸出、身分、外部影響與回復方式。</li><li><strong>擋：</strong>先檢查授權、身分、權利與政策；沒有資格就停止，不進入風險計分。</li><li><strong>算：</strong>用人工基準線比較節省、品質、審核、返工、維護與例外成本。</li><li><strong>畫：</strong>對通過前兩關的步驟，標出復原難度與重做代價跳升的位置。</li><li><strong>放：</strong>在跳升之前設關卡，寫清楚批准者、資訊、逾時、拒絕與回復規則。</li><li><strong>記：</strong>保存每次退件、修改、重跑時間與原因，讓下一次決策使用真實資料。</li></ol>
+  <div class="callout"><strong>最小充分設計：</strong>能用格式驗證、來源比對或權限限制自動擋下的問題，不必每次找人看；涉及身分資格、重大承諾或公開權的決定，也不要假裝一個漂亮的風險分數就能取代負責人。</div>
+  <h2>結論：關卡不是煞車，而是把速度留給可以加速的地方</h2>
+  <p>自動化不是從頭到尾消滅人，而是讓機器持續處理已獲授權、值得做、可被驗證的部分；在人必須承擔責任，或返工成本即將跳升之前，清楚交棒。</p>
+  <div class="thesis">越晚發現錯誤，重做範圍越大；但真正不可逆的不是算繪時間，而是錯誤內容已經公開。</div>
+  <section class="sources" aria-labelledby="sources-title"><div class="section-label">Frameworks, cases &amp; primary sources</div><h2 id="sources-title">方法、案例與來源</h2><ol>
+    <li><a href="https://airc.nist.gov/airmf-resources/airmf/5-sec-core/">NIST AI Risk Management Framework Core</a>：治理、角色責任、人類監督，以及 Map／Measure／Manage 的風險管理架構。</li>
+    <li><a href="https://developers.openai.com/api/docs/guides/agents/guardrails-approvals">OpenAI Developers：Guardrails and human review</a>：自動檢查、敏感工具動作的暫停與人工核准。</li>
+    <li><a href="https://www.youtube.com/watch?v=zwFXM4rnjZU">AI 辦公室 90 天落地路線圖：先證明、再接線、後擴大</a>：上述影片流程的首支公開成品。</li>
+    <li><a href="../ai-workflow-grounding/">前篇：AI 怎麼跟工作接地氣？</a>、<a href="../ai-office-90-day-roadmap/">前篇：AI 怎麼進辦公室？90 天落地路線圖</a>。</li>
+  </ol><p class="small text-muted">查證日期：2026 年 9 月 30 日。本文的「資格門檻／值不值得做／兩軸斷點」是依公開框架與兩個自有案例整理出的編輯方法，不是 NIST 或 OpenAI 的官方分級。明信片案例已泛化，不公開 credential、內部端點、個資或部署細節。影片 40–130 分鐘為明列假設的規劃估算，並非實測 benchmark；因缺少可稽核重做日誌，實際重做次數標記為 N/A。本文由 AI 協助查證、整理、配圖與排版，發布前須經獨立複審與金霸確認。</p></section>
+</article></div></main>
+<footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
