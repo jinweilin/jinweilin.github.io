@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>我為什麼做 Go 醬？把旅行規劃從一個人的腦袋搬出來｜金霸觀察</title>
+  <meta name="description" content="每次旅行都要整合大家的想法、安排順序與交通，再把行程交給大家確認。Go 醬的起點，是想讓助理分擔這份燒腦工作，讓同行的人一起參與、調整並留下紀錄。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#173a33">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/go-chan-origin/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="我為什麼做 Go 醬？把旅行規劃從一個人的腦袋搬出來">
+  <meta property="og:description" content="從反覆承擔旅遊規劃的痛點出發，看 Go 醬如何用 Skill、工具和共同確認，分擔行程協調工作。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/go-chan-origin/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/go-chan-origin/hero-shared-travel-planning.webp">
+  <meta property="og:image:width" content="1774">
+  <meta property="og:image:height" content="887">
+  <meta property="og:image:alt" content="同行旅伴圍著桌面分享空白行程卡片，由抽象的數位助理協助整理共同旅程的概念插畫">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="我為什麼做 Go 醬？把旅行規劃從一個人的腦袋搬出來">
+  <meta name="twitter:description" content="一位旅遊助理的起點，是想把規劃工作從一個人的腦袋，搬到大家都能參與的流程裡。">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/go-chan-origin/hero-shared-travel-planning.webp">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"我為什麼做 Go 醬？把旅行規劃從一個人的腦袋搬出來","description":"每次旅行都要整合大家的想法、安排順序與交通，再把行程交給大家確認。Go 醬的起點，是想讓助理分擔這份燒腦工作，讓同行的人一起參與、調整並留下紀錄。","image":"https://jinweilin.github.io/tech/go-chan-origin/hero-shared-travel-planning.webp","datePublished":"2026-10-05","dateModified":"2026-10-05","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/go-chan-origin/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.origin-hero{margin-bottom:3.5rem;background-image:linear-gradient(132deg,rgba(12,32,28,.91),rgba(29,69,59,.63)),url("hero-shared-travel-planning.webp");background-position:center;background-size:cover}
+    header.masthead.origin-hero .post-heading{padding:9rem 0 6rem}
+    header.masthead.origin-hero h1{max-width:950px;font-size:clamp(2.35rem,6vw,4.5rem);line-height:1.1;letter-spacing:-.04em}
+    header.masthead.origin-hero .subheading{max-width:850px;margin-top:1.2rem;color:rgba(255,255,255,.92);font-size:clamp(1.05rem,2.2vw,1.32rem);line-height:1.7}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}
+    .article-body h2{margin:3.6rem 0 1.25rem;font-size:clamp(1.8rem,4vw,2.55rem)}
+    .article-body h3{margin-top:1.8rem;font-size:1.25rem}
+    .article-body a{color:#1c6654;text-underline-offset:3px}
+    .lead{color:#45514c;font-size:1.22rem;line-height:1.85}
+    .article-cover{margin:0 0 2.4rem}
+    .article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 18px 50px rgba(20,52,44,.16)}
+    .article-cover figcaption{margin-top:.7rem;color:#68716d;font-size:.84rem;line-height:1.6}
+    .thesis{margin:2.4rem 0;padding:1.7rem 1.9rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.25rem,3vw,1.75rem)/1.65 Georgia,"Noto Serif TC",serif}
+    .workflow{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.8rem 0 2rem}
+    .workflow section{padding:1.3rem 1.4rem;border:1px solid #d9d5c9;border-radius:.9rem;background:#fffdf8}
+    .workflow h3{margin:.1rem 0 .5rem;color:#214f43}
+    .workflow p{margin:0;color:#505c56}
+    .note{margin:2rem 0;padding:1.35rem 1.5rem;border-left:4px solid #b17c2d;background:#f3ecdf}
+    .sources{margin-top:3.5rem;padding-top:1.8rem;border-top:1px solid #dcd8cc}
+    .sources li{margin-bottom:.8rem}
+    @media(max-width:767px){header.masthead.origin-hero .post-heading{padding:7rem 0 4.5rem}.article-body{font-size:1.02rem}.workflow{grid-template-columns:1fr}.thesis{padding:1.35rem}}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+  <header class="masthead origin-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · A personal travel assistant</div><h1>我為什麼做 Go 醬？</h1><span class="subheading">把旅行規劃從一個人的腦袋搬出來，讓同行的人都能參與、確認，並在需要時一起修改。</span><span class="meta">金霸 · 2026 年 10 月 5 日 · 約 8 分鐘閱讀</span></div></div></div></div></header>
+  <main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+    <p class="lead">Go 醬的起點不是「AI 還能做什麼」，而是我一次又一次碰到的同一件事：每次旅行，我都要整合大家的想法、安排順序和交通方式，再把行程整理好交給大家確認。規劃看起來像一張表，實際上卻是一堆要同時放在腦袋裡的選擇。</p>
+    <figure class="article-cover"><img src="hero-shared-travel-planning.webp" width="1774" height="887" alt="同行旅伴圍著桌面分享空白行程卡片，由抽象的數位助理協助整理共同旅程的概念插畫" fetchpriority="high"><figcaption>把每個人的想法放到同一張桌上，一起整理成可以確認的行程。AI 輔助原創概念插畫；卡片與路線不是實際介面或地圖。</figcaption></figure>
+    <div class="thesis">我想解決的不是「找不到景點」，而是每次都由同一個人承擔整合與協調的腦力工作。</div>
+
+    <h2>旅行規劃，為什麼常常變成一個人的工作？</h2>
+    <p>一群人出遊時，想看的、想吃的、能走的節奏不一定相同。有人先丟一個景點，有人想到交通，有人晚一點才回覆。最後總要有一個人把零散的意見兜起來，判斷先去哪裡、怎麼移動、一天塞多少事情，再把版本送出去問大家。</p>
+    <p>這份工作不只是搜尋。它要記住每個人的偏好，理解景點之間的距離，留意時間與交通限制，還要把「大家想要的」變成一份大家看得懂、能回饋的草稿。規劃者可以做得很好，卻也容易因此成為唯一記得全貌、唯一負責收尾的人。</p>
+
+    <h2>我想要一個助理，先把大家的想法接住</h2>
+    <p>我希望同行的人能把自己的需求交給一個助理，讓它先整理內容、排出可討論的順序和交通方式，再交給大家一起確認。行程要能繼續改，也要留下大家找得到的紀錄。這樣，規劃不是一個人做完、其他人點頭；每個人都能參與，決定也能隨旅程需要調整。</p>
+    <p>這就是我做 Go 醬的原因：把反覆、繁瑣、需要記住很多事情的那一段工作交給助理處理，讓人把注意力留給真正需要一起決定的部分。不是讓助理替旅伴投票，而是讓意見更容易被整理、看見和討論。</p>
+
+    <h2>Skill 教它怎麼規劃，Tools 讓它能接觸外部資訊</h2>
+    <p>我把 Go 醬拆成兩個容易理解的部分。Skill 像一份可重複使用的工作手冊，告訴它要先問哪些必要資訊、如何檢查行程是否排得太滿、如何整理草稿，以及什麼時候該停下來請人確認。它讓助理知道這份工作的順序與規矩。</p>
+    <p>Tools 則是助理能使用的能力。以旅遊規劃為例，查公開網站可以核對景點資訊，地圖連結可以讓人自己檢查位置，行程紀錄工具則能保存已確認的規劃，讓後續調整接著同一份內容進行。工具能擴大它取得資訊和完成工作的範圍，但不會自動讓資料正確，也不會替一群人決定誰的偏好優先。</p>
+    <p>用一句話說：<strong>Skill 安排工作怎麼走，Tools 提供它能走到哪裡。</strong>這是用 Go 醬做例子的簡化說法；不同平台對 Skill、工具與 Agent 的定義和實作方式可能不同。官方文件也把 Skill 描述為可重用的指示與工作流程，並將工具列為 Agent 可直接使用的能力。[<a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI：Skills</a>、<a href="https://developers.openai.com/api/docs/guides/agents/define-agents">OpenAI：Agent definitions</a>]</p>
+
+    <h2>一趟行程從需求走到共同確認</h2>
+    <div class="workflow" role="group" aria-label="Go 醬旅遊規劃的四個階段">
+      <section><h3>1. 先把需求說清楚</h3><p>目的地、日期、天數、人數和偏好，是規劃的起點；缺少重要資訊時先補問，不急著拼出一張看似完整的表。</p></section>
+      <section><h3>2. 把可行性放進規劃</h3><p>季節、交通距離和每天的活動量會影響行程。安排順不順，不能只看景點名稱是否排得漂亮。</p></section>
+      <section><h3>3. 做出能討論的草稿</h3><p>助理整理景點順序、移動方式與提醒，附上可供旅伴自行核對的資訊，讓大家有共同的討論版本。</p></section>
+      <section><h3>4. 由人確認，再持續調整</h3><p>草稿先交給旅客確認；確定後再保存行程。需要改動時，接著更新原本的行程紀錄，減少版本散落和舊連結失效。</p></section>
+    </div>
+    <p>這些步驟不是要把人從規劃中移除，而是把整理工作與共同決定分開。助理先做可重複、可檢查的整理；同行的人再決定取捨，確認這趟旅程適不適合自己。</p>
+
+    <h2>工具查得到，不代表旅程已經替你決定好了</h2>
+    <p>網頁資訊可能更新，營業時間和交通也可能變動；一份合理的路線，仍可能不符合同行者的體力或興趣。助理提出的內容應該是可核對的草稿，不是保證，也不該假裝掌握每個人的真正優先順序。</p>
+    <div class="note"><strong>我仍然要負責的部分：</strong>核對重要資訊、確認大家的取捨，並在實際出發前再次確認會變動的安排。助理分擔整理，不會接手旅伴之間的溝通與最後決定。</div>
+
+    <h2>Go 醬的故事，從我的痛點開始</h2>
+    <p>我做 Go 醬，是因為我想解決自己反覆承擔的規劃負擔。對我來說，一個有用的旅行助理，不是一次吐出最多景點，而是讓需求容易提出、安排容易理解、修改有地方接續，最後讓同行的人一起確認。</p>
+    <p>它目前能做到多少，還要看每一次真實行程。之後我也會用實際旅程檢查：哪些安排真的省下整理時間、哪些地方仍要人來判斷、哪些資訊需要更早確認。這些才是 Go 醬能不能幫上忙的答案。</p>
+    <div class="thesis">我不是想讓 AI 替我們旅行；我想讓它分擔規劃，好讓我們把心思留給一起出發的人。</div>
+
+    <section class="sources" aria-labelledby="sources-title"><div class="section-label">Background &amp; sources</div><h2 id="sources-title">補充說明與參考</h2><ol>
+      <li><a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI Developers：Skills</a>：說明 Skill 可承載可重用指示與多步驟工作流程。此處用作通用概念參照，並非 Go 醬的平台規格文件。</li>
+      <li><a href="https://developers.openai.com/api/docs/guides/agents/define-agents">OpenAI Developers：Agent definitions</a>：以 Agent 指示與工具能力的不同職責作為對照。本文的 Go 醬流程描述則以作者實際設計為準。</li>
+    </ol><p class="small text-muted">本文前半為金霸本人提供的創作動機；Go 醬的流程描述為現行設計的概括整理。公開版不包含憑證、私人端點、識別碼、完整提示詞、同行者個資或實際行程資料。本文由 AI 協助研究、編輯、排版與生成概念主圖，發布前須經獨立複審與金霸確認。</p></section>
+  </article></div></main>
+  <footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
