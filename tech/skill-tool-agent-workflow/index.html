@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Skill 是方法，Tool 是能力：用旅行助理看懂 AI 工作流｜金霸觀察</title>
+  <meta name="description" content="多人旅行規劃常讓一個人忙著整合需求。從這個痛點出發，拆解 AI 助理中的 Skill、Tool 與人類確認邊界，並用四步法找出適合自動化的工作。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#173a33">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/skill-tool-agent-workflow/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="Skill 是方法，Tool 是能力：用旅行助理看懂 AI 工作流">
+  <meta property="og:description" content="Skill 說明工作方法，Tool 提供外部能力；誰有權決定、何時需要人確認，仍要另外設計。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/skill-tool-agent-workflow/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/skill-tool-agent-workflow/hero-skill-tool-workflow.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta property="og:image:alt" content="旅伴圍坐桌邊，數位助理整理空白流程卡片，一名成員查看草稿並共同討論的概念插畫">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Skill 是方法，Tool 是能力：用旅行助理看懂 AI 工作流">
+  <meta name="twitter:description" content="用多人旅行規劃的痛點，理解 AI 助理如何分工：方法可重用、外部能力受控、人仍負責確認。">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/skill-tool-agent-workflow/hero-skill-tool-workflow.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Skill 是方法，Tool 是能力：用旅行助理看懂 AI 工作流","description":"多人旅行規劃常讓一個人忙著整合需求。從這個痛點出發，拆解 AI 助理中的 Skill、Tool 與人類確認邊界，並用四步法找出適合自動化的工作。","image":"https://jinweilin.github.io/tech/skill-tool-agent-workflow/hero-skill-tool-workflow.png","datePublished":"2026-10-06","dateModified":"2026-10-06","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/skill-tool-agent-workflow/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet">
+  <link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.skill-tool-hero{margin-bottom:3.2rem;background-image:linear-gradient(132deg,rgba(12,32,28,.91),rgba(29,69,59,.63)),url("hero-skill-tool-workflow.png");background-position:center;background-size:cover}
+    header.masthead.skill-tool-hero .post-heading{padding:9rem 0 6rem}
+    header.masthead.skill-tool-hero h1{max-width:980px;font-size:clamp(2.2rem,6vw,4.35rem);line-height:1.12;letter-spacing:-.04em}
+    header.masthead.skill-tool-hero .subheading{max-width:850px;margin-top:1.2rem;color:rgba(255,255,255,.93);font-size:clamp(1.05rem,2.2vw,1.32rem);line-height:1.7}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}
+    .article-body h2{margin:3.4rem 0 1.15rem;font-size:clamp(1.8rem,4vw,2.5rem)}
+    .article-body h3{margin:.2rem 0 .65rem;font-size:1.28rem}
+    .article-body a{color:#1c6654;text-underline-offset:3px}
+    .lead{color:#45514c;font-size:1.22rem;line-height:1.85}
+    .article-cover{margin:0 0 2.4rem}
+    .article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 18px 50px rgba(20,52,44,.16)}
+    .article-cover figcaption{margin-top:.7rem;color:#68716d;font-size:.84rem;line-height:1.6}
+    .thesis{margin:2.2rem 0;padding:1.55rem 1.8rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.2rem,3vw,1.65rem)/1.65 Georgia,"Noto Serif TC",serif}
+    .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
+    .pair section{padding:1.35rem 1.45rem;border:1px solid #d9d5c9;border-radius:.9rem;background:#fffdf8}
+    .pair section:first-child h3{color:#205b4d}
+    .pair section:last-child h3{color:#9a6522}
+    .pair p{margin:.45rem 0 0}
+    .steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin:1.5rem 0}
+    .steps section{padding:1.1rem 1.2rem;border-left:4px solid #b17c2d;background:#f6f1e8}
+    .steps h3{font-size:1.08rem}
+    .steps p{margin:0;color:#505c56}
+    .callout{margin:2rem 0;padding:1.3rem 1.45rem;border-left:4px solid #b17c2d;background:#f3ecdf}
+    .sources{margin-top:3.3rem;padding-top:1.8rem;border-top:1px solid #dcd8cc}
+    .sources li{margin-bottom:.8rem}
+    @media(max-width:767px){header.masthead.skill-tool-hero .post-heading{padding:7rem 0 4.5rem}.article-body{font-size:1.02rem}.pair,.steps{grid-template-columns:1fr}.thesis{padding:1.3rem}}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+  <header class="masthead skill-tool-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · Designing AI workflows</div><h1>Skill 是方法，Tool 是能力</h1><span class="subheading">從多人旅行規劃的痛點出發，用一個助理案例看懂 AI 工作流程怎麼分工，以及為什麼最後的確認仍該由人負責。</span><span class="meta">金霸研究編輯部 · 2026 年 10 月 6 日 · 約 8 分鐘閱讀</span></div></div></div></div></header>
+  <main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+    <p class="lead">多人旅行時，難的不只是在腦中想出安排；還得把每個人的想法收在一起、排出可討論的順序與移動方式，再讓大家確認。對我來說，這份燒腦的整合工作常集中在一個人身上。要讓 AI 助理分擔，先分清兩件事：它依什麼方法工作，以及它能使用哪些外部能力。</p>
+    <figure class="article-cover"><img src="hero-skill-tool-workflow.png" width="1672" height="941" alt="旅伴圍坐桌邊，數位助理整理空白流程卡片，一名成員查看草稿並共同討論的概念插畫" fetchpriority="high"><figcaption>工作方法、可用能力與人類確認點彼此相連，但不是同一件事。AI 輔助原創概念插畫；不代表實際介面或產品。</figcaption></figure>
+    <div class="thesis">Skill 安排工作怎麼走；Tool 提供助理能使用的能力；誰有權做決定，仍要另外確認。</div>
+
+    <h2>把一團忙亂拆成幾種不同工作</h2>
+    <p>我想解決的不是「沒有人會找景點」，而是規劃者常得同時記住需求、順序、移動限制和大家的回覆。先把任務拆開，助理要做的就不再是一團模糊的「幫我們排行程」，而是幾件較清楚的工作：補齊缺少的條件、整理可選方案、把資訊排成可閱讀的草稿，再交給同行者確認。</p>
+    <p>這個例子不是共享旅行攻略，也不是 Go 醬的完整技術說明；它只是用來看清 AI 助理的工作分工。這裡的 Skill 和 Tool 是概念層次的說法，不包含任何特定系統的內部設定或規格。</p>
+
+    <h2>Skill 與 Tool，分別回答不同問題</h2>
+    <div class="pair" role="group" aria-label="Skill 和 Tool 的概念差異">
+      <section><h3>Skill：這類工作要怎麼做？</h3><p>把可重複的方法整理成指引：先問哪些必要條件、如何檢查安排是否合理、怎麼標出未知，以及什麼時候應停下來請人確認。它讓流程不必每次都從零開始。</p></section>
+      <section><h3>Tool：助理能做哪些操作？</h3><p>提供與外部資訊或系統互動的能力。例如在一個抽象的旅行助理中，工具可能用來查詢公開資訊、讀取獲准使用的資料，或保存已確認的內容。能呼叫某項工具，不代表任何情境都應呼叫它。</p></section>
+    </div>
+    <p>用生活化的比喻，Skill 像一份工作手冊，Tool 像桌上可用的器具。手冊告訴你步驟與檢查點；器具讓你能完成某些操作。但器具本身不會決定誰有權拍板，手冊也不能單靠文字把不恰當的權限變合理。</p>
+    <p>不同平台對 Skill、工具與 Agent 的命名和實作可能不一樣。以 OpenAI 公開文件為例，Agent Skills 被描述為可重用的指示與支援檔案；Agent 的定義也把 instructions 和 tools 分開配置。這是理解概念的一個參照，不是所有平台都必須採用的固定分類。[<a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI：Agent Skills</a>；<a href="https://developers.openai.com/api/docs/guides/agents/define-agents">OpenAI：定義 Agent</a>]</p>
+
+    <h2>從想法到可確認的草稿：四步拆工作</h2>
+    <div class="steps" role="group" aria-label="設計助理工作流的四個步驟">
+      <section><h3>1. 拆出子步驟</h3><p>把需求蒐集、整理選項、提出草稿、確認與後續更新分開看，別用一個「全自動」按鈕概括整件事。</p></section>
+      <section><h3>2. 先問資格與代表權</h3><p>助理是在替誰處理事情？它能代表誰做哪種決定？如果授權不清楚，就先補問或停止。</p></section>
+      <section><h3>3. 判斷值得自動化嗎</h3><p>估計重複整理帶來的節省，再扣掉工具建置、查核、例外處理與維護成本；能做不等於值得做。</p></section>
+      <section><h3>4. 把人放在適當的確認點</h3><p>助理可整理出版本供大家檢視；涉及不同人的取捨、尚未確認的資訊或會產生外部承諾的操作，就應保留清楚的人類確認。</p></section>
+    </div>
+    <p>這四步也說明了為什麼 Skill、Tool 不是權限制度的替代品。Skill 可以提醒助理按流程工作，Tool 可以讓它查詢或修改資料；至於某次操作是否被授權、是否值得做、是否必須等人批准，仍是另一層要明確設計的問題。</p>
+
+    <h2>好的助理不是代替大家決定</h2>
+    <p>在旅行規劃這個例子裡，助理的價值可以是把散落的想法整理成大家看得懂的草稿，讓意見比較容易被看見，也更容易討論。它不該擅自替同行者決定誰的偏好優先；當條件不清楚或意見衝突時，先呈現差異、再請人選擇，比假裝有唯一正解可靠。</p>
+    <div class="callout"><strong>設計檢查：</strong>每加入一項 Tool，都問它會讀取什麼、可能改變什麼，以及誰批准這個操作。把「查詢」、「草擬」與「對外執行」分開，才看得見真正需要人把關的位置。</div>
+
+    <h2>把整理交出去，把共同決定留下來</h2>
+    <p>這篇想分享的不是某一套神奇提示詞，而是設計助理時可以先問的三個問題：這份工作的方法能否重複使用？完成它需要哪些外部能力？最後哪些判斷仍屬於人？</p>
+    <p>當這三件事分清楚，AI 就不必在「什麼都不做」和「什麼都自動做」之間二選一。它可以接手繁瑣整理，讓草稿更早出現；而人保留確認權，讓重要選擇仍由真正要一起生活在結果裡的人完成。</p>
+    <div class="thesis">讓助理承擔整理，不等於把人的選擇也交出去。</div>
+
+    <section class="sources" aria-labelledby="sources-title"><div class="section-label">Concept references</div><h2 id="sources-title">概念參考</h2><ol>
+      <li><a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI API 文件：Agent Skills</a>：說明 Skill 可作為可重用的指示與支援檔案。本文僅借用其公開概念作參照。</li>
+      <li><a href="https://developers.openai.com/api/docs/guides/agents/define-agents">OpenAI API 文件：定義 Agent</a>：將 Agent 的 instructions 與 tools 分別說明。本文的流程例子是抽象分析，不是任何平台的完整技術規格。</li>
+    </ol><p class="small text-muted">本文以作者親述的多人旅行規劃痛點作抽象起點，不包含具體地點、日期、行程片段或同行者資訊。Go 醬僅作脫敏概念例子；文章不呈現其內部設定、工具規格或可供重建的實作細節。AI 協助研究、編輯與生成概念主圖。</p></section>
+  </article></div></main>
+  <footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
