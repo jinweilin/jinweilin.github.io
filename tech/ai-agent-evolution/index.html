@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AI 助理拿到身分證之前：四條路並存的一年｜金霸觀察</title>
+  <meta name="description" content="上篇寫了六家商業產品怎麼發「身分證」給 AI 助理，這篇倒帶一年：開源社群先把會辦事的 AI 玩出來，協議層試圖讓它不被大公司綁死，最後大公司把它包裝成打開就能用。這是前傳。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18342f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/ai-agent-evolution/">
+  <meta property="og:type" content="article"><meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="AI 助理拿到身分證之前：四條路並存的一年">
+  <meta property="og:description" content="上篇寫了六家商業產品怎麼發「身分證」給 AI 助理，這篇倒帶一年：開源社群先把會辦事的 AI 玩出來，協議層試圖讓它不被大公司綁死，最後大公司把它包裝成打開就能用。這是前傳。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/ai-agent-evolution/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/ai-agent-evolution/hero-ai-agent-evolution.png">
+  <meta property="og:image:width" content="2240">
+  <meta property="og:image:height" content="1120">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/ai-agent-evolution/hero-ai-agent-evolution.png">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="AI 助理拿到身分證之前：四條路並存的一年">
+  <meta name="twitter:description" content="上篇寫了六家商業產品怎麼發「身分證」給 AI 助理，這篇倒帶一年：開源社群先把會辦事的 AI 玩出來，協議層試圖讓它不被大公司綁死，最後大公司把它包裝成打開就能用。這是前傳。">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI 助理拿到身分證之前：四條路並存的一年","description":"上篇寫了六家商業產品怎麼發「身分證」給 AI 助理，這篇倒帶一年：開源社群先把會辦事的 AI 玩出來，協議層試圖讓它不被大公司綁死，最後大公司把它包裝成打開就能用。這是前傳。","datePublished":"2026-10-19","dateModified":"2026-10-19","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-agent-evolution/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet"><link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.gate-hero{margin-bottom:4rem;background-image:radial-gradient(circle at 78% 28%,rgba(226,181,92,.27) 0 88px,transparent 89px),linear-gradient(132deg,#0c201c,#1d453b 56%,#6b7768)}
+    header.masthead.gate-hero .post-heading{padding:10rem 0 7rem}header.masthead.gate-hero h1{max-width:1000px;font-size:clamp(2.55rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.05em}header.masthead.gate-hero .subheading{max-width:850px;margin-top:1.5rem;color:rgba(255,255,255,.87);font-size:clamp(1.04rem,2.25vw,1.36rem);line-height:1.72}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2.2rem;font-size:1.34rem}.article-body a{color:#1c6654;text-underline-offset:3px}.lead{color:#45514c;font-size:1.25rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(20,52,44,.18)}.article-cover figcaption{margin-top:.65rem;color:#68716d;font-size:.82rem}
+    .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.84rem)/1.65 Georgia,"Noto Serif TC",serif}.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2.3rem 0}.layer{padding:1.45rem;border:1px solid #d9d5c9;border-radius:1rem;background:#fffdf8}.layer .n{display:inline-flex;width:2rem;height:2rem;align-items:center;justify-content:center;border-radius:50%;color:#fff;background:#315d52;font-weight:800}.layer h3{margin:.8rem 0 .45rem}.layer p{margin:0;color:#59635e;font-size:.94rem}.step{margin:1.3rem 0;padding:1.6rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.55)}.step h3{margin:.05rem 0 .75rem}
+    .hard-gate{margin:2.5rem 0;padding:1.7rem 1.8rem;border-left:5px solid #9c3c32;background:#f6e8e4}.hard-gate strong{color:#792b25}.callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b17c2d;background:#f3ecdf}
+.data-note{padding:1.5rem;border-radius:.85rem;background:#eef3f1}.data-note ul{margin-bottom:0}.table-region{width:100%;margin:2rem 0;overflow-x:auto;border:1px solid #ded9cc;border-radius:.9rem;background:#fff;box-shadow:0 10px 26px rgba(22,50,42,.06)}table{width:100%;min-width:720px;margin:0;border-collapse:collapse;font-size:.93rem}caption{padding:1rem;text-align:left;color:#4a5751;font-weight:800}th,td{padding:1rem .8rem;border-top:1px solid #e2ded3;text-align:left;vertical-align:top}thead th{border-top:0;color:#4b5d55;background:#f2eee5;font-size:.75rem;letter-spacing:.05em}tbody th{color:#214f43;background:#fbfaf6}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 1rem;padding:0;list-style:none}.checklist li{padding:.95rem 1rem;border-left:3px solid #4d8c79;background:rgba(255,255,255,.55)}.sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.85rem}
+    @media(max-width:767px){header.masthead.gate-hero .post-heading{padding:8rem 0 5rem}.layers,.checklist{grid-template-columns:1fr}.article-body{font-size:1.02rem}.thesis{padding:1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+<header class="masthead gate-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · AI Agents</div><h1>AI 助理拿到身分證之前：四條路並存的一年</h1><span class="subheading">上篇我寫了六家商業產品怎麼發「身分證」給 AI 助理，這篇講另一面：開源自架、個人系統、開放協議——四條路各有各的擁護者，沒有誰取代誰。這是前傳。</span><span class="meta">金霸研究編輯部 · 2026 年 10 月 19 日 · 約 9 分鐘閱讀</span></div></div></div></div></header>
+<main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+  <figure class="article-cover"><img src="hero-ai-agent-evolution.png" alt="AI Agent 演化：從開源自架工作坊、個人助理、開放協議網絡，到商業成品裝置" width="2240" height="1120" loading="eager"><figcaption>從左到右：開源自架、個人系統、開放協議、商業產品——四條路，各走各的。</figcaption></figure>
+  <h2>開場：倒帶</h2>
+  <p class="lead">先講結論：Muse、Cue、Grok Bot、Dots 這些產品，沒有發明新東西。它們賣的東西——常駐執行、住在聊天軟體裡、技能系統、跨 app 辦事——開源社群在 2025 年底就已經玩過一輪了。大公司做的是把它包裝成「打開就能用」，然後跟你收訂閱費。</p>
+  <p>所以上篇那個問題——「你敢不敢把鑰匙交出去」——有個前傳要先回答：「鑰匙本來在誰手上？」答案是：在你自己手上。至少一開始是。</p>
+  <p>這篇講 2025 年 11 月到 2026 年下半年這一年，四條路怎麼同時走出來的。這篇不是產品發表史——不寫產品百科，只回答一個問題：在「買現成的」之外，還有哪些拿法，以及它們為什麼沒有消失。</p>
+  <div class="thesis">先聲明一個誠實點：這不是單一血統的演化樹。OpenClaw、Hermes、OpenAB、商業產品是各自獨立開發的，沒有誰是誰的下一代。它們真正的共同點只有一個：每一種都讓「擁有一個會辦事的 AI」變得更便宜、更不需要動手。但便宜跟省事不是唯一的考量——後面會講到，有些場景，雲端大廠的手再長也伸不進去。</div>
+  <section class="table-region" tabindex="0" aria-label="四條路時間線總覽，可水平捲動"><table><caption>四條路時間線</caption><thead><tr><th scope="col">站</th><th scope="col">時間</th><th scope="col">關鍵事件</th><th scope="col">拿掉的麻煩</th></tr></thead><tbody>
+    <tr><th scope="row">第一條路 OpenClaw</th><td>2025-11</td><td>開源個人 AI 助理爆紅，住在聊天軟體裡</td><td>「要會寫 code」</td></tr>
+    <tr><th scope="row">第二條路 Hermes</th><td>2026-02</td><td>開源 Hermes Agent 帶來自我改進的學習迴路</td><td>「要一直開著電腦」「每次重頭教」</td></tr>
+    <tr><th scope="row">第三條路 ACP／OpenAB</th><td>2025-08 → 2026-04</td><td>協議層讓聊天軟體、agent、模型脫鉤互換</td><td>「選錯邊就得重來」的鎖定風險</td></tr>
+    <tr><th scope="row">第四條路 商業產品</th><td>2026 下半年</td><td>Muse、Cue、Grok Bot、Dots 等開箱即用</td><td>「要會架」</td></tr>
+  </tbody></table></section>
+
+  <h2>第一條路：OpenClaw，自己動手</h2>
+  <p>2025 年 11 月，一個奧地利開發者 Peter Steinberger（做 PSPDFKit 的那位）丟出一個叫 Clawdbot 的開源專案：一個跑在你自己機器上的個人 AI 助理。</p>
+  <p>概念很簡單，也很瘋：它不住在瀏覽器分頁裡，它住在 Telegram、WhatsApp、Discord 這些你每天開的 app 裡。你傳一句話給它，它可以回頭去跑終端機指令、讀寫檔案、查 email——是真的辦事，不是陪聊。</p>
+  <p>發布 72 小時，GitHub 衝上 6 萬顆星。開發者說它是「最接近 JARVIS 的東西」。接下來半年一路狂飆：2026 年 2 月 14.5 萬星（CNBC 報導過），4 月號稱 35.7 萬星、史上成長最快的開源專案，9 月接近 39 萬星。（stars 數字各來源說法有出入，這裡取區間不保證精確；查證日期 2026-10-19。）</p>
+  <p>它證明了兩件事。第一，「agent 可以住在聊天軟體裡」是成立的——不用學新工具，在本來就會開的 app 下指令。第二，它發明了一個很關鍵的東西：SOUL.md。一份 markdown 文件，寫下這個 agent 的名字、個性、規則、技能、接哪個頻道，存檔，就是一個 agent。<strong>「定義一個 agent」從寫程式變成了寫文件</strong>——它第一個拿掉的麻煩，是「要會寫 code」。</p>
+  <div class="hard-gate"><strong>但「自己動手」有真實的代價，我得誠實寫。</strong>OpenClaw 預設工具跑在你電腦的完整權限上（除非你自己設沙盒）；爆紅幾天內就被多起攻擊利用：明文存的憑證、沒人審核的外掛生態，資安公司 Securonix 還為它發了威脅情報報告。這就是這條路線的價格：<strong>控制權在你手上，責任也在你手上。</strong></div>
+  <p>但這條路有個商業產品永遠取代不了的理由：資安。對資料不能出內網的企業——金融、醫療、政府——雲端大廠的手再長，也伸不進不連外網的私人網路。自架在這裡不是情懷，是合規要求。這條路不會「倒下」，因為有些門，雲端從一開始就進不去。</p>
+  <p>順帶一提它改過兩次名：Anthropic 說 "Claw" 長得太像 "Claude"，2026 年 1 月底先改成 Moltbot，兩天後定案叫 <a href="https://openclaw.ai">OpenClaw</a>。開源史上少見的插曲，順手記一筆。</p>
+  <p>它的技能市集 ClawHub 最高峰號稱有上萬個技能——數字各家說法不一，僅供參考，但方向是對的：agent 的能力開始可以「安裝」了。2026 年 2 月，連月之暗面都推出了 Kimi Claw——瀏覽器版的 OpenClaw。開源的火，燒到大公司門口了。</p>
+
+  <h2>第二條路：Hermes，agent 開始自己變強</h2>
+  <section class="step"><h3>先拆一個容易搞混的東西</h3><p>「Hermes」這個名字現在有三個意思：Nous Research 在 2026 年 2 月發布的開源 Hermes Agent；Nous 早年出的開源 LLM 模型家族（跟 Agent 是不同產品）；還有一家付費代管商 hermesagent.help（跟官方的關係未確認）。下面講的是第一個，開源的那個。</p></section>
+  <p>Hermes Agent 的招牌是一個「自我改進的學習迴路」。概念是這樣：它跑完一個複雜任務，會自動把解法寫成一份可重用的 skill 檔案，下次遇到類似的事直接拿出來用，不用重頭推理。再加上 MEMORY.md 記環境事實、USER.md 記你的偏好，整個 agent 是越用越聰明的。</p>
+  <p>而且它把「在哪聊天」跟「在哪執行」拆開了：手機上用 Telegram 下指令，實際執行發生在雲端一台小機器上。本機、Docker、VPS、serverless 都行。2026 年 5 月還一度在 OpenRouter 的流量排行上超過 OpenClaw（第三方報導，標 △）。</p>
+  <div class="thesis">如果說 OpenClaw 證明了「agent 可以住在聊天軟體裡」，Hermes 證明的是「agent 可以越用越聰明」——把經驗沉澱下來，而不是每次重頭教。</div>
+  <p>講到這裡要放我自己的東西了。我的 Hermes 系統（對，就是這系列文章背後那套）——我曾經用一部影片公開介紹過它的架構：《Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構》。它的 skill 機制跟開源 Hermes Agent 同源。至於啟用時間、架構細節這些，屬於未確認，不展開講。</p>
+  <p>我想講的不是技術，是轉折：從「好玩的玩具」到「每天用的東西」。一開始是好奇，架起來玩；後來發現它真的能接住日常——排程、查資料、整理東西，變成工作流程的一部分。這一條路代表的其實是「個人實踐者」：開源工具被真人拿去用、調教，變成日常。OpenClaw 是社群的煙火，Hermes 是有人把煙火帶回家當燈用。從「架起來玩」到「每天開口就叫它」，中間沒有儀式感，就是不知不覺。</p>
+  <div class="callout"><strong>它拿掉的麻煩有兩道：</strong>「要一直開著電腦」（執行跟對話脫鉤了），以及「每次重頭教」（經驗沉澱成 skill）。</div>
+
+  <h2>第三條路：協議層的反制</h2>
+  <p>這一條路最技術，但也最重要。先給一句人話：</p>
+  <div class="thesis">「agent 世界的 LSP」</div>
+  <p>2025 年 8 月，Zed 編輯器團隊搞了個東西叫 ACP（Agent Client Protocol）。它解決的問題叫 N×M 整合地獄：市面上有 30 幾個 coding agent、十幾個編輯器，原本每對組合都要寫外掛。ACP 說：agent 們都照同一個協議實作一次，編輯器們也都支援一次，之後隨便配。2026 年 1 月還出了 Agent Registry，一鍵安裝 agent。到 2026 年 6 月，registry 上有 50 個 agent（Claude Code、Codex、Gemini CLI、Copilot、Cursor、Grok Build 等，快照數字，查證日期 2026-10-19）。</p>
+  <p>它跟 MCP 怎麼分工？一句話：ACP 是「編輯器怎麼驅動 agent」，MCP 是「agent 怎麼呼叫工具」。互補，不互斥。</p>
+  <p>然後 2026 年 4 月，有人把同一個思想搬到了聊天平台：<a href="https://github.com/openabdev/openab">OpenAB</a>（openabdev/openab）。Rust 寫的輕量小程式，MIT 授權。它做的事情是：Discord、Slack 原生支援，Telegram、LINE、飛書、Google Chat、企業微信透過 gateway 接進來——全部接到同一個 ACP broker，後面可以掛任何 ACP 相容的 coding agent，config 一切換就換人。</p>
+  <p>關鍵設計就一句：broker 本身很薄，一條 ACP 協議邊界貫穿始終。「用什麼聊天軟體」跟「用什麼 agent」徹底脫鉤。</p>
+  <div class="callout"><strong>為什麼這一條路重要？</strong>因為它是開源陣營對商業整合的反制。大公司的玩法是把一切包起來：模型、介面、身分、記憶全綁死，你進來就別想出去。協議層的回答是：不靠大公司發身分證，靠協議讓所有零件互通。<strong>它對付的是「選錯邊就得重來」的鎖定風險。</strong></div>
+  <p>多數發展史文章會漏掉這一章，因為太技術、太新。但沒有它，「開源 vs 商業」就只剩情懷，沒有結構。這也是為什麼 OpenAB 值得單獨一章：它不是又一個 agent，它是讓 agent 們能換來換去的插座。</p>
+
+  <h2>第四條路：商業產品，開箱即用</h2>
+  <p>2026 下半年，大公司進場了。時間線很快帶過：1 月 Claude Cowork（本機派）、5 月 Google 發表 Gemini Spark（7 月底台灣開放，NT$650／月）、7 月 OpenAI 的 ChatGPT Work、8 月 xAI 的 Grok Bot 公測、9 月 Meta 的 Muse、Manus 的 Cue、OpenAI 的 Dots。細節我上篇寫過了，這裡不重複。</p>
+  <div class="thesis">重點只有一句，呼應開場：這些產品賣的東西，開源社群都先玩過了。</div>
+  <ul class="checklist"><li>常駐執行？OpenClaw 2025 年 11 月就有。</li><li>技能系統？SOUL.md 和 ClawHub。</li><li>學習迴路？Hermes 2026 年 2 月就在做。</li><li>商業產品真正拿掉的麻煩，是「要會架」——雲端電腦、專屬 email／電話／錢包、審批治理，一次給齊。</li></ul>
+  <p>但注意：麻煩拿掉了，鑰匙也交出去了。而有些場景，這個代價是付不起的——資料不能出內網的企業，連「要不要交鑰匙」這個選項都沒有。這裡沿用上篇的公平性原則：六家一律公平看待，不因為今天台灣用不用得到誰就判它出局——比較看的是路線，不是戶籍。</p>
+
+  <h2>結語：四條路，各走各的</h2>
+  <p>所以這一年真正的故事，不是「誰取代誰」，而是四條路同時被走出來，各有各的擁護者。商業產品本質上是把開源先玩過的東西做成開箱即用——但開箱即用從來不是唯一的答案。</p>
+  <p>而你現在有三種拿法，選一個站上去就好：</p>
+  <div class="layers" role="group" aria-label="光譜上的三種拿法"><section class="layer"><span class="n">1</span><h3>自己顧鑰匙</h3><p>OpenClaw、Hermes 這條路。控制權最大，代價是時間、技術，和自己扛資安。對資料不能出內網的企業，這不是偏好，是唯一解——雲端大廠的手再長，也伸不進不連外網的私人網路。</p></section><section class="layer"><span class="n">2</span><h3>用協議兩邊沾</h3><p>ACP、OpenAB 這條路。零件互通，今天用這個模型明天換那個，不被單一廠商鎖死。代價是要會部署、協議還很新。適合想保有彈性、又不想從零開始的人。</p></section><section class="layer"><span class="n">3</span><h3>把鑰匙交出去</h3><p>Muse、Cue、Grok Bot、Dots、Gemini Spark 這些。打開就能用，代價是信任平台、付訂閱費。適合只想用、不想管的人。</p></section></div>
+  <div class="thesis">沒有哪個位置是對的，只有哪個代價你付得起——以及哪個約束你繞不開。</div>
+  <p>上篇的結尾是：「你給它的身分證上，寫了多少權限。」這篇補上前半句：一年前，鑰匙在你自己手上；現在，你可以選擇把它交出去——但最好是個選擇，而不是因為沒別的路可走，才交出去。</p>
+  <p>問題從來不是你要不要用 AI 助理，而是在哪個位置、以什麼代價用。</p>
+  <div class="data-note"><strong>附註：</strong>商業產品細節請見上篇<a href="../ai-agent-identity-era/">《AI 助理有了身分證：辦事時代來了》</a>。本文查證日期 2026-10-19；stars 等數字為各來源整理區間，不等同用戶數；地區開放狀態以下篇附註為準。</div>
+
+  <section class="sources" aria-labelledby="sources-title"><div class="section-label">Research &amp; primary sources</div><h2 id="sources-title">研究與資料來源</h2><ol>
+    <li><a href="https://connect.securonix.com/threat-research-intelligence-62/openclaw-threat-intelligence-report-clawdbot-moltbot-and-openclaw-208">Securonix 威脅情報報告</a>：OpenClaw 改名始末與 stars 里程碑。</li>
+    <li><a href="https://airisingtrends.com/openclaw-origin-story/">OpenClaw 起源故事與數據</a>（airisingtrends）。</li>
+    <li><a href="https://dev.to/jordanolsen/openclaw-rebrand-clawdbot-to-moltbot-to-openclaw-explained-522m">Clawdbot → Moltbot → OpenClaw 改名始末</a>（dev.to）。</li>
+    <li><a href="https://www.taskade.com/blog/moltbook-clawdbot-openclaw-history?ref=frenzel-publikationen.com">OpenClaw 歷史整理</a>（taskade，含 Steinberger 加入 OpenAI）。</li>
+    <li><a href="https://www.usecarly.com/blog/what-is-openclaw/">什麼是 OpenClaw</a>（usecarly，含 ClawHub 數據）。</li>
+    <li><a href="https://toolradar.com/blog/what-is-hermes-agent">Hermes Agent 概覽與發布日期</a>（toolradar）。</li>
+    <li><a href="https://kisztof.medium.com/hermes-agent-review-nous-researchs-self-improving-ai-agent-e72bc244435a">Hermes Agent 學習迴路與部署彈性</a>（Medium，Krzysztof Słomka）。</li>
+    <li><a href="https://www.developersdigest.tech/blog/hermes-agent-guide-2026">Hermes Agent 與 OpenClaw 對照</a>（developersdigest，2026-09-28）。</li>
+    <li><a href="https://getcoai.com/article/hermes-ai/">Hermes 商業使用者指南</a>（getcoai，含與模型家族的區分）。</li>
+    <li><a href="https://dev.to/alextdev/agent-client-protocol-acp-a-new-standard-for-bringing-ai-coding-agents-into-your-ide-1k89">ACP 介紹與生態</a>（dev.to）。</li>
+    <li><a href="https://casys.ai/blog/mcp-a2a-acp-agent-protocols">ACP vs MCP vs A2A</a>（casys.ai）。</li>
+    <li><a href="https://github.com/openabdev/openab">OpenAB 官方 README</a>（openabdev/openab）。</li>
+    <li>商業產品來源：沿用上篇《AI 助理有了身分證：辦事時代來了》<a href="../ai-agent-identity-era/#sources-title">研究與資料來源</a>清單。</li>
+  </ol><p class="small text-muted">查證日期：2026 年 10 月 19 日。OpenClaw stars 數字各來源說法有出入，內文取區間不保證精確；OpenClaw 改名確切日期（29 或 30 日）說法不一，內文寫「2026 年 1 月底」；OpenRouter 流量排行屬第三方報導，已標 △；Hermes 個人系統的啟用時間、架構細節、公開影片連結未確認，內文未臆測。本文由 AI 協助查證、整理與排版，發布前須經獨立複審與金霸確認。</p></section>
+</article></div></main>
+<footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
+<!-- 本階段運用的 HC：#一致性（整頁結構、CSS 變數、masthead、article-body、sources、JSON-LD、OG meta 寫法全部沿用上篇模板，只換內容）／#具體化（時間線總覽表把四站抽象敘事轉成可掃讀的具體表格；三種拿法用 layers 卡片具象化；抽象概念如 ACP 配「agent 世界的 LSP」一句話錨點）／#問對問題（訪客真正要的是「怎麼走到今天」的故事，版型選擇時間線表格＋分站詳述，而非產品百科式羅列） -->
