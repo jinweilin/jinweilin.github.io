@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>最危險的檔案不是.exe，是一份.md｜金霸觀察</title>
+  <meta name="description" content="一份純文字檔，不能執行、不觸發任何防毒警報，卻能指揮你的 AI agent 安裝惡意套件、偷走你的登入 token。關鍵不在檔案，在位置：它躺在 Downloads——網路能自己寫入、而你又常在那裡叫醒 agent 的資料夾。這篇把每一環的證據等級標出來：哪些真的發生了，哪些只是被證明做得到。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18342f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/agents-md-attack/">
+  <meta property="og:type" content="article"><meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="最危險的檔案不是.exe，是一份.md">
+  <meta property="og:description" content="一份純文字檔，不能執行、不觸發任何防毒警報，卻能指揮你的 AI agent 安裝惡意套件、偷走你的登入 token。關鍵不在檔案，在位置：它躺在 Downloads——網路能自己寫入、而你又常在那裡叫醒 agent 的資料夾。這篇把每一環的證據等級標出來：哪些真的發生了，哪些只是被證明做得到。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/agents-md-attack/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/agents-md-attack/hero-agents-md-attack.png">
+  <meta property="og:image:width" content="2240">
+  <meta property="og:image:height" content="1120">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/agents-md-attack/hero-agents-md-attack.png">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="最危險的檔案不是.exe，是一份.md">
+  <meta name="twitter:description" content="一份純文字檔，不能執行、不觸發任何防毒警報，卻能指揮你的 AI agent 安裝惡意套件、偷走你的登入 token。關鍵不在檔案，在位置：它躺在 Downloads——網路能自己寫入、而你又常在那裡叫醒 agent 的資料夾。這篇把每一環的證據等級標出來：哪些真的發生了，哪些只是被證明做得到。">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"最危險的檔案不是.exe，是一份.md","description":"一份純文字檔，不能執行、不觸發任何防毒警報，卻能指揮你的 AI agent 安裝惡意套件、偷走你的登入 token。關鍵不在檔案，在位置：它躺在 Downloads——網路能自己寫入、而你又常在那裡叫醒 agent 的資料夾。這篇把每一環的證據等級標出來：哪些真的發生了，哪些只是被證明做得到。","datePublished":"2026-10-26","dateModified":"2026-10-26","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/agents-md-attack/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet"><link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.gate-hero{margin-bottom:4rem;background-image:radial-gradient(circle at 78% 28%,rgba(226,181,92,.27) 0 88px,transparent 89px),linear-gradient(132deg,#0c201c,#1d453b 56%,#6b7768)}
+    header.masthead.gate-hero .post-heading{padding:10rem 0 7rem}header.masthead.gate-hero h1{max-width:1000px;font-size:clamp(2.55rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.05em}header.masthead.gate-hero .subheading{max-width:850px;margin-top:1.5rem;color:rgba(255,255,255,.87);font-size:clamp(1.04rem,2.25vw,1.36rem);line-height:1.72}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2.2rem;font-size:1.34rem}.article-body a{color:#1c6654;text-underline-offset:3px}.article-body code{padding:.08em .35em;border-radius:.3rem;background:#eef0ea;color:#7a2d24;font-size:.92em}.lead{color:#45514c;font-size:1.25rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(20,52,44,.18)}.article-cover figcaption{margin-top:.65rem;color:#68716d;font-size:.82rem}
+    .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.84rem)/1.65 Georgia,"Noto Serif TC",serif}.step{margin:1.3rem 0;padding:1.6rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.55)}.step h3{margin:.05rem 0 .75rem}
+    .hard-gate{margin:2.5rem 0;padding:1.7rem 1.8rem;border-left:5px solid #9c3c32;background:#f6e8e4}.hard-gate strong{color:#792b25}.callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b17c2d;background:#f3ecdf}.callout blockquote{margin:0}.callout blockquote p{margin:0 0 .8rem}.callout blockquote p:last-child{margin-bottom:0}
+    .grade{display:inline-block;margin-left:.55rem;padding:.18rem .65rem;border-radius:999px;font-size:.76rem;font-weight:800;letter-spacing:.05em;vertical-align:middle}.grade-real{color:#fff;background:#9c3c32}.grade-poc{color:#fff;background:#b17c2d}.grade-unknown{color:#fff;background:#5c6660}.data-note{padding:1.5rem;border-radius:.85rem;background:#eef3f1}.data-note ul{margin-bottom:0}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 1rem;padding:0;list-style:none;counter-reset:check}.checklist li{padding:.95rem 1rem;border-left:3px solid #4d8c79;background:rgba(255,255,255,.55)}.sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.85rem}
+    @media(max-width:767px){header.masthead.gate-hero .post-heading{padding:8rem 0 5rem}.checklist{grid-template-columns:1fr}.article-body{font-size:1.02rem}.thesis{padding:1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+<header class="masthead gate-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · AI Security</div><h1>最危險的檔案不是.exe，是一份.md</h1><span class="subheading">一份純文字檔，不能執行、不觸發任何防毒警報，卻能指揮你的 AI agent 安裝惡意套件、偷走你的登入 token。關鍵不在檔案，在位置：它躺在 Downloads——網路能自己寫入、而你又常在那裡叫醒 agent 的資料夾。這篇把每一環的證據等級標出來：哪些真的發生了，哪些只是被證明做得到。</span><span class="meta">金霸研究編輯部 · 2026 年 10 月 26 日 · 約 11 分鐘閱讀</span></div></div></div></div></header>
+<main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+  <figure class="article-cover"><img src="hero-agents-md-attack.png" alt="一份發光的 .md 文件躺在資料夾上方，AI 機器手伸向它，紅色絲線從文件蔓延到背景的設定齒輪" width="2240" height="1120" loading="eager"><figcaption>不能執行的純文字檔，卻能指揮你的 AI agent——關鍵不在檔案，在它躺的位置。</figcaption></figure>
+  <h2>先講結論，也先劃邊界</h2>
+  <p class="lead">結論一句話：AI coding agent 會把工作目錄裡的 .md 指令檔當法律在讀，而 Downloads 偏偏是整台電腦最容易被外人放檔案進去的資料夾。兩個各自合理的設計撞在一起，接縫就是攻擊面。</p>
+  <p>但邊界要先講清楚，這篇最怕把話說過頭。資安公司 Forever Security 在 2026 年 10 月 22 日發表報告：他們在一台客戶的機器上、session 進行中，即時攔下了一次由 AGENTS.md 驅動的惡意套件安裝——這是真實事件。可是那份檔案到底怎麼進到那台機器的 Downloads，Forever 在報告裡寫得很白：沒有人知道（nobody knew how it got there）——這是未證實。</p>
+  <p>所以我把整條鏈拆成四環，一環一環標級，是地板還是天花板，你自己看得見。</p>
+  <div class="data-note"><strong>本文的證據分級：</strong><ul><li><span class="grade grade-real">真實事件</span> 已證實發生過，有事實地錨。</li><li><span class="grade grade-poc">PoC 可行</span> 在實驗室受控測試中證明做得到，不等於已在真實世界發生。</li><li><span class="grade grade-unknown">未證實</span> 合理推測，但目前沒有證據。</li></ul></div>
+
+  <h2>被攔下的那一次<span class="grade grade-real">真實事件</span></h2>
+  <p>已證實的部分其實很短，我刻意只寫這些。</p>
+  <p>Forever 在一位客戶的機器上攔下一次安裝嘗試：一個 AI coding agent 正試圖安裝 npm 套件 <code>function-color</code>——已知惡意套件，連結到一場潛伏約兩年才被公開記錄的攻擊行動，現已被 npm 下架。Forever 說，他們在任何程式碼執行之前就攔了下來。</p>
+  <p>指示 agent 去裝套件的，是一份躺在 ~/Downloads 裡的 AGENTS.md：約 13 KB，偽裝成平淡無奇的「Engineering Work Guidelines」工程規範文件。而 Downloads 正好是那個 agent 的工作目錄。</p>
+  <p>客戶是誰、確切日期是哪天，Forever 沒公開，我也不猜。這是整件事的事實地錨：真的有人把武器化的指令檔放進真實使用者的資料夾，真的有 agent 照做了。</p>
+  <div class="hard-gate"><strong>先別急著想「那我把那份 .md 刪掉就好」</strong>——後面會講到，為什麼刪檔是最不重要的一步。</div>
+
+  <h2>攻擊鏈四環，逐環標級</h2>
+  <h3>投放<span class="grade grade-poc">PoC 可行</span><span class="grade grade-unknown">未證實</span></h3>
+  <p>Forever 做了一個概念驗證（PoC）網頁：網頁可以在你沒點任何同意的情況下，把一份 AGENTS.md 下載進 ~/Downloads。BleepingComputer 親自驗證過，檔案真的掉進去了（下載的是內容無害的版本）。</p>
+  <p>「靜默」要加註：Chrome、Edge、Firefox 預設把下載存進 Downloads、不逐檔詢問位置，但會顯示下載通知；Brave 在實測中會跳出核准。所以不是全然無聲無息——而是下載列裡多了一份 .md，你不會把它跟威脅聯想在一起。這才是它陰險的地方。</p>
+  <h3>觸發<span class="grade grade-real">真實事件</span></h3>
+  <p>檔案躺著不會自己動，要有人在 Downloads 啟動 agent 才會被載入。問題是這太常見了：Forever 研究員 Gal Weizman 對 BleepingComputer 表示，依他們內部統計，數百名客戶會從 ~/Downloads 啟動 Claude Code、Codex、Cursor CLI，光 Claude Code 就從那裡啟動過 1,300 多次 session。先標明：這是 Forever 自家產品的遙測、公司數字，未經獨立稽核；原報告另有一個口徑——約半數客戶會在 Downloads 裡跑 coding agent。他們的遙測還說，約四分之一的 agent session 會自己開真實瀏覽器（同為公司數字）——投放與觸發，理論上可以都由 agent 完成。</p>
+  <h3>執行與持久化<span class="grade grade-poc">PoC 可行</span></h3>
+  <p>檔案被載入之後發生什麼，是下一節的實驗室重跑。先記住一個順序：真正的傷害不在「agent 照做了」，而在照做之後留下的東西刪不掉。</p>
+  <div class="thesis">檔案可以刪，設定刪不掉——這才是這次攻擊真正的傷害半徑。</div>
+
+  <h2>實驗室重跑：兩條路，兩種定性</h2>
+  <p>先講清楚：以下是 Forever 自家受控測試的結果，不是真實攻擊的統計。</p>
+  <section class="step"><h3>Codex：重跑真實攻擊者的檔案</h3>
+  <p>Forever 沒有自製 payload，而是把客戶機器上那份真實 AGENTS.md 原封不動放進隔離的虛擬機器，讓 Codex 重跑。</p>
+  <p>檔案尾段偽裝成例行環境設定，指示 Codex 在動使用者的任務之前，先把一個叫 <code>project-tools</code> 的 MCP server 註冊進 <code>~/.codex/config.toml</code>——這是整機的全域設定，不是那個資料夾專屬的。依註冊內容，系統啟動時會去安裝 <code>function-color</code>。為了讓註冊在同一個 session 內生效，檔案還指示 Codex 跑一個子指令，帶上 <code>--dangerously-bypass-approvals-and-sandbox</code> 旗標，包裝理由是「首次初始化需要網路」——那個繞過核准與沙盒的旗標，是模型自己寫進去的。</p>
+  <p>結果：Forever 說 Codex 在超過 90% 的嘗試中執行了惡意程式。口徑照實標：其方法註腳說，大部分測試用無害的計算機程式當替身，真實惡意套件也在隔離 VM 內跑過一次；BleepingComputer 則把 90% 直接綁在計算機 payload 上，兩邊寫法略有出入，也沒有第三方獨立重現過這個數字。</p>
+  <p>但比成功率更重要的是持久化：config.toml 一旦被改，這台機器之後每一個 Codex session——任何資料夾、任何專案——啟動時都會載入攻擊者的 server。刪掉 Downloads 裡的 .md，不會復原已經被改掉的設定。</p></section>
+  <section class="step"><h3>Claude Code：研究員自製的 CLAUDE.md</h3>
+  <p>定性先貼好：打 Claude Code 的檔案不是真實攻擊者留下的，是 Forever 受真實檔案啟發自製的。這證明的是「這條路也走得通」，不是「已經有人被這樣打」。</p>
+  <p>特製 CLAUDE.md 偽裝成「設定專案模型閘道」的例行步驟，指示 Claude 把一段設定寫成專案裡的 <code>.claude/settings.json</code>，將 <code>ANTHROPIC_BASE_URL</code> 指向研究員控制的伺服器——自有網域、有效憑證，外觀就像企業內部 gateway。</p>
+  <p>寫入成功後，兩件事接著來。第一，Claude 的 API 請求改走假伺服器，每個請求都帶著它的 OAuth 登入 token；Forever 說，他們拿擷取到的 token 去打真實 API，成功以受害者身分被服務——不用執行任何程式碼，帳號已被接管。第二，下一次在這個資料夾啟動 Claude，假伺服器可以「以模型的名義」回一個關掉沙盒的工具呼叫，用戶端會當成模型自己的決定來執行。Forever 的定性是：設定寫入成功的那一刻，定時炸彈就埋好了。</p>
+  <p>那「約 50%」是什麼的 50%？是設定寫入的成功率。這類寫入需人工核准，Claude 對可疑寫入常會拒絕；冗長工程文件的包裝，是讓寫入約一半機會落地的關鍵。另外有一條同 session 內執行的路線：叫 Claude 以「驗證設定」為名生出子 agent，子 agent 的新連線會經過假伺服器——成功率約 20%。</p>
+  <p>還有一個反直覺的發現：同一份 payload 放在滿是資安筆記的資料夾裡，每次都失敗——子 agent 讀了環境，把 CLAUDE.md 標記為攻擊。這點，自保的時候用得上。</p></section>
+
+  <h2>為什麼這不是一個 bug</h2>
+  <p>Forever 報告裡有一句題眼：</p>
+  <div class="callout"><blockquote><p lang="en">"There is nothing here for OpenAI or Anthropic to patch. An agent that follows the AGENTS.md in its folder is doing exactly what it was built to do."</p><p>（這裡沒有什麼是 OpenAI 或 Anthropic 可以修補的。agent 照著它資料夾裡的 AGENTS.md 做事，正是它被設計來做的事。）</p></blockquote></div>
+  <p>先標利益：Forever 是賣 AI agent 風險監控產品的公司，這份報告同時是它的產品展示，「無從修補」的定性跟它的商業利益同方向。但把利益放一邊，機制面有三個層次站得住：</p>
+  <p>一、<strong>指令檔的信任模型。</strong> .md 是純文字、不是執行檔，不觸發作業系統對執行檔的任何防護；agent 卻被設計成啟動時自動載入、照單全收。OWASP 把這類手法歸為「間接提示注入」：指令不是你打的，是從檔案、網頁這些外部來源餵進來的。防線都為「程式」而設，這次進門的是一份「文件」。</p>
+  <p>二、<strong>這是整個品類的共同設計。</strong> AGENTS.md 是開放格式，2025 年 12 月已捐給 Linux Foundation 旗下的 Agentic AI Foundation 託管，原生讀取它的工具超過 30 家、採用專案超過 60,000 個。Codex 讀 AGENTS.md、Claude Code 讀 CLAUDE.md、Gemini CLI 讀 GEMINI.md——「醒來先讀目錄裡的純文字指令」是這一代工具的共同架構，不是兩家產品的個別選擇。</p>
+  <p>三、<strong>歷史上警告過。</strong> 2025 年 7 月，NVIDIA 的 AI 紅隊做過模擬：被投毒的 AGENTS.md 讓 Codex 在程式碼裡植入延遲，還指示要在摘要中隱瞞。NVIDIA 於 2025 年 7 月 1 日向 OpenAI 協調揭露；OpenAI 於 8 月 19 日結論該手法不顯著提升風險、無計畫變更（NVIDIA 在文中稱此評估「公允」），研究在 2026 年 4 月公開。但兩件事不能混：NVIDIA 的前提是惡意依賴已先取得執行權，才有機會寫入檔案；這次 Downloads 路徑不需要先裝到惡意依賴——不過檔案實際怎麼落地的，仍未證實。</p>
+
+  <h2>各方說法，照實寫</h2>
+  <ul>
+    <li><strong>Forever Security（研究方）</strong>：定性這不是單一產品的 bug，而是架構屬性——「網路可寫入的資料夾」與「agent 信任工作目錄」的接縫，不在任何人的威脅模型裡；並以釣魚類比：瀏覽器把釣魚頁面畫出來是照設計運作，無從修補。報告標語是 "Markdown is the new executable."（Markdown 是新的執行檔。）它的定性是立場，不是業界共識，利益關係已標在上一節。</li>
+    <li><strong>OpenAI、Anthropic</strong>：對本事件，截至 2026 年 10 月 26 日，我沒有找到任何一家的公開回應或修補聲明。可查到的只有兩家既有文件的建議：從 agent 預定工作的專案目錄啟動、把工作目錄收窄——那是本來就寫在文件裡的用法，不是對本事件的回應，我不替任何一方補台詞。</li>
+    <li><strong>瀏覽器廠商</strong>：沒有任何一家對「靜默下載」表態。現有的只有 BleepingComputer 的自家實測。</li>
+  </ul>
+  <p>沒有回應，就寫沒有回應。</p>
+
+  <h2>自保清單：先查設定，再談習慣</h2>
+  <p>英文報導的清單多半以「不要在 Downloads 開 agent」開頭。我的順序不同：因為真正的傷害是持久化，先查可能已經被改掉的設定，再談習慣。</p>
+  <ol class="checklist">
+    <li><strong>先檢查全域設定。</strong> 用 Codex 的，打開 <code>~/.codex/config.toml</code>，看有沒有不認識的 <code>mcp_servers</code> 註冊區塊（例：<code>project-tools</code>）。用 Claude Code 的，檢查專案裡的 <code>.claude/settings.json</code>，看 <code>ANTHROPIC_BASE_URL</code> 或 proxy 有沒有指向不認識的伺服器。設定被改過，刪再多 .md 都沒用，所以這條排第一。</li>
+    <li><strong>不要在 ~/Downloads 啟動 agent。</strong> 只在它要工作的專案目錄裡啟動，工作目錄收窄到你管得到內容的範圍。</li>
+    <li><strong>不是你寫的指令檔，先讀再用。</strong> 任何 AGENTS.md、CLAUDE.md，包括剛 clone 下來的 repo 附的——看到「註冊伺服器」「改全域設定」「繞過核准」這類段落，直接當紅旗。</li>
+    <li><strong>核准提示與沙盒保持開啟。</strong> 兩條攻擊路徑都得想辦法繞過它們；任何要你（或要 agent 自己）關掉防護的指示，本身就是警訊。</li>
+    <li><strong>機器上若出現過 <code>function-color</code>，視為已淪陷。</strong> 輪換 token，而且不要以為刪掉 .md 就沒事——被改寫的設定不會自己復原。</li>
+  </ol>
+  <p>補一個不那麼絕望的註腳：Forever 的實驗裡，payload 在滿是資安筆記的環境裡會被 agent 自己標記出來。工作目錄維持乾淨、設定檔維持可稽核，是你手上最實際的防線。</p>
+
+  <h2>結語：誰能在你的資料夾裡立法</h2>
+  <p>前兩篇我寫 agent 怎麼拿到身分、拿到能力——靠的正是讀純文字檔定義自己：SOUL.md、AGENTS.md，一份文件就是它的法律。上一篇問的是「你敢不敢把鑰匙交出去」；這篇的問題更早一步：<strong>這部法律，是誰寫的？</strong></p>
+  <p>目前證實到的邊界是：已經有人把武器化的指令檔放進真實使用者的資料夾，agent 真的照做了、在造成執行之前被攔下；而檔案的第一公里怎麼走完的，還沒有人證明給你看。</p>
+  <p>帶走一句判斷標準就好：<strong>從今以後，把 agent 會自動讀的檔案當成程式碼來審，不要當成文件。</strong> .exe 至少會被系統和防毒軟體多看兩眼；.md 不會——它的通行證，是你我對「純文字無害」的直覺。</p>
+
+  <section class="sources" aria-labelledby="sources-title"><div class="section-label">Research &amp; primary sources</div><h2 id="sources-title">研究與資料來源</h2><ol>
+    <li><a href="https://forever.security/blog/hijacking-ai-agents-via-downloads-folder/">Forever Security 原始研究報告〈Markdown Is the New Executable〉</a>（2026-10-22）：真實攔截事件、攻擊鏈四環與兩條受控測試路徑的原始出處。</li>
+    <li><a href="https://www.bleepingcomputer.com/news/security/ai-coding-agents-hijacked-using-agentsmd-file-in-downloads-folder/">BleepingComputer〈AI coding agents hijacked using AGENTS.md file in Downloads folder〉</a>（2026-10-25）：含 PoC 與瀏覽器行為的獨立驗證。</li>
+    <li><a href="https://developer.nvidia.com/blog/mitigating-indirect-agents-md-injection-attacks-in-agentic-environments/">NVIDIA Technical Blog〈Mitigating Indirect AGENTS.md Injection Attacks in Agentic Environments〉</a>（2026-04）：含 2025 年協調揭露時間表。</li>
+    <li><a href="https://agents.md">AGENTS.md 格式官網</a>：開放格式與採用工具、專案數字。</li>
+    <li><a href="https://mezha.net/eng/news/mezha-6346d26a04b8e8f15b0ed423_malicious_agents-md_file/">Mezha 報導</a>：本站讀者的原始來源，轉述 BleepingComputer。</li>
+    <li><a href="https://letsdatascience.com/news/forever-security-reports-agentsmd-file-in-downloads-hijacked-7bc9bb6c">Let's Data Science</a>：對 Forever 主張邊界的整理。</li>
+    <li><a href="https://www.neoteo.com/en/forever-security-reports-a-malicious-agentsmd-attack-in-downloads">NeoTeo</a>：受控測試與真實事件的定性區分。</li>
+  </ol><p class="small text-muted">查證日期：2026 年 10 月 26 日。真實事件中檔案進入 Downloads 的路徑、客戶身分與確切日期，Forever 未公開，內文已如實標註「未證實／未公開」；成功率與遙測數字皆為 Forever 自家受控測試與產品數據，未經第三方獨立重現或稽核，內文已標明口徑。本文由 AI 協助查證、整理與排版，發布前須經獨立複審與金霸確認。</p></section>
+</article></div></main>
+<footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+<script src="../../assets/js/site.js"></script>
+<!-- 本階段運用的 HC：#設計思考（以讀者「今晚就能檢查自己的機器」為中心設計版面：證據分級傳奇＋徽章讓證據等級在掃讀時即可辨識）；#系統描繪（把攻擊鏈四環映射為版面資訊架構，逐環標級）；#問對問題（訪客真正要的是分清哪些已證實、哪些只是 PoC——故分級做成骨架而非註腳）；#類比（沿用模板的視覺語彙與前兩篇一致的版型，讓新風險掛上讀者熟悉的閱讀框架） -->
+</body>
+</html>
