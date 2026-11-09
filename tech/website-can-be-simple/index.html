@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>原來做一個網站也可以這麼簡單｜金霸觀察</title>
+  <meta name="description" content="內容型網站的做法變了：內容整理成結構化檔案、放進 GitHub 私有 repo，push 後 Cloudflare Pages 自動建置發佈，託管月費 0 元。後台不是消失，是被 repo、PR 與 AI 換掉。這篇拆三步流程、preview 確認後轉 Production 的上線方式、適用界線，以及資安風險搬家後的新功課。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18342f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/website-can-be-simple/">
+  <meta property="og:type" content="article"><meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="原來做一個網站也可以這麼簡單">
+  <meta property="og:description" content="內容型網站的做法變了：內容整理成結構化檔案、放進 GitHub 私有 repo，push 後 Cloudflare Pages 自動建置發佈，託管月費 0 元。後台不是消失，是被 repo、PR 與 AI 換掉。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/website-can-be-simple/">
+  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="原來做一個網站也可以這麼簡單">
+  <meta name="twitter:description" content="內容整理成檔案、GitHub 當倉庫、Cloudflare Pages 自動上線，託管月費 0 元；後台不是消失，是被 repo、PR 與 AI 換掉。內容型網站的新做法，一次拆完。">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"原來做一個網站也可以這麼簡單","description":"內容型網站的做法變了：內容整理成結構化檔案、放進 GitHub 私有 repo，push 後 Cloudflare Pages 自動建置發佈，託管月費 0 元。後台不是消失，是被 repo、PR 與 AI 換掉。這篇拆三步流程、preview 確認後轉 Production 的上線方式、適用界線，以及資安風險搬家後的新功課。","datePublished":"2026-11-09","dateModified":"2026-11-09","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/website-can-be-simple/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet"><link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.gate-hero{margin-bottom:4rem;background-image:radial-gradient(circle at 78% 28%,rgba(226,181,92,.27) 0 88px,transparent 89px),linear-gradient(132deg,#0c201c,#1d453b 56%,#6b7768)}
+    header.masthead.gate-hero .post-heading{padding:10rem 0 7rem}header.masthead.gate-hero h1{max-width:1000px;font-size:clamp(2.55rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.05em}header.masthead.gate-hero .subheading{max-width:850px;margin-top:1.5rem;color:rgba(255,255,255,.87);font-size:clamp(1.04rem,2.25vw,1.36rem);line-height:1.72}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2.2rem;font-size:1.34rem}.article-body a{color:#1c6654;text-underline-offset:3px}.lead{color:#45514c;font-size:1.25rem;line-height:1.85}
+    .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.84rem)/1.65 Georgia,"Noto Serif TC",serif}.step{margin:1.3rem 0;padding:1.6rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.55)}.step h3{margin:.05rem 0 .75rem}
+    .callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b17c2d;background:#f3ecdf}
+    .sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.85rem}
+    @media(max-width:767px){header.masthead.gate-hero .post-heading{padding:8rem 0 5rem}.article-body{font-size:1.02rem}.thesis{padding:1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+<header class="masthead gate-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · 網站建置</div><h1>原來做一個網站也可以這麼簡單</h1><span class="subheading">當「放網站的地方」免費了、「組頁面的工作」自動化了，做網站剩下的難處，已經和十年前完全不一樣。這篇拆解內容型網站的新做法：三步流程、preview 先行、後台被換掉，和沒變簡單的那四件事。</span><span class="meta">金霸研究編輯部 · 2026 年 11 月 9 日 · 約 7 分鐘閱讀</span></div></div></div></div></header>
+<main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+  <div class="thesis">對「內容型」網站——公司介紹、產品型錄、規格文件、詢價——做網站的流程已經簡單到一個程度：內容整理成結構化檔案，放進 GitHub 私有 repo，push 上去，Cloudflare Pages 自動把網站建好、發佈到全球節點，託管月費 0 元，只剩域名年費。簡單的不是「隨便做做」，而是以前最花錢、最花時間的兩層——主機託管和逐頁製作——分別被平台免費額度和自動化拆掉了。但先講清楚：這只適用於內容型網站，需要金流、會員、即時庫存的「系統型」網站不在此列，後面會劃界線。</div>
+
+  <h2>先說以前為什麼「不簡單」</h2>
+  <p>很多人對做網站的印象停在這裡：買主機、裝 CMS、做版型、一個頁面一個頁面刻，完工之後每年還要付主機費和維護費，隔幾年系統老了、版本不支援了，整站打掉重做。</p>
+  <p>這個印象在當年是真的。傳統動態網站是一台一直在跑的伺服器程式：有資料庫、有後台登入頁、有一堆外掛，每個零件都要更新、要修補、要有人盯。貴的不是某一個零件，是「整套系統要持續照顧」這件事本身。費用有一大半，是在為這套複雜度買單。</p>
+  <p>所以問題來了：如果一個網站的內容根本不需要即時運算——產品型錄不會因為有人來看就變內容，規格 PDF 下載一萬次還是同一份檔案——那為什麼要養一台伺服器在那裡跑？</p>
+
+  <h2>現在的做法，只有三步</h2>
+  <section class="step"><h3>第一步：內容先變成檔案，而不是頁面</h3>
+  <p>關鍵觀念轉換在這裡：不要一頁一頁做網站，先把內容整理成結構化資料——每個產品一筆紀錄，欄位是型號、分類、簡介、圖片、規格檔；頁面交給程式照範本自動組出來。</p>
+  <p>一家 B2B 廠商有兩三百項產品很常見，聽起來很多，但人要整理的只是兩三百筆資料，幾百個頁面是程式一次生成的。分類頁、品牌頁、搜尋索引也一樣，全部是資料餵範本的結果。日後加一個品牌、換首頁輪播圖、調整欄位，改的是資料和範本，不是幾百個頁面逐一手工修。</p>
+  <p>這一層以前要靠 CMS 後台和資料庫撐，現在一份結構化檔案就夠了——因為加上 AI 協作之後，把既有網站清點、轉成結構化資料的速度，和過去人工逐頁搬運已經不是同一個量級。</p></section>
+  <section class="step"><h3>第二步：GitHub 私有 repo，當倉庫兼保險箱</h3>
+  <p>組好的網站原始檔和內容資料，放在 GitHub 的私有 repo 裡。GitHub 免費版就提供數量不限的私有 repo 和協作者，對一個企業官網來說，這一格的成本是 0 元（官方定價頁，2026-11-09 查核）。</p>
+  <p>repo 還有兩個附帶價值：一是版本紀錄，每次改了什麼、誰改的、什麼時候改的，天然留痕，要回溯或還原都有依據；二是備份，網站的全部資產就是一包檔案，不綁在某台主機、某間廠商的後台裡，公司換誰接手都帶得走。</p></section>
+  <section class="step"><h3>第三步：Cloudflare Pages，push 一下就上線</h3>
+  <p>託管交給 Cloudflare Pages：repo 一有新 commit，它就自動建置、自動部署，網站由 Cloudflare 的全球網路送到訪客面前，HTTPS 憑證自動處理，DDoS 緩解是內建的。</p>
+  <p>免費版的額度，對企業官網來說寬到幾乎感覺不到天花板：每月 500 次建置、每個網站 20,000 個檔案、單一檔案上限 25 MiB、每個專案可綁 100 個自訂網域，靜態內容的請求與頻寬不限量（Cloudflare 官方限制文件，2026-11-09 查核）。一個久久更新一次、幾百到幾千個檔案的官網，離任何一條線都很遠。託管月費就這樣變成 0 元，經常性成本只剩域名年費（金額視註冊商與網域後綴而定）。</p>
+  <p>上線流程還有一個關鍵設計：先預覽，確認後才轉正式。改動先開在分支或 Pull Request 上，Cloudflare Pages 會自動產生一個專屬的預覽網址，版面、內容、連結都先在預覽站上驗一遍；預覽不會動到正式站和自訂網域，確認沒問題，再把分支合併進正式分支，才算對外發佈。改錯了，正式站毫髮無傷；要回退，也只是回到上一個版本。這道「先看過、再放行」的關卡，正是這套做法敢把流程做得這麼簡單的底氣。</p></section>
+  <p>三步連起來：改資料、push、自動上線。沒有主機要登入，沒有後台要維護，沒有外掛要更新。</p>
+
+  <h2>那後台呢？被換掉了，不是被省掉</h2>
+  <p>傳統官網一定要有一個後台：登入、編輯、按發佈。這套做法最常被問的就是——那後台去哪了？</p>
+  <p>答案是：後台的四個功能——編輯、審核、發佈、紀錄——都還在，只是拆給三個東西接手。內容本體是 repo 裡的資料檔；審核靠 GitHub 的 Pull Request 流程，改動先開 PR、先看預覽，核准了才合併；紀錄是版本歷史，誰在什麼時候改了什麼，天然留痕。至於實際動手改的那個人，現在可以是 AI：GitHub 和 AI 工具整合之後，你用講的就好——「新增這三項產品、換掉首頁那張圖」——AI 直接改資料、開 PR、附上預覽網址，你要做的只剩下看預覽和點核准。</p>
+  <p>所以後台不是被省掉，是被換成一套更輕的介面：repo 加 PR 加 AI 對話。附帶的好處在資安：沒有對外開放的後台登入頁，就少了一整類被攻擊的入口，下一節會講。</p>
+  <p>界線也要講：公司裡如果有多位非技術同仁要天天自己上稿、改文章，熟悉的後台畫面還是有它的價值，CMS 不會因為這套做法就消失。但對「久久改一次、改的人固定」的企業官網，養一整套後台系統來服務一年幾次的編輯，成本和風險都划不來——換成 AI 代勞加 PR 審核，反而更省事。</p>
+
+  <h2>簡單背後，資安的風險搬了家</h2>
+  <p>靜態網站有一個結構性的安全優勢：沒有資料庫、沒有後台登入頁、沒有外掛，傳統 CMS 最常見的那一整類漏洞——弱密碼登入、過期外掛被植入、資料庫注入——攻擊面整類消失，不需要每月追著安全性更新跑。</p>
+  <p>但風險沒有消失，是搬家了。新的大門是帳號和域名：GitHub 和 Cloudflare 帳號一旦被盜，網站內容和流量導向就一起被拿走；域名註冊和 DNS 控制權在誰手上，決定公司對自己官網還剩多少主導權——實務上最常見的狀況，是域名當年由廠商代註冊、DNS 放在廠商的帳號裡，公司要搬家時才發現鑰匙不在自己手上。</p>
+  <p>所以這套做法的資安功課很明確：帳號一律開在公司自己名下、強制雙重驗證、權限只給需要的人，域名和 DNS 的歸屬在動工之前先談清楚。把這幾件事做對，靜態架構的安全性是結構上就成立的，不靠事後補丁。</p>
+
+  <h2>先講界線：不是每個網站都適合這樣做</h2>
+  <p>這套做法有它的適用範圍，硬套會出事：</p>
+  <ul>
+    <li><strong>適合</strong>：公司與品牌官網、產品型錄與規格站、文件與下載中心、活動與形象頁——內容會更新，但更新頻率以週或月計，而且不需要訪客帳號。</li>
+    <li><strong>不適合</strong>：電商購物車與金流、會員系統、即時庫存與訂單查詢、需要後台讓非技術人員隨時自行編輯的內容平台。這類「系統型」網站需要的是會運算的後端，該用電商平台或 CMS 的地方就用它們。</li>
+  </ul>
+  <p>兩條路線是並存的，不是谁淘汰誰。判斷方法只有一個問題：你的網站主要是「給人看的內容」，還是「替人辦事的系統」？前者用靜態做法，簡單又便宜；後者乖乖付系統的錢，天經地義。</p>
+
+  <h2>那還有什麼是不簡單的</h2>
+  <p>把話說完整，免得這篇變成業配式的樂觀：託管和組頁變簡單了，但有四件事沒有變簡單，也不會因為工具進步就消失——事實上，架構越簡單，這四件事在整個案子裡佔的比重反而越高：</p>
+  <ol>
+    <li><strong>設計與版面</strong>：看起來專業、手機上好讀、資訊找得到，這是設計功力，不是平台送的。</li>
+    <li><strong>內容與雙語校對</strong>：產品資料對不對、翻譯通不通順、型號有沒有打錯，工具只能加速，正確性還是人負責。</li>
+    <li><strong>遷移驗證</strong>：舊網址逐筆比對、QR Code 和外部連結不能斷，這是最枯燥也最不能錯的一段。</li>
+    <li><strong>帳號治理與交接</strong>：帳號開在誰名下、權限怎麼給、人事異動怎麼交接——這是管理問題，技術幫不上忙，但出事時最貴。</li>
+  </ol>
+  <p>換句話說，專業的價值沒有消失，是搬了位置：從「會架主機、會維護系統」，移到「內容正確、遷移可靠、治理清楚、有人負責」。對不想碰技術的企業主來說，要買的也正是後面這一段，不是主機本身。</p>
+
+  <h2>結尾：先問你的網站是內容，還是系統</h2>
+  <p>做網站變簡單，是真的，但簡單的是特定的那一類。把問題問對，後面全部迎刃而解：你的官網如果九成是給人看的內容——介紹、型錄、規格、聯絡——那它今天就可以用「資料加工廠流水線」的方式重做一次，月費歸零、維護歸零，工夫花在內容驗證和帳號治理上。如果它是替人辦事的系統，那就不是這篇文章的題目，預算該花在系統品質上，不要省錯地方。</p>
+  <p>工具會繼續進步，但這個分類不會過時：內容歸內容，系統歸系統。分清楚，網站這件事就簡單了。</p>
+  <div class="callout"><strong>一句話總結：</strong>先分清你的網站是「給人看的內容」還是「替人辦事的系統」——是內容，流程已經簡單到只剩改資料、看預覽、點核准；是系統，就把預算花在系統品質上。</div>
+
+  <section class="sources" aria-labelledby="sources-title"><div class="section-label">Research &amp; primary sources</div><h2 id="sources-title">資料來源</h2><ol>
+    <li><a href="https://developers.cloudflare.com/pages/platform/limits/">Cloudflare Pages 官方限制文件</a>：免費版建置次數、檔案數、單檔上限、自訂網域數。</li>
+    <li><a href="https://developers.cloudflare.com/pages/configuration/preview-deployments/">Cloudflare Pages 官方文件（Preview deployments）</a>：每個 Pull Request 自動產生預覽網址、合併後才進正式站。</li>
+    <li><a href="https://github.com/pricing">GitHub 官方定價頁</a>：免費版私有 repo 與協作者不限量。</li>
+  </ol>
+  <p class="small text-muted">查核日期：2026 年 11 月 9 日。文中流程為作者目前實際採用的官網建置架構；託管成本為 GitHub 與 Cloudflare 免費額度內的結果，超出免費額度或主動升級進階功能時，依平台公告價格計費。平台額度與功能會調整，導入前請以官方文件為準。本文由 AI 協助整理與排版，發布前經金霸確認。</p></section>
+
+</article></div></main>
+<footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
