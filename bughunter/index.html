@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude-BugHunter 懶人包｜83 個資安技能安裝與清單 — 金霸趴趴走</title>
+<meta name="description" content="Claude-BugHunter 完整懶人包：兩步安裝指令、83 個技能分類清單、授權邊界與適用範圍。給已在用 Claude Code、想學合法資安檢查的開發者與資安學習者。">
+<style>
+  :root{
+    --bg:#FAFAF7; --ink:#1c2430; --muted:#5b6572;
+    --blue:#002461; --gold:#CC982E; --red:#b3261e;
+    --card:#ffffff; --line:#e5e0d5;
+    --code-bg:#0e1a33; --code-ink:#e8edf7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;
+    line-height:1.75;font-size:16.5px}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 18px 56px}
+  header{border-bottom:3px solid var(--gold);padding-bottom:18px;margin-bottom:22px}
+  .kicker{color:var(--gold);font-weight:700;letter-spacing:.12em;font-size:13px}
+  h1{font-size:30px;line-height:1.35;margin:8px 0 6px;color:var(--blue)}
+  .sub{color:var(--muted);margin:0}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:10px 16px;min-width:calc(50% - 5px);flex:1}
+  .stat b{display:block;font-size:24px;color:var(--blue);line-height:1.2}
+  .stat span{font-size:13.5px;color:var(--muted)}
+  h2{font-size:21px;color:var(--blue);margin:34px 0 10px;
+    border-left:5px solid var(--gold);padding-left:10px}
+  h3{font-size:17.5px;margin:22px 0 6px;color:var(--ink)}
+  p{margin:8px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .warn{border:2px solid var(--red);background:#fdf3f2}
+  .warn h2{border-left-color:var(--red);color:var(--red);margin-top:4px}
+  code{font-family:ui-monospace,Consolas,Menlo,monospace;font-size:.92em;
+    background:#eef1f6;border-radius:5px;padding:1px 6px}
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:12px;
+    padding:16px 18px;overflow-x:auto;line-height:1.6;margin:10px 0}
+  pre code{background:none;padding:0;color:inherit;font-size:14.5px;white-space:pre}
+  ul{margin:6px 0 10px;padding-left:22px}
+  li{margin:3px 0}
+  .skills{list-style:none;padding-left:0}
+  .skills li{padding:7px 0;border-bottom:1px dashed var(--line)}
+  .skills li:last-child{border-bottom:none}
+  .skills code{color:var(--blue);font-weight:700}
+  .skills .d{color:var(--muted);font-size:15px}
+  .tag{display:inline-block;background:var(--blue);color:#fff;font-size:12.5px;
+    border-radius:999px;padding:1px 10px;margin-left:8px;vertical-align:2px}
+  a{color:var(--blue);font-weight:600}
+  .small{font-size:13.5px;color:var(--muted)}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:16px;
+    color:var(--muted);font-size:14px}
+  .jb{color:var(--gold);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">金霸趴趴走 · GitHub 爆紅工具懶人包</div>
+  <h1>Claude-BugHunter 懶人包</h1>
+  <p class="sub">給已經在用 Claude Code、想學合法資安檢查的開發者與資安學習者：兩步裝好一套由 681 份公開揭露報告整理出來的獵洞技能包。</p>
+  <p style="margin-top:10px"><strong>看攻擊方打法，是為了在自己有授權的系統先找到洞、修好它，懂攻擊為了防守。</strong></p>
+  <p class="small">本頁前提：你已安裝並能使用 Claude Code。</p>
+  <div class="stats">
+    <div class="stat"><b>83</b><span>個技能（自動依主題載入）</span></div>
+    <div class="stat"><b>15</b><span>個 slash commands</span></div>
+    <div class="stat"><b>681</b><span>個公開揭露模式（433 個可逐項稽核引用）</span></div>
+    <div class="stat"><b>10,687</b><span>GitHub 星數（2026-11-18 查證）</span></div>
+  </div>
+  <p class="small">出處：<a href="https://github.com/elementalsouls/Claude-BugHunter" target="_blank" rel="noopener">elementalsouls/Claude-BugHunter</a>（作者 Sachin Sharma）。爆紅數字「單日 +1,094 星」為 2026-11-17 快照。</p>
+</header>
+
+<h2>這是什麼</h2>
+<p>它是一套給 Claude Code 用的技能包（skill bundle）。裝好之後，你只要用白話描述想測什麼，相關技能會自動載入，不用記技能名稱、不用手動搬檔案。內容分四層：</p>
+<ul>
+  <li><strong>思考</strong>：獵洞方法論與紅隊思維紀律，先想清楚再動手。</li>
+  <li><strong>獵網頁</strong>：58 個獵洞技能，來自 681 份公開揭露的 HackerOne 報告，含偵測模式、payload、繞過表與串鏈模板。</li>
+  <li><strong>打邊界</strong>：企業平台攻擊鏈（M365/Entra、Okta、vCenter、SSL VPN、雲端 IAM 等），多為 2024–2026 的 CVE 鏈。</li>
+  <li><strong>交付</strong>：送出前的驗證關卡（7-Question Gate）、證據遮罩紀律與報告寫作。</li>
+</ul>
+
+<div class="card warn">
+  <h2>先講邊界（裝之前先看）</h2>
+  <ul>
+    <li>只能用在<strong>自己的</strong>，或<strong>有書面授權</strong>的資產，限自己的系統、漏洞獎勵計畫範圍內。</li>
+    <li><strong>沒授權掃別人的系統，是違法。</strong></li>
+    <li>工具內建驗證關卡：指向未驗證的第三方目標時，triage-validation 的 7-Question Gate 會先問這個資產在不在授權範圍內。</li>
+    <li>它只看<strong>對外攻擊面</strong>，也不保證跑完：Anthropic 模型有即時資安防護，連授權範圍內的工作也可能被模型中途擋下；做授權滲透／獵洞的人可申請官方的 Cyber Verification Program 調整防護（連結在文末）。</li>
+  </ul>
+</div>
+
+<h2>安裝（兩步）</h2>
+<p>在 Claude Code 裡依序輸入這兩行（原文照貼，不要改）：</p>
+<pre><code>/plugin marketplace add elementalsouls/Claude-BugHunter
+/plugin install claude-bughunter@elementalsouls</code></pre>
+<p>裝好後，83 個技能與 15 個指令會進到專屬命名空間 <code>claude-bughunter:</code> 之下，跟著外掛版本更新，不會把檔案複製進你的 <code>~/.claude/</code>。實際技能與指令數量以你裝完後的實測為準。</p>
+<h3>備案：複製安裝（不用外掛系統，或想固定版本）</h3>
+<pre><code>git clone https://github.com/elementalsouls/Claude-BugHunter.git
+cd Claude-BugHunter
+# macOS / Linux
+bash scripts/install.sh
+# Windows (PowerShell)
+pwsh ./scripts/install.ps1</code></pre>
+<p class="small">複製安裝會把技能與指令放進 <code>~/.claude/</code>，並附帶 <code>cbh</code> CLI 與 <code>hunt</code> 任務腳手架；外掛安裝則沒有後兩者（cbh 可另外用 pipx 裝）。同一套 SKILL.md 格式也能裝到 OpenCode、Codex CLI、Hermes、AntiGravity 等其他 agent 工具，細節見官方 multi-harness 指南。</p>
+
+<h2>怎麼用</h2>
+<p>裝好後打開 Claude Code，用白話講你在測什麼、在授權範圍內的哪個目標，技能就會自動載入。官方示意範例：</p>
+<pre><code>Testing acme.com — an in-scope HackerOne target.
+Run recon and rank the surface.</code></pre>
+<p class="small">（上為官方 README 的示意對話，實際輸出依你的目標與授權範圍而定。）常用的 slash commands 包含 <code>/hunt</code>、<code>/recon</code>、<code>/report</code> 等共 15 個。</p>
+
+<h2>83 個技能分類清單</h2>
+<p class="small">名稱為官方原文，說明為本頁依官方目錄濃縮的中文摘要。完整可搜尋目錄見文末官方連結。</p>
+
+<h3>獵洞 — Web 應用漏洞類 <span class="tag">58</span></h3>
+<ul class="skills">
+  <li><code>hunt-api-misconfig</code> <span class="d">— API 設定錯誤：大量賦值、原型污染、HTTP 動詞竄改</span></li>
+  <li><code>hunt-aspnet</code> <span class="d">— ASP.NET 攻擊面：ViewState、machineKey、trace.axd 外洩</span></li>
+  <li><code>hunt-ato</code> <span class="d">— 帳號接管（ATO）九種路徑與串鏈</span></li>
+  <li><code>hunt-auth-bypass</code> <span class="d">— 身分驗證繞過</span></li>
+  <li><code>hunt-brute-force</code> <span class="d">— 缺乏速率限制：登入／OTP 爆破、帳號列舉</span></li>
+  <li><code>hunt-business-logic</code> <span class="d">— 業務邏輯漏洞</span></li>
+  <li><code>hunt-cache-poison</code> <span class="d">— 快取投毒</span></li>
+  <li><code>hunt-captcha-bypass</code> <span class="d">— CAPTCHA 繞過六種模式</span></li>
+  <li><code>hunt-cicd</code> <span class="d">— CI/CD 流水線：Actions 注入、自架 runner 投毒、OIDC 濫用</span></li>
+  <li><code>hunt-clickjacking</code> <span class="d">— 點擊劫持：缺 X-Frame-Options／CSP frame-ancestors</span></li>
+  <li><code>hunt-cloud-misconfig</code> <span class="d">— 雲端與基礎設施設定錯誤</span></li>
+  <li><code>hunt-cors</code> <span class="d">— CORS 設定錯誤：來源反射、null origin 信任</span></li>
+  <li><code>hunt-csrf</code> <span class="d">— CSRF 跨站請求偽造</span></li>
+  <li><code>hunt-deserialization</code> <span class="d">— 不安全反序列化：Java／PHP／Python／.NET 鏈</span></li>
+  <li><code>hunt-dispatch</code> <span class="d">— /hunt 協調器的技能載入器（內部）</span></li>
+  <li><code>hunt-dom</code> <span class="d">— DOM 客戶端漏洞：clobbering、postMessage 劫持</span></li>
+  <li><code>hunt-exceptional-conditions</code> <span class="d">— 例外處理不當：錯誤輸入讓系統 fail-open 或洩密</span></li>
+  <li><code>hunt-file-upload</code> <span class="d">— 檔案上傳：webshell、SVG XSS、路徑穿越</span></li>
+  <li><code>hunt-fintech-graphql</code> <span class="d">— 金融 GraphQL：轉帳 mutation、帳本 IDOR、精度濫用</span></li>
+  <li><code>hunt-forgot-password</code> <span class="d">— 忘記密碼／帳號復原流程缺陷五種模式</span></li>
+  <li><code>hunt-graphql</code> <span class="d">— GraphQL 漏洞</span></li>
+  <li><code>hunt-grpc</code> <span class="d">— gRPC：反射列舉、未驗證的內部端點</span></li>
+  <li><code>hunt-host-header</code> <span class="d">— Host Header 注入：重設密碼投毒、路由 SSRF</span></li>
+  <li><code>hunt-html-injection</code> <span class="d">— HTML 注入</span></li>
+  <li><code>hunt-http-smuggling</code> <span class="d">— HTTP 請求走私（CL.TE／TE.CL／H2 等）</span></li>
+  <li><code>hunt-idor</code> <span class="d">— IDOR 越權存取</span></li>
+  <li><code>hunt-jwt-crypto</code> <span class="d">— JWT 加密缺陷：alg none、RS256 轉 HS256 混淆</span></li>
+  <li><code>hunt-k8s</code> <span class="d">— Kubernetes／Docker：API 未授權、kubelet、etcd</span></li>
+  <li><code>hunt-laravel</code> <span class="d">— Laravel：debug 外洩、Ignition RCE、Telescope 未授權</span></li>
+  <li><code>hunt-ldap</code> <span class="d">— LDAP／XPath 注入</span></li>
+  <li><code>hunt-lfi</code> <span class="d">— LFI／RFI／路徑穿越：filter chain RCE</span></li>
+  <li><code>hunt-llm-ai</code> <span class="d">— LLM／AI 功能：提示注入、工具濫用、Agent 安全</span></li>
+  <li><code>hunt-mfa-bypass</code> <span class="d">— MFA／2FA 繞過七種模式</span></li>
+  <li><code>hunt-misc</code> <span class="d">— 其他雜項漏洞類彙整</span></li>
+  <li><code>hunt-nextjs</code> <span class="d">— Next.js：Server Actions、Middleware 繞過、ISR 投毒</span></li>
+  <li><code>hunt-nodejs</code> <span class="d">— Node.js：原型污染鏈、SSTI、child_process 注入</span></li>
+  <li><code>hunt-nosqli</code> <span class="d">— NoSQL 注入：MongoDB 運算子注入</span></li>
+  <li><code>hunt-ntlm-info</code> <span class="d">— NTLM／Negotiate 資訊洩露（IIS／SharePoint／Exchange）</span></li>
+  <li><code>hunt-oauth</code> <span class="d">— OAuth 漏洞</span></li>
+  <li><code>hunt-open-redirect</code> <span class="d">— 開放重導向（含串 OAuth 竊取 token）</span></li>
+  <li><code>hunt-race-condition</code> <span class="d">— 競態條件</span></li>
+  <li><code>hunt-rag-vector</code> <span class="d">— RAG 向量庫弱點：語料投毒（OWASP LLM08）</span></li>
+  <li><code>hunt-rce</code> <span class="d">— 遠端程式碼執行</span></li>
+  <li><code>hunt-saml</code> <span class="d">— SAML／SSO 攻擊</span></li>
+  <li><code>hunt-session</code> <span class="d">— Session 管理：固定、失效不足、低熵</span></li>
+  <li><code>hunt-shadow-api</code> <span class="d">— 影子／殭屍 API 盤點（OWASP API9）</span></li>
+  <li><code>hunt-sharepoint</code> <span class="d">— SharePoint 地端：ToolShell 鏈、舊 SOAP 繞過</span></li>
+  <li><code>hunt-source-leak</code> <span class="d">— 原始碼與建置產物外洩：sourcemap、.env／.git</span></li>
+  <li><code>hunt-spa-api</code> <span class="d">— 從 SPA 的 JS 包挖隱藏後端 API 並測存取控制</span></li>
+  <li><code>hunt-springboot</code> <span class="d">— Spring Boot：Actuator、SpEL、Spring4Shell</span></li>
+  <li><code>hunt-sqli</code> <span class="d">— SQL 注入</span></li>
+  <li><code>hunt-ssrf</code> <span class="d">— SSRF 伺服器端請求偽造</span></li>
+  <li><code>hunt-ssti</code> <span class="d">— 伺服器端模板注入（多引擎）</span></li>
+  <li><code>hunt-subdomain</code> <span class="d">— 子網域接管</span></li>
+  <li><code>hunt-tls-network</code> <span class="d">— TLS／DNS 設定：HSTS、弱加密、AXFR、郵件偽冒</span></li>
+  <li><code>hunt-websocket</code> <span class="d">— WebSocket：CSWSH、Origin 驗證缺失</span></li>
+  <li><code>hunt-xss</code> <span class="d">— 跨站腳本 XSS</span></li>
+  <li><code>hunt-xxe</code> <span class="d">— XML 外部實體注入 XXE</span></li>
+</ul>
+
+<h3>企業平台攻擊 <span class="tag">10</span></h3>
+<ul class="skills">
+  <li><code>apk-redteam-pipeline</code> <span class="d">— Android APK 紅隊流水線：反編譯、密鑰掃描、Frida</span></li>
+  <li><code>cloud-iam-deep</code> <span class="d">— 雲端 IAM 攻擊鏈（AWS／Azure／GCP）</span></li>
+  <li><code>enterprise-vpn-attack</code> <span class="d">— SSL VPN 設備攻擊矩陣（Cisco／Fortinet／Citrix／Palo Alto 等）</span></li>
+  <li><code>ios-redteam-pipeline</code> <span class="d">— iOS IPA 紅隊流水線：靜態分析、Keychain 提取</span></li>
+  <li><code>m365-entra-attack</code> <span class="d">— Microsoft 365／Entra ID 攻擊鏈</span></li>
+  <li><code>meme-coin-audit</code> <span class="d">— 迷因幣／代幣安全審計：rug pull 偵測</span></li>
+  <li><code>okta-attack</code> <span class="d">— Okta 身分攻擊鏈：列舉、推播疲勞、密碼噴灑</span></li>
+  <li><code>supply-chain-attack-recon</code> <span class="d">— 供應鏈攻擊面偵察：相依性混淆、註冊表暴露</span></li>
+  <li><code>vmware-vcenter-attack</code> <span class="d">— VMware vCenter 攻擊矩陣與 CVE 鏈</span></li>
+  <li><code>web3-audit</code> <span class="d">— 智能合約審計：十大 DeFi 漏洞類</span></li>
+</ul>
+
+<h3>偵察與 OSINT <span class="tag">5</span></h3>
+<ul class="skills">
+  <li><code>offensive-osint</code> <span class="d">— 授權紅隊／獵洞偵察的 OSINT 實作庫</span></li>
+  <li><code>osint-methodology</code> <span class="d">— OSINT 計畫與執行方法論</span></li>
+  <li><code>recon-scope-triage</code> <span class="d">— 偵察結果歸屬分類：分出真正資產與同名噪音</span></li>
+  <li><code>security-arsenal</code> <span class="d">— payload、繞過表、字典與模式庫</span></li>
+  <li><code>web2-recon</code> <span class="d">— Web 偵察流水線：子網域、存活主機、JS 分析</span></li>
+</ul>
+
+<h3>方法論與思維 <span class="tag">4</span></h3>
+<ul class="skills">
+  <li><code>bb-local-toolkit</code> <span class="d">— 本地工具／字典路徑對照（SecLists、ffuf 等）</span></li>
+  <li><code>bb-methodology</code> <span class="d">— 獵洞流程方法論：開局、換目標、迷路時用</span></li>
+  <li><code>bug-bounty</code> <span class="d">— 從偵察、範圍、測試到報告的完整流程指南</span></li>
+  <li><code>redteam-mindset</code> <span class="d">— 紅隊操作者思維紀律</span></li>
+</ul>
+
+<h3>報告與驗證 <span class="tag">6</span></h3>
+<ul class="skills">
+  <li><code>bugcrowd-reporting</code> <span class="d">— Bugcrowd 報告戰術：VRT 對照與嚴重度溝通</span></li>
+  <li><code>evidence-hygiene</code> <span class="d">— 證據與個資遮罩紀律：cookie／PII 處理</span></li>
+  <li><code>mid-engagement-ir-detection</code> <span class="d">— 任務中偵測客戶 SOC 修補與環境變化</span></li>
+  <li><code>redteam-report-template</code> <span class="d">— 客戶向紅隊交付報告格式</span></li>
+  <li><code>report-writing</code> <span class="d">— 平台報告寫作：模板、CVSS、影響先行</span></li>
+  <li><code>triage-validation</code> <span class="d">— 送出前驗證：7-Question Gate、四道關卡</span></li>
+</ul>
+
+<h2>範圍與限定（先講清楚）</h2>
+<div class="card">
+  <p><strong>涵蓋：</strong>對外攻擊面 — Web 應用與 API、SaaS、GraphQL／OAuth／JWT、企業平台（M365、Okta、SharePoint、vCenter、SSL VPN）、雲端設定錯誤與取得憑證後的提權、偵察與 OSINT、平台與客戶報告。</p>
+  <p><strong>不涵蓋（官方明言是設計取捨，不是缺陷）：</strong>內網 Active Directory 攻擊（Kerberoasting、DCSync 等）、C2 框架、後滲透／持久化／橫向移動、規避偵測（AMSI／EDR bypass）、iOS 滲透／硬體／RF／ICS、二進位與核心利用；官方另明文排除 0-day 武器化、惡意軟體開發與大規模目標掃描。如果你做的是內網紅隊，這套在那些階段幫不上忙。</p>
+  <p><strong>其他限定：</strong>看攻擊方打法，是為了在自己有授權的系統先找到洞、修好它 — 懂攻擊是為了防守。模型可能中途擋下部分請求（見邊界段），這不是這套工具的故障。</p>
+</div>
+
+<h2>官方連結</h2>
+<ul>
+  <li><a href="https://github.com/elementalsouls/Claude-BugHunter" target="_blank" rel="noopener">GitHub 專案首頁</a></li>
+  <li><a href="https://github.com/elementalsouls/Claude-BugHunter/blob/main/docs/skills.md" target="_blank" rel="noopener">官方技能目錄（可搜尋）</a></li>
+  <li><a href="https://github.com/elementalsouls/Claude-BugHunter/blob/main/INSTALL.md" target="_blank" rel="noopener">官方安裝指南</a>／<a href="https://github.com/elementalsouls/Claude-BugHunter/blob/main/USAGE.md" target="_blank" rel="noopener">使用指南</a>／<a href="https://github.com/elementalsouls/Claude-BugHunter/blob/main/SECURITY.md" target="_blank" rel="noopener">安全立場說明</a></li>
+  <li><a href="https://claude.com/form/cyber-use-case" target="_blank" rel="noopener">Anthropic Cyber Verification Program 申請</a>（授權資安工作者調整模型防護用）</li>
+</ul>
+<p class="small">授權：程式碼 MIT、內容 CC BY 4.0（以官方 repo 標示為準）。</p>
+
+<footer>
+  <p><span class="jb">金霸趴趴走</span> · 本頁為資訊整理與教育用途，不構成對任何未授權目標的測試建議。數字皆標示快照日期。頁面版本 v1.0，最後查證：2026-11-18。</p>
+</footer>
+
+</div>
+</body>
+</html>
