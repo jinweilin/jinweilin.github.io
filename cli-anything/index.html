@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLI-Anything 懶人包｜讓 AI 用指令操作 60 多個軟體 — 金霸趴趴走</title>
+<style>
+  :root{
+    --bg:#0e1420; --panel:#16202f; --panel2:#1b2839; --text:#e8edf4; --muted:#9fb0c3;
+    --gold:#CC982E; --line:#2a3a4f; --code-bg:#0a0f18; --red:#e06c5b; --green:#6fce8b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",system-ui,sans-serif;
+    line-height:1.75;font-size:17px}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 20px 64px}
+  header{padding:28px 0 8px;border-bottom:2px solid var(--gold);margin-bottom:8px}
+  .series{color:var(--gold);font-weight:700;letter-spacing:.08em;font-size:14px}
+  h1{font-size:30px;line-height:1.35;margin:10px 0 6px}
+  .sub{color:var(--muted);margin:0 0 14px}
+  h2{font-size:23px;margin:42px 0 10px;padding-left:12px;border-left:5px solid var(--gold)}
+  h3{font-size:19px;margin:26px 0 6px;color:var(--gold)}
+  p{margin:8px 0}
+  ul{margin:8px 0 8px 0;padding-left:22px}
+  li{margin:5px 0}
+  code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:15px;
+    font-family:Consolas,"Courier New",monospace}
+  pre{background:var(--code-bg);border:1px solid var(--line);border-radius:10px;
+    padding:16px;overflow-x:auto;font-size:14px;line-height:1.6}
+  pre code{background:none;padding:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .warn{border-left:5px solid var(--red)}
+  .ok{border-left:5px solid var(--green)}
+  .num{font-size:26px;font-weight:800;color:var(--gold)}
+  .grid{display:flex;gap:14px;flex-wrap:wrap}
+  .grid .card{flex:1 1 200px;margin:7px 0;text-align:center}
+  .grid .lbl{color:var(--muted);font-size:14px}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    border-radius:999px;padding:2px 12px;margin:3px 2px;font-size:15px}
+  a{color:var(--gold)}
+  .small{color:var(--muted);font-size:14px}
+  footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  strong{color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="series">金霸趴趴走｜GitHub 本週爆紅・深挖懶人包</div>
+  <h1>CLI-Anything 懶人包：讓 AI 不點滑鼠，直接下指令操作軟體</h1>
+  <p class="sub">先講結論：這是香港大學做的開源專案，它幫一個個軟體做好「指令遙控器」加一份 AI 看的說明書（SKILL.md），AI 照著下指令就能操作軟體，不必看著螢幕慢慢點滑鼠。這一頁有安裝方式、完整支援清單、我們自己跑過的實測，還有裝之前一定要看的安全邊界。</p>
+</header>
+
+<div class="grid">
+  <div class="card"><div class="num">62,041</div><div class="lbl">GitHub 星數（2026-11-22 查核）</div></div>
+  <div class="card"><div class="num">60+</div><div class="lbl">repo 內建 harness 軟體數</div></div>
+  <div class="card"><div class="num">Apache-2.0</div><div class="lbl">授權（可商用）</div></div>
+</div>
+
+<h2>這是什麼</h2>
+<p><strong>CLI-Anything 是一套「把軟體變成 AI 能直接操作」的工具產生器。</strong>它用 7 階段自動流水線去研究一個軟體，產出一組指令工具（CLI）加上一份 SKILL.md 說明書；AI agent 讀了說明書，就能用打指令的方式操作那個軟體。</p>
+<p>為什麼要這樣做？現在 AI 操作軟體有兩條路：一條是看著螢幕點滑鼠（GUI agent），一條是直接下指令（CLI）。兩條路各有擅場、會並存——點滑鼠通用但慢又容易點錯，下指令快而精準，但前提是軟體得先有指令介面。CLI-Anything 做的就是把這個前提補上。官方標語是「Making ALL Software Agent-Native」，口號講的是 ALL，實際進度就是下面那份 60 多個的清單，兩件事分開看。</p>
+<p>官方展示過的示範包括：FreeCAD 蓋好奇號探測車、Blender 做軌道中繼無人機、Draw.io 畫 HTTPS 握手圖、Slay the Spire II 遊戲自動化、VideoCaptioner 自動上字幕、ArcGIS Pro 製圖。</p>
+
+<h2>快速開始（走 CLI-Hub 安裝）</h2>
+<p>已經生成好的指令工具統一放在 CLI-Hub 上，裝法就兩步（原文照貼，不要改）：</p>
+<pre><code>pip install cli-anything-hub
+
+cli-hub install &lt;name&gt;</code></pre>
+<p>第二行的 <code>&lt;name&gt;</code> 換成你要的軟體名稱，例如我們實測用的就是 <code>cli-hub install drawio</code>（名稱以 CLI-Hub 上架名為準）。裝好後，每個工具會以 <code>cli-anything-軟體名</code> 的形式出現在你的系統裡，可以直接在終端機下指令，也能交給 Claude Code 等 agent 透過 SKILL.md 來操作。官方 README 的 Quick Start 另有 Claude Code、Cursor、Codex 等 agent 平台的外掛接法，想把整套產生器接進自己的 agent，請照官方文件走。</p>
+
+<h2>我們實測了：10 句指令，Draw.io 畫出 HTTPS 握手圖</h2>
+<p>影片裡那張圖不是官方示範截圖，是我們自己跑的。實測紀錄如下，指令全文照貼，你可以自己複驗：</p>
+<div class="card ok">
+<ul>
+  <li><strong>日期與環境：</strong>2026-11-21，在我們的 Linux VM 上（repo 快照加獨立 venv），工具是 Draw.io harness 的 <code>cli-anything-drawio</code></li>
+  <li><strong>做了什麼：</strong>建專案 1 句、加圖形 2 句（瀏覽器、伺服器）、加連接線 7 句，共 <strong>10 句指令</strong></li>
+  <li><strong>結果：</strong>10 句全部執行成功，總耗時 <strong>1.05 秒</strong>，產出 Draw.io 檔案：上方是瀏覽器、下方是伺服器，中間 7 條帶標籤的連接線（SYN、SYN-ACK、ACK、ClientHello、ServerHello + Certificate、Finished、Encrypted Data）</li>
+</ul>
+</div>
+<pre><code>cli-anything-drawio --json project new --width 850 --height 1100 -o handshake-raw.drawio
+cli-anything-drawio --json --project handshake-raw.drawio shape add rounded --id browser -l "瀏覽器 Browser" --x 315 --y 40 -w 220 -h 64
+cli-anything-drawio --json --project handshake-raw.drawio shape add rectangle --id server -l "伺服器 Server" --x 315 --y 990 -w 220 -h 64
+cli-anything-drawio --json --project handshake-raw.drawio connect add browser server --id msg1 -l "SYN"
+cli-anything-drawio --json --project handshake-raw.drawio connect add server browser --id msg2 -l "SYN-ACK"
+cli-anything-drawio --json --project handshake-raw.drawio connect add browser server --id msg3 -l "ACK"
+cli-anything-drawio --json --project handshake-raw.drawio connect add browser server --id msg4 -l "ClientHello"
+cli-anything-drawio --json --project handshake-raw.drawio connect add server browser --id msg5 -l "ServerHello + Certificate"
+cli-anything-drawio --json --project handshake-raw.drawio connect add browser server --id msg6 -l "Finished"
+cli-anything-drawio --json --project handshake-raw.drawio connect add browser server --id msg7 -l "Encrypted Data"</code></pre>
+<p class="small">誠實註記兩件小事：一、harness 產出的連接線預設會疊在一起，我們事後只把每條線的連接點位置沿著圖形寬度分散開，圖形、標籤和連接關係都是這 10 句指令產出的，內容沒有改。二、我們第一次嘗試時旗標用錯、10 句全數失敗，上面是第二次乾淨重跑的紀錄——所以你第一次跑失敗也別意外，先看錯誤訊息再重來。</p>
+
+<h2>支援清單（repo 內建 harness）</h2>
+<p><strong>清單範圍：</strong>這裡列的是官方 repo 內建的 agent-harness，共 67 個，加上獨立目錄的 Slay the Spire II，<strong>整理日期 2026-11-21</strong>。CLI-Hub 另外還收錄社群提供的外部 Public CLIs，不在本清單範圍內，請直接上 CLI-Hub 網站看（連結在文末）。專案更新很快，實際清單以官方 repo 為準。</p>
+
+<h3>設計／影音／3D</h3>
+<p>
+<span class="tag">Blender</span><span class="tag">FreeCAD</span><span class="tag">GIMP</span><span class="tag">Inkscape</span><span class="tag">Krita</span><span class="tag">Draw.io</span><span class="tag">Mermaid</span><span class="tag">Sketch</span><span class="tag">QGIS</span><span class="tag">CloudCompare</span><span class="tag">MuseScore</span><span class="tag">Audacity</span><span class="tag">Kdenlive</span><span class="tag">Shotcut</span><span class="tag">OBS Studio</span><span class="tag">ComfyUI</span><span class="tag">Godot</span><span class="tag">VideoCaptioner</span>
+</p>
+
+<h3>辦公／筆記／文件</h3>
+<p>
+<span class="tag">LibreOffice</span><span class="tag">Obsidian</span><span class="tag">Joplin</span><span class="tag">思源筆記 SiYuan</span><span class="tag">幕布 Mubu</span><span class="tag">Calibre</span><span class="tag">Zotero</span><span class="tag">Firefly III</span><span class="tag">NotebookLM</span>
+</p>
+
+<h3>開發／運維／資料</h3>
+<p>
+<span class="tag">Ollama</span><span class="tag">n8n</span><span class="tag">PM2</span><span class="tag">LLDB</span><span class="tag">ChromaDB</span><span class="tag">OpenRefine</span><span class="tag">WireMock</span><span class="tag">JumpServer</span><span class="tag">AdGuard Home</span><span class="tag">RenderDoc</span><span class="tag">Nsight Graphics</span><span class="tag">Unreal Insights</span><span class="tag">Dify Workflow</span><span class="tag">UniMol Tools</span>
+</p>
+
+<h3>通訊／服務／遊戲</h3>
+<p>
+<span class="tag">Zoom</span><span class="tag">Mailchimp</span><span class="tag">Safari</span><span class="tag">iTerm2</span><span class="tag">Rekordbox</span><span class="tag">Exa</span><span class="tag">Slay the Spire II</span>
+</p>
+
+<h3>其他（repo 原文名）</h3>
+<p>
+<span class="tag">3MF</span><span class="tag">anygen</span><span class="tag">browser</span><span class="tag">cc-switch</span><span class="tag">cloudanalyzer</span><span class="tag">eez-studio</span><span class="tag">eth2-quickstart</span><span class="tag">intelwatch</span><span class="tag">live2d</span><span class="tag">minimax</span><span class="tag">novita</span><span class="tag">nslogger</span><span class="tag">openscreen</span><span class="tag">quietshrink</span><span class="tag">rms</span><span class="tag">sbox</span><span class="tag">seaclip</span><span class="tag">tigris</span><span class="tag">wavetone</span><span class="tag">web-yu-pri</span>
+</p>
+
+<h2>安全邊界（裝之前先看）</h2>
+<p>這一套工具的本質，是讓 AI 自主組裝指令、直接操作你電腦上的真檔案。方便是真的，風險也是真的，先講清楚再裝。</p>
+<div class="card">
+<p><strong>官方有做的防護</strong>（出自官方 SECURITY.md，它有正式的威脅模型文件）：</p>
+<ul>
+  <li>官方自承<strong>首要風險是 prompt injection</strong>：AI 讀到不可信的輸入時，可能被誘導組裝並執行不該執行的指令——這是官方自己寫在威脅模型第一位的</li>
+  <li>參數白名單驗證：指令參數要通過白名單檢查，不是 AI 想塞什麼都行</li>
+  <li>路徑正規化：擋掉用相對路徑繞去不該碰的目錄</li>
+  <li>金鑰檔權限收緊為 0o600（只有檔案擁有者能讀寫）</li>
+  <li>程式碼禁止用 shell=True 執行指令，XML 解析改用 defusedxml 防 XXE 類攻擊</li>
+</ul>
+</div>
+<div class="card warn">
+<p><strong>還是存在的風險</strong>（官方有防護，不代表可以無人看管）：</p>
+<ul>
+  <li><strong>供應鏈沒有簽章把關：</strong>CLI-Hub 是從 GitHub 和第三方來源拉程式碼下來執行，沒有簽章或雜湊鎖定，來源那一端被動手腳，你這邊不會收到警告</li>
+  <li><strong>它操作的是真檔案：</strong>不是沙盒玩具，AI 下錯指令，改掉或刪掉的就是你的真實檔案</li>
+  <li><strong>清單裡有高權限工具：</strong>JumpServer（堡壘機）、Zoom、Mailchimp 這類會碰帳號與金鑰的工具都在清單裡，這種一旦被誘導操作，出事的不是一張圖，是帳號本身</li>
+</ul>
+</div>
+<div class="card ok">
+<p><strong>我們的安全檢查表</strong>（影片裡講的四條，照著做）：</p>
+<ul>
+  <li>只裝官方 Hub 的，不要來路不明的來源</li>
+  <li>裝之前先看清：這個工具會碰哪些軟體、哪些檔案</li>
+  <li>重要檔案先備份，再讓 AI 動手</li>
+  <li>碰帳號、金鑰的，不要放手讓 AI 自己跑，人要在旁邊看</li>
+</ul>
+</div>
+
+<h2>官方連結</h2>
+<ul>
+  <li>GitHub 專案首頁：<a href="https://github.com/HKUDS/CLI-Anything">github.com/HKUDS/CLI-Anything</a></li>
+  <li>CLI-Hub（瀏覽與安裝所有上架 CLI，含外部 Public CLIs）：<a href="https://clianything.cc/">clianything.cc</a></li>
+  <li>官方安全文件 SECURITY.md：在 repo 首頁根目錄，裝之前建議自己讀一遍</li>
+</ul>
+
+<footer>
+  <p>授權：本專案授權為 Apache-2.0（以官方 repo 標示為準）。本頁數字為 2026-11-22 查核快照。</p>
+  <p>金霸趴趴走「GitHub 本週爆紅」系列出品｜這一集的短影音留言關鍵字是「握手」。</p>
+</footer>
+
+</div>
+</body>
+</html>
