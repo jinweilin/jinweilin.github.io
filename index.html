@@ -63,13 +63,13 @@
           <div class="section-label" id="topics-title">Explore by topic</div>
           <div class="row g-3">
             <div class="col-md-4">
-              <div class="topic-card"><span>01 / TRAVEL</span><h2>旅遊</h2><p>路線、住宿與在地體驗。</p></div>
+              <div class="topic-card"><span>01 / TRAVEL</span><h2>旅遊</h2><p>路線、住宿與在地體驗。（新文章準備中）</p></div>
             </div>
             <div class="col-md-4">
-              <div class="topic-card"><span>02 / FOOD</span><h2>美食</h2><p>風土、技法與餐桌價值。</p></div>
+              <a class="topic-card guide-link" href="#latest" data-filter-link="food"><span>02 / FOOD</span><h2>美食</h2><p>風土、技法與餐桌價值。共 3 篇，點這裡直接看。</p></a>
             </div>
             <div class="col-md-4">
-              <div class="topic-card"><span>03 / TECH</span><h2>技術分享</h2><p>工具、產業與實務判斷。</p></div>
+              <a class="topic-card guide-link" href="#latest" data-filter-link="tech"><span>03 / TECH</span><h2>技術分享</h2><p>工具、產業與實務判斷。共 15 篇，點這裡直接看。</p></a>
             </div>
           </div>
         </section>
@@ -95,7 +95,21 @@
 
         <section id="latest" aria-labelledby="latest-title">
           <div class="section-label" id="latest-title">Latest analysis</div>
-          <article class="post-preview">
+          <div class="article-tools">
+            <div class="filter-chips" role="group" aria-label="依主題篩選文章">
+              <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">全部（19）</button>
+              <button type="button" class="chip" data-filter="tech" aria-pressed="false">科技（15）</button>
+              <button type="button" class="chip" data-filter="food" aria-pressed="false">美食（3）</button>
+              <button type="button" class="chip" data-filter="methods" aria-pressed="false">方法論（1）</button>
+            </div>
+            <label class="search-box">
+              <span class="visually-hidden">搜尋文章關鍵字</span>
+              <input type="search" id="article-search" placeholder="搜尋文章：輸入標題或關鍵字，例如「資安」「燒肉」" autocomplete="off">
+            </label>
+            <p class="result-count" id="result-count" aria-live="polite"></p>
+          </div>
+          <p class="no-result" id="no-result" hidden>找不到符合的文章。<button type="button" id="clear-filter">清除篩選，看全部</button></p>
+          <article class="post-preview" data-cat="tech">
             <a href="tech/cli-integration-first-principles/">
               <span class="badge-topic">科技 · AI 整合</span>
               <h2 class="post-title">不必等高速公路蓋好：第一性原理看 AI 如何走進沒有 API 的系統</h2>
@@ -104,7 +118,7 @@
             <p class="post-meta">金霸 · 2026 年 11 月 24 日 · 約 11 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-agent-enters-office/">
               <span class="badge-topic">科技 · AI 趨勢</span>
               <h2 class="post-title">當 AI 開始替員工上班：未來辦公室先變的五件事</h2>
@@ -113,7 +127,7 @@
             <p class="post-meta">金霸 · 2026 年 11 月 16 日 · 約 8 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/website-can-be-simple/">
               <span class="badge-topic">科技 · 網站建置</span>
               <h2 class="post-title">原來做一個網站也可以這麼簡單</h2>
@@ -122,7 +136,7 @@
             <p class="post-meta">金霸 · 2026 年 11 月 9 日 · 約 7 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/agents-md-attack/">
               <span class="badge-topic">科技 · 資安</span>
               <h2 class="post-title">最危險的檔案不是 .exe，是一份 .md</h2>
@@ -131,7 +145,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 26 日 · 約 11 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/emudhra-php2shell/">
               <span class="badge-topic">科技 · 資安專題</span>
               <h2 class="post-title">私鑰是「4」：eMudhra 事件、PHP2Shell 與這一週的修補潮</h2>
@@ -140,7 +154,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 24 日 · 約 11 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="food">
             <a href="food/tokyo-three-bakeries/">
               <span class="badge-topic">美食 · 東京麵包</span>
               <h2 class="post-title">東京三家排隊麵包店：元祖鹽麵包、80 年老舖吐司、法式麵包</h2>
@@ -149,7 +163,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 24 日 · 約 6 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-agent-evolution/">
               <span class="badge-topic">科技 · AI 趨勢</span>
               <h2 class="post-title">AI 助理拿到身分證之前：四條路並存的一年</h2>
@@ -158,7 +172,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 19 日 · 約 9 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-agent-identity-era/">
               <span class="badge-topic">科技 · AI 趨勢</span>
               <h2 class="post-title">AI 助理有了身分證：辦事時代來了</h2>
@@ -167,7 +181,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 18 日 · 約 10 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="food">
             <a href="food/jojoen-shinjuku-kabukicho/">
               <span class="badge-topic">美食 · 東京燒肉</span>
               <h2 class="post-title">叙々苑燒肉 新宿歌舞伎町店：午間套餐¥3,200起，橫隔膜跟牛舌必點</h2>
@@ -176,7 +190,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 18 日 · 約 5 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="food">
             <a href="food/harbs-fruit-mille-crepe/">
               <span class="badge-topic">美食 · 日本甜點</span>
               <h2 class="post-title">每次去日本必報到的 HARBS：水果千層依然是本命</h2>
@@ -185,7 +199,7 @@
             <p class="post-meta">金霸 · 2026 年 10 月 18 日 · 約 6 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-automation-human-checkpoints/">
               <span class="badge-topic">科技 · AI 工作流治理</span>
               <h2 class="post-title">AI 自動化應該停在哪裡？用資格門檻與兩軸模型設計人工關卡</h2>
@@ -194,7 +208,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 30 日 · 約 12 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-office-90-day-roadmap/">
               <span class="badge-topic">科技 · AI 辦公室</span>
               <h2 class="post-title">AI 怎麼進辦公室？從一個試點到落地的 90 天路線圖</h2>
@@ -203,7 +217,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 25 日 · 約 12 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/personal-ai-assistant-boundaries/">
               <span class="badge-topic">科技 · Personal AI</span>
               <h2 class="post-title">當別人也能使用你的 AI 分身：它是在幫你，還是在冒充你？</h2>
@@ -212,7 +226,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 17 日 · 約 11 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/ai-workflow-grounding/">
               <span class="badge-topic">科技 · AI 工作流</span>
               <h2 class="post-title">AI 怎麼跟工作接地氣？把聊天變成可驗收成果的 5 步教學</h2>
@@ -221,7 +235,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 17 日 · 約 10 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/agent-to-agent-collaboration/">
               <span class="badge-topic">科技 · Multi-agent systems</span>
               <h2 class="post-title">Agent-to-Agent：當 AI 從單兵工具走向協作組織</h2>
@@ -230,7 +244,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 14 日 · 約 12 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/hermes-telegram-chatgpt-explained/">
               <span class="badge-topic">科技 · 入門圖解</span>
               <h2 class="post-title">Hermes Agent＋Telegram＋ChatGPT：從聊天到執行的完整架構</h2>
@@ -239,7 +253,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 8 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/openab-roman-team/">
               <span class="badge-topic">科技 · Multi-agent systems</span>
               <h2 class="post-title">OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織</h2>
@@ -248,7 +262,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 7 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="tech">
             <a href="tech/openai-agents-api-2026/">
               <span class="badge-topic">科技 · AI 產業分析</span>
               <h2 class="post-title">OpenAI Agents API：從「會回答」走向「會執行」</h2>
@@ -257,7 +271,7 @@
             <p class="post-meta">金霸研究編輯部 · 2026 年 9 月 13 日 · 約 10 分鐘閱讀</p>
           </article>
           <hr class="my-5">
-          <article class="post-preview">
+          <article class="post-preview" data-cat="methods">
             <a href="ai/BMAD%20工作流程與角色指南.html">
               <span class="badge-topic">方法論 · AI 協作</span>
               <h2 class="post-title">BMAD 工作流程與角色指南</h2>
@@ -288,5 +302,79 @@
   </footer>
 
   <script src="assets/js/site.js"></script>
+
+  <style>
+    .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .article-tools{margin:0 0 1.5rem}
+    .filter-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem}
+    .chip{padding:.45rem 1.05rem;border:1.5px solid #15372e;border-radius:999px;background:#fff;color:#15372e;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+    .chip:hover{border-color:#CC982E}
+    .chip.is-active{background:#15372e;color:#fff;border-color:#15372e}
+    .search-box{display:block}
+    .search-box input{width:100%;padding:.7rem 1rem;border:1.5px solid #cfd4cf;border-radius:.6rem;font-size:1rem;background:#fff;color:#26302c}
+    .search-box input:focus{outline:none;border-color:#CC982E;box-shadow:0 0 0 3px rgba(204,152,46,.18)}
+    .result-count{margin:.6rem 0 0;color:#68716d;font-size:.88rem;min-height:1.2em}
+    .no-result{padding:1.2rem 1.4rem;border:1px dashed #b9beb9;border-radius:.6rem;color:#45514c;background:#fafaf7}
+    .no-result button{margin-left:.5rem;padding:.3rem .9rem;border:1.5px solid #15372e;border-radius:999px;background:#fff;color:#15372e;font-weight:600;cursor:pointer}
+    #latest hr.sep-hidden{display:none}
+  </style>
+  <script>
+  (function () {
+    var chips = Array.prototype.slice.call(document.querySelectorAll('.chip[data-filter]'));
+    var articles = Array.prototype.slice.call(document.querySelectorAll('#latest .post-preview'));
+    var search = document.getElementById('article-search');
+    var count = document.getElementById('result-count');
+    var noResult = document.getElementById('no-result');
+    var current = 'all';
+
+    function apply() {
+      var q = (search.value || '').trim().toLowerCase();
+      var visible = [];
+      articles.forEach(function (a) {
+        var okCat = current === 'all' || a.getAttribute('data-cat') === current;
+        var okQ = !q || a.textContent.toLowerCase().indexOf(q) !== -1;
+        var show = okCat && okQ;
+        a.style.display = show ? '' : 'none';
+        if (show) visible.push(a);
+      });
+      var hrs = document.querySelectorAll('#latest hr');
+      hrs.forEach(function (hr) { hr.classList.remove('sep-hidden'); });
+      // hide separators that sit after a hidden article or after the last visible one
+      articles.forEach(function (a) {
+        var hr = a.nextElementSibling;
+        if (hr && hr.tagName === 'HR' && (a.style.display === 'none' || a === visible[visible.length - 1])) {
+          hr.classList.add('sep-hidden');
+        }
+      });
+      var filtering = current !== 'all' || q;
+      count.textContent = filtering ? ('共找到 ' + visible.length + ' 篇') : '';
+      noResult.hidden = visible.length !== 0;
+    }
+
+    function setFilter(cat) {
+      current = cat;
+      chips.forEach(function (c) {
+        var on = c.getAttribute('data-filter') === cat;
+        c.classList.toggle('is-active', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      apply();
+    }
+
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () { setFilter(c.getAttribute('data-filter')); });
+    });
+    search.addEventListener('input', apply);
+    document.getElementById('clear-filter').addEventListener('click', function () {
+      search.value = '';
+      setFilter('all');
+      search.focus();
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-filter-link]'), function (el) {
+      el.addEventListener('click', function () { setFilter(el.getAttribute('data-filter-link')); });
+    });
+    apply();
+  })();
+  </script>
 </body>
 </html>
