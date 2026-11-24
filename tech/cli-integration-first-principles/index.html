@@ -48,7 +48,7 @@
   <p>API 是專為機器修的高速公路：平整、快速、規則完備，但要先付龐大的建設費，還要等施工排程。CLI 則是早就存在的人行道：工程師為了自己操作系統而建，本來就鋪在那裡，只是過去只有懂指令的人走得動。實務上有兩條路：一是沿用系統既有的 CLI；二是為軟體生成或封裝一支 CLI，把操作路徑整理成指令介面——像在既有路網旁鋪一小段連接道，工程遠小於修一條高速公路。前提也要講清楚：這條路只適用於有指令介面、或有可封裝操作路徑的系統；完全封閉、只剩資料庫可挖的，不在此列。</p>
   <p>變化發生在 AI 這一側。Threads 讀者 alicken 的留言說得很精準：CLI 讓 AI 操作軟體從「畫面識別」進化到「語意理解」。當 AI 從辨認畫面、猜哪裡可以點，進化到理解指令的語意、直接下指令，原本只有工程師走得動的人行道，就成為 AI 也能通行的路。</p>
   <p>實例是香港大學的 CLI-Anything：它用 7 個階段的流程，為六十多個軟體各生成一支專屬 CLI；截至 2026 年 11 月查核時，在 GitHub 上累積六萬多顆星；採 Apache-2.0 開源授權，企業可自行部署、稽核程式碼。我自己實測：10 句指令，它用 Draw.io 約 1 秒畫完一張 HTTPS 握手圖。這只是一個例證，不代表其他軟體的成功率與耗時，但示範了路徑的可行性。</p>
-  <figure class="article-figure"><img src="handshake-diagram-pretty.png" alt="HTTPS 握手流程" width="1440" height="1120" loading="lazy"><figcaption>HTTPS 握手流程：TCP 三向交握、TLS 協商到加密傳輸，全由 10 句指令拼出（步驟與方向與實測產出一致，本圖依實測結果整理重繪）。</figcaption></figure>
+  <figure class="article-figure"><img src="handshake-diagram-drawio.png" alt="HTTPS 握手流程（draw.io 渲染）" width="1260" height="1456" loading="lazy"><figcaption>HTTPS 握手流程：實測由 10 句指令產出的 .drawio 檔，版面整理為序列圖後以 draw.io 渲染；步驟與方向與原始產出一致。</figcaption></figure>
   <figure class="article-figure"><img src="terminal-run-brief.png" alt="終端機實測紀錄" width="1279" height="754" loading="lazy"><figcaption>終端機實測紀錄（節錄）：10 句指令逐條執行、全程 1.135 秒（2026-11-24 重跑），每句的 JSON 回傳在此省略，完整紀錄留存備查。</figcaption></figure>
 
   <h2>三、成本的本質：誰先付、何時付</h2>
