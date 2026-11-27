@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>一個人能不能經營一間軟體工廠：把人移到兩端，中間交給有護欄的自動化｜金霸觀察</title>
+  <meta name="description" content="用 AI 寫程式之後，返工多半不是程式寫錯，而是問題一開始就沒講清楚。這篇把多 Agent 開發分工抽成五層工作流：人站在兩端把關，中間交給有分級、有止損的自動化，並補上分級 rubric 與止損規則。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#18342f">
+  <link rel="canonical" href="https://jinweilin.github.io/tech/ai-dev-factory/">
+  <meta property="og:type" content="article"><meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="一個人能不能經營一間軟體工廠：把人移到兩端，中間交給有護欄的自動化">
+  <meta property="og:description" content="人只站在兩端把關，中間交給有護欄的自動化——五層工作流、grill 澄清、分級 rubric 與止損規則，把多 Agent 開發分工整理成個人也能試的流程框架。">
+  <meta property="og:url" content="https://jinweilin.github.io/tech/ai-dev-factory/">
+  <meta property="og:image" content="https://jinweilin.github.io/tech/ai-dev-factory/cover.jpg">
+  <meta property="og:image:width" content="2240">
+  <meta property="og:image:height" content="1120">
+  <meta name="twitter:image" content="https://jinweilin.github.io/tech/ai-dev-factory/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="一個人能不能經營一間軟體工廠：把人移到兩端，中間交給有護欄的自動化">
+  <meta name="twitter:description" content="人只站在兩端把關，中間交給有護欄的自動化——五層工作流、grill 澄清、分級 rubric 與止損規則，把多 Agent 開發分工整理成個人也能試的流程框架。">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0EY36MHX33"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0EY36MHX33');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"一個人能不能經營一間軟體工廠：把人移到兩端，中間交給有護欄的自動化","description":"人只站在兩端把關，中間交給有護欄的自動化——五層工作流、grill 澄清、分級 rubric 與止損規則，把多 Agent 開發分工整理成個人也能試的流程框架。","datePublished":"2026-11-27","dateModified":"2026-11-27","author":{"@type":"Person","name":"金霸"},"publisher":{"@type":"Organization","name":"金霸觀察"},"inLanguage":"zh-Hant","mainEntityOfPage":"https://jinweilin.github.io/tech/ai-dev-factory/"}</script>
+  <link href="../../assets/css/clean-blog.css" rel="stylesheet"><link href="../../assets/css/jinba.css" rel="stylesheet">
+  <style>
+    header.masthead.gate-hero{margin-bottom:4rem;background-image:radial-gradient(circle at 78% 28%,rgba(226,181,92,.27) 0 88px,transparent 89px),linear-gradient(132deg,#0c201c,#1d453b 56%,#6b7768)}
+    header.masthead.gate-hero .post-heading{padding:10rem 0 7rem}header.masthead.gate-hero h1{max-width:1000px;font-size:clamp(2.55rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.05em}header.masthead.gate-hero .subheading{max-width:850px;margin-top:1.5rem;color:rgba(255,255,255,.87);font-size:clamp(1.04rem,2.25vw,1.36rem);line-height:1.72}
+    .article-body{color:#26302c;font-size:1.08rem;line-height:1.95}.article-body h2{margin:4rem 0 1.4rem;font-size:clamp(1.9rem,4vw,2.7rem)}.article-body h3{margin-top:2.2rem;font-size:1.34rem}.article-body a{color:#1c6654;text-underline-offset:3px}.article-body code{padding:.08em .35em;border-radius:.3rem;background:#eef0ea;color:#7a2d24;font-size:.92em}.lead{color:#45514c;font-size:1.25rem;line-height:1.85}.article-cover{margin:0 0 2.5rem}.article-cover img{display:block;width:100%;height:auto;border-radius:1rem;box-shadow:0 20px 55px rgba(20,52,44,.18)}.article-cover figcaption{margin-top:.65rem;color:#68716d;font-size:.82rem}
+    .article-figure{margin:2.5rem 0}.article-figure img{display:block;width:100%;height:auto;border-radius:.8rem;box-shadow:0 12px 35px rgba(20,52,44,.14)}.article-figure figcaption{margin-top:.65rem;color:#68716d;font-size:.85rem;line-height:1.7}
+    .thesis{margin:2.5rem 0;padding:2rem;border-radius:1rem;color:#fff;background:#173a33;font:700 clamp(1.3rem,3vw,1.84rem)/1.65 Georgia,"Noto Serif TC",serif}.step{margin:1.3rem 0;padding:1.6rem;border:1px solid #dad6cb;border-radius:.9rem;background:rgba(255,255,255,.55)}.step h3{margin:.05rem 0 .75rem}
+    .hard-gate{margin:2.5rem 0;padding:1.7rem 1.8rem;border-left:5px solid #9c3c32;background:#f6e8e4}.hard-gate strong{color:#792b25}.callout{margin:2.5rem 0;padding:1.6rem 1.8rem;border-left:4px solid #b17c2d;background:#f3ecdf}.callout blockquote{margin:0}.callout blockquote p{margin:0 0 .8rem}.callout blockquote p:last-child{margin-bottom:0}
+    .grade{display:inline-block;margin-left:.55rem;padding:.18rem .65rem;border-radius:999px;font-size:.76rem;font-weight:800;letter-spacing:.05em;vertical-align:middle}.grade-real{color:#fff;background:#9c3c32}.grade-poc{color:#fff;background:#b17c2d}.grade-unknown{color:#fff;background:#5c6660}.data-note{padding:1.5rem;border-radius:.85rem;background:#eef3f1}.data-note ul{margin-bottom:0}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem 1rem;padding:0;list-style:none;counter-reset:check}.checklist li{padding:.95rem 1rem;border-left:3px solid #4d8c79;background:rgba(255,255,255,.55)}.sources{margin-top:4rem;padding-top:2rem;border-top:1px solid #dcd8cc}.sources li{margin-bottom:.85rem}
+    .tier-list{padding-left:1.4rem}.tier-list li{margin-bottom:.9rem}
+    .article-body table{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.98rem;line-height:1.7}.article-body th,.article-body td{border:1px solid #dad6cb;padding:.7rem .8rem;text-align:left;vertical-align:top}.article-body th{background:#eef3f1}
+    @media(max-width:767px){header.masthead.gate-hero .post-heading{padding:8rem 0 5rem}.checklist{grid-template-columns:1fr}.article-body{font-size:1.02rem}.thesis{padding:1.5rem}}
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" aria-label="主要導覽"><div class="container px-4 px-lg-5"><a class="navbar-brand" href="../../">金霸觀察</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="展開導覽">選單</button><div class="collapse navbar-collapse" id="navbarResponsive"><ul class="navbar-nav ms-auto py-4 py-lg-0"><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#topics">主題分類</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../#latest">最新文章</a></li><li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../../portfolio.html">創作作品</a></li></ul></div></div></nav>
+<header class="masthead gate-hero"><div class="container position-relative px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-11 col-lg-10 col-xl-9"><div class="post-heading"><div class="kicker">Technology · Multi-Agent Workflow</div><h1>一個人能不能經營一間軟體工廠：把人移到兩端，中間交給有護欄的自動化</h1><span class="subheading">人只站在兩端：開頭把問題問到清楚，結尾驗收把關；中間的執行，交給一套有分級、有止損、異常會自動停下來叫人的自動化流程。</span><span class="meta">金霸研究編輯部 · 2026 年 11 月 27 日 · 約 8 分鐘閱讀</span></div></div></div></div></header>
+<main class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><article class="col-md-10 col-lg-9 col-xl-8 article-body">
+  <figure class="article-cover"><img src="cover.jpg" alt="封面：一個人站在產線兩端把關，機器人小幫手在中間分工" width="2240" height="1120" loading="eager"><figcaption>一個人站在產線兩端把關，機器人小幫手在中間分工。</figcaption></figure>
+  <p class="lead">我越來越確定一件事：用 AI 寫程式之後，我返工的原因幾乎都不是程式寫錯，而是問題一開始就沒講清楚——需求含糊地進去，程式再快地出來，也只是更快地做出不對的東西。所以我一直在想，如果由我來設計一條開發流程，我會把它重新排一次：人只站在兩端，開頭把問題問到清楚，結尾驗收把關；中間的執行，交給一套有分級、有止損、異常會自動停下來叫人的自動化流程。這篇要拆的，就是這套「AI 開發工廠」五層工作流。</p>
+  <p>先說清楚適用邊界：這套分工適用於邊界清楚、成果可自動驗證、變更可逆的任務。越不可逆、越碰權限與個資、越無法自動驗證，自動化深度就越要收、真人就越要往前站。它還只是個人整理的方法論提案，不是被大規模驗證過的標準流程，可以先在小專案上試。</p>
+  <p>這篇其實有一篇前作。今年 9 月，我寫過〈<a href="https://jinweilin.github.io/tech/openab-roman-team/">OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織</a>〉，記錄我實際組的一支多 Agent 開發軍團怎麼分工：有人訪談需求、有人規劃派工、有人寫程式、有人挑錯、有人部署與驗收。那篇是實踐紀錄；這篇是把同一套分工抽出來，整理成不綁特定工具、個人或小團隊也能試的流程框架，並補上前作沒寫的兩件事：怎麼分級、怎麼止損。兩篇的關係是：前作裡，這個分工形狀已經在我自己的團隊實際跑過；這篇試著回答它能不能複製，以及自動化到底該放多深。</p>
+
+  <h2>五層地圖：每層對應傳統流程的哪個環節</h2>
+  <p>想像一個人經營一間小軟體工廠：不是一個人變成好幾個人，而是當產出速度不再是問題，時間被迫重新分配，看清瓶頸在哪。五層這樣排：</p>
+  <ul class="tier-list">
+    <li><strong>L1 真人提出需求</strong>：真人提交想法，經 grill 澄清後成為規格文件。它對應的是那份寫完就沒人再看的需求單——規格在這裡會被反問、修訂、定稿。</li>
+    <li><strong>L2 分診</strong>：分診角色讀規格，幫任務分級、拆解，並寫下驗收標準。它接手的是憑感覺排優先序、靠開會對齊，改用公開判準（後文的 rubric 表）決定每單走多自動。</li>
+    <li><strong>L3 開發 Agent</strong>：照任務清單在獨立分支寫程式，留下自測紀錄。它接手的是重複、可驗證的執行段——規格已定死、做法明確的寫碼工作。</li>
+    <li><strong>L4 驗證 Agent</strong>：跑測試與掃描，只認機器結果。它接手的是開發者自己驗收自己，改由獨立檢查把關。</li>
+    <li><strong>L5 真人審核</strong>：分診彙整開發與驗證結果開出 PR，真人決定合併或退回。它接手中段的層層簽核與盯場，把注意力集中到最後裁決。</li>
+  </ul>
+  <p>整條流程的狀態大致是：提交、澄清中、已分診、開發中、驗證中、PR 已開、合併或退回。任何一關停滯太久，不無限等待，而是自動升級通知真人。真人沒有退出流程，只是從中段移到兩端的定義與裁決；高等級任務裡，中段還多一道規格核准。</p>
+  <figure class="article-figure"><img src="five-layers.png" alt="五層工作流架構圖：L1 真人提需求、L2 分診、L3 開發 Agent、L4 驗證 Agent、L5 真人審核 PR，下方為護欄規則" width="2400" height="1120" loading="lazy"><figcaption>五層工作流架構圖：L1 真人提需求、L2 分診、L3 開發 Agent、L4 驗證 Agent、L5 真人審核 PR，下方為護欄規則。</figcaption></figure>
+
+  <h2>為什麼 grill 是整條產線槓桿最高一層</h2>
+  <p>五層裡，我認為最值得先做的不是開發自動化，而是開頭的 grill——動手之前，先反問問題。</p>
+  <p>設計上，grill 的問題上限五題，有五個必問面向：目的與成功標準、影響範圍、不可動的東西、驗收方式、期限與優先序。答案直接寫回規格文件；規格未定稿的任務不進分診佇列，就此卡住，不放行。</p>
+  <p>為什麼這一層槓桿最高？因為它同時決定下游兩件事：開發 Agent 要做什麼、驗證 Agent 要驗什麼。這套設計裡，驗收測試從 grill 定稿的規格產生，不採用開發 Agent 自寫的測試當唯一依據。需求階段多問對一個問題，省下的是開發做錯方向、驗證又驗不出來的整段返工。用工廠比喻，grill 就像開工前的圖面確認：圖面錯了，機器跑得越快，報廢品只會越多。</p>
+  <p>這不是我個人的偏好。GitHub 開源的 Spec Kit 把同樣的想法做成了產品：先用 constitution 指令為專案立下原則，再用 clarify 指令（前身叫 /quizme）在規劃前最多提五個針對性問題，把模糊處問清楚、寫回規格文件。學界也有呼應：Wu 等人（2025）發現，程式語言模型面對模糊需求時傾向直接寫 code 而非先提問；他們提出的 ClarifyCoder 框架用專門微調，讓模型學會先辨識歧義、提出澄清問題，再開始寫 code。我自己的評論是：會寫 code 和會問問題是兩種能力，流程設計不能假設前者自動包含後者。</p>
+
+  <h2>分級 rubric：用一張表決定自動化深度</h2>
+  <p>不是每一單都該用同樣的自動化程度。分級判準用四個面向逐項評估：</p>
+  <table>
+    <thead><tr><th>面向</th><th>低</th><th>中</th><th>高</th></tr></thead>
+    <tbody>
+      <tr><td>影響範圍</td><td>單一模組、局部</td><td>跨二到三個模組</td><td>跨系統、對外介面</td></tr>
+      <tr><td>資料與權限</td><td>不碰個資與權限</td><td>讀取既有資料</td><td>寫入、權限、金流相關</td></tr>
+      <tr><td>可逆性</td><td>可直接還原</td><td>需資料回滾</td><td>不可逆（已發布、已寄出）</td></tr>
+      <tr><td>驗證條件</td><td>有現成測試</td><td>需新增測試</td><td>無法自動驗證</td></tr>
+    </tbody>
+  </table>
+  <p>規則只有幾條，但要寫死：任一面向評為高，整單就列高等級——分診拆解後先送真人看規格、核准了才進開發。低等級自動跑完開發與驗證，直接開 PR 等審核；中等級同樣自動跑，但 PR 要附完整的測試與掃描報告摘要。分級本身可設計成多個評估角色各自獨立給分，最後彙整成一份結構化裁決文件，只留裁決、不留討論過程當交接物。</p>
+  <p>自動跑不代表放著不管，還需要止損規則。我的建議值是：單一任務重試例如以三次為上限；測試連續失敗例如兩次就停下升級真人；單一任務設預算上限，接近上限先警示、到達就停機待裁決；掃描出現高嚴重度問題，先退回修正一次，第二次仍出現就升級真人。每次升級都要附上：卡在哪一步、試過什麼、需要真人決定什麼——叫人來是做裁決，不是丟回爛攤子。</p>
+  <p>舉個假設情境：你想幫自己的部落格加訂閱功能。只改按鈕樣式，影響局部、可還原、有現成測試，是低等級；但若要串接付款、寫入訂閱者資料，兩個面向一拉高，整單就該列高等級，先把規格給真人看過。同一張表，兩種走法，這就是 rubric 的用途。</p>
+
+  <h2>學界對照：這套分工不是憑空想的</h2>
+  <p>把五層拆開看，每層幾乎都能在公開研究裡找到對照：</p>
+  <table>
+    <thead><tr><th>依據</th><th>對回五層的哪個設計</th><th>一句話結論</th></tr></thead>
+    <tbody>
+      <tr><td>GitHub Spec Kit</td><td>L1 的 grill 與專案原則</td><td>把澄清做成規格流程的正式步驟，答案寫回規格文件</td></tr>
+      <tr><td>ClarifyCoder 相關研究（Wu 等人，2025）</td><td>L1 的 grill</td><td>需求澄清能力需要被獨立設計與訓練，不會自動附帶在寫 code 能力上</td></tr>
+      <tr><td>MetaGPT（Hong 等人，2023）</td><td>L2 到 L4 的交接方式</td><td>把標準作業程序編碼進提示序列，用結構化產出交接，讓多個 agent 像流水線一樣分工</td></tr>
+      <tr><td>ChatDev（Qian 等人，2023）</td><td>五層分工的整體形狀</td><td>多個專職 agent 透過對話鏈分工，依序參與設計、寫碼與測試，是多 agent 開發分工的早期代表作</td></tr>
+      <tr><td>SWE-agent（Yang 等人，2024）</td><td>L3 開發 Agent 的能力與限制</td><td>為 agent 設計專屬的電腦操作介面，能顯著提升它自主修復軟體問題的能力；介面與流程設計本身就影響成敗</td></tr>
+    </tbody>
+  </table>
+  <p>復旦大學團隊主導的綜覽論文《Large Language Model-Based Agents for Software Engineering: A Survey》（Liu 等人，2024）系統性整理了這個領域的研究，可作深入時的起點地圖。這些對照要說明的是：結構化分工與前置澄清的價值，已在不同團隊的研究與產品實踐裡反覆出現；五層工廠只是把線索整理成個人也能試的流程。</p>
+
+  <h2>冷靜面：哪些情況不要這樣做</h2>
+  <p>先把邊界再收束一次。探索型產品的需求還在找答案，grill 問不出定稿；高度主觀的體驗設計，成果很難自動驗證；文件稀缺的老舊系統，影響範圍往往評不準；安全關鍵或受法規管制的系統，更不該讓自動化走這麼深。這些情境不是調一調 rubric 就能套用，而是要大幅收緊，甚至維持真人主導。</p>
+  <p>也要提醒不要過度承諾：這套框架還沒有被大規模驗證。分工的形狀，我已在自己的多 Agent 團隊實踐過（見前作），但分級與止損作為一套正式機制，仍在提案階段。想試的人，建議先選邊界清楚的小專案，只開低、中等級，累積樣本後回顧分級準不準、升級次數是否合理、PR 一次通過的比例，再決定要不要放寬。最後是一個我尚無答案的開放問題：中段執行越來越多交給自動化，新進者要在哪裡練讀 code 與改 code 的基本功？兩者如何並存，值得持續想。</p>
+
+  <h2>資安面：自動化的邊界，就是風險的邊界</h2>
+  <p>這不是附加的，是整套設計能否成立的前提，且全部是公開通行的最佳實務：</p>
+  <ul class="tier-list">
+    <li><strong>驗證與開發分離</strong>：自己出題自己答，是品質與資安的共同大忌。驗收測試必須從規格獨立產生，驗證與開發角色要用不同的提示與權限，不能讓同一個 agent 既交卷又改考卷。</li>
+    <li><strong>掃描是標配，不是加分項</strong>：驗證層必跑既有測試套件、驗收測試、SAST 與 secrets 掃描；高嚴重度問題的退回與升級規則要事先寫死，不能留給 agent 自行判斷「應該沒關係」。</li>
+    <li><strong>最小權限與憑證隔離</strong>：每個專案的憑證與 sandbox 獨立，agent 不跨專案共用權限，只給任務所需的最小範圍。rubric 把「資料與權限」列為獨立面向，正是為了在分級時就把權限風險算進去。</li>
+    <li><strong>不可逆動作真人前置核准</strong>：已發布、已寄出、寫入或與金流相關的動作，一律提高等級，由真人在執行前核准，而非事後補審。</li>
+    <li><strong>稽核軌跡</strong>：每一單的分級裁決、掃描報告、升級紀錄與最終核准都要留下結構化紀錄，出事時能回答「當初依什麼標準放行」；沒有軌跡的自動化，只是把責任弄丟。</li>
+  </ul>
+
+  <h2>結論：人沒有離開，只是換了位置</h2>
+  <p>AI 開發工廠不是把工程師移出軟體開發，而是把人的時間從「寫每一行」移到「問對問題、定對標準、做最後裁決」——會寫程式的人、會定義問題的人、會驗收把關的人，各有位置，而且彼此需要。當產出速度不再是問題，真正稀缺的是把問題定義清楚的能力，和守住最後一關的判斷。</p>
+  <p>想試的人不必先建整座工廠。最小起步只有一個動作：下一個 issue，先只做 grill 五問，把答案寫回規格，再讓 AI 動手。這篇如果對你有用，歡迎收藏，並追蹤後續的逐層拆解。</p>
+
+  <h2>參考來源</h2>
+  <ul class="sources">
+    <li>前作（實踐篇）：OpenAB 與羅馬團隊：我們如何打造多 Agent 開發組織（金霸觀察，2026-09）：<a href="https://jinweilin.github.io/tech/openab-roman-team/">https://jinweilin.github.io/tech/openab-roman-team/</a></li>
+    <li>ChatDev: Communicative Agents for Software Development（Qian 等人，2023）：<a href="https://arxiv.org/abs/2307.07924">https://arxiv.org/abs/2307.07924</a></li>
+    <li>MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework（Hong 等人，2023）：<a href="https://arxiv.org/abs/2308.00352">https://arxiv.org/abs/2308.00352</a></li>
+    <li>SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering（Yang 等人，2024）：<a href="https://arxiv.org/abs/2405.15793">https://arxiv.org/abs/2405.15793</a></li>
+    <li>Can Code Language Models Learn Clarification-Seeking Behaviors?（Wu 等人，2025，提出 ClarifyCoder 框架）：<a href="https://arxiv.org/abs/2504.16331">https://arxiv.org/abs/2504.16331</a></li>
+    <li>Large Language Model-Based Agents for Software Engineering: A Survey（Liu 等人，2024）：<a href="https://arxiv.org/abs/2409.02977">https://arxiv.org/abs/2409.02977</a></li>
+    <li>GitHub Spec Kit（官方 repo）：<a href="https://github.com/github/spec-kit">https://github.com/github/spec-kit</a></li>
+    <li>GitHub Spec Kit 官方文件（Agentic SDD 指令參考）：<a href="https://github.github.io/spec-kit/reference/agentic-sdd.html">https://github.github.io/spec-kit/reference/agentic-sdd.html</a></li>
+  </ul>
+</article></div></main>
+<footer class="border-top mt-5"><div class="container px-4 px-lg-5"><div class="row gx-4 gx-lg-5 justify-content-center"><div class="col-md-10 col-lg-8 col-xl-7 text-center"><div class="small text-muted fst-italic">© 2026 金霸觀察</div><div class="site-footer-note mt-2"><a href="../../">返回首頁</a> · 技術分享</div></div></div></div></footer>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
